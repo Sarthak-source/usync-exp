@@ -18,9 +18,12 @@ git clone git@git.usync.us:usync/usync-flutter.git
   |- android (Android related files)/
   |- ios (iOs related files)/
   |- lib/
-  |     |- components
-  |     |- config
-  |     |- modules
+  |     |- components/
+  |     |- config/
+  |     |- modules/
+  |           |- <ModuleName>
+  |                     |- screens/
+  |                     |- model/
   |     |- services
   |     |- utils
   |     |- main.dart
