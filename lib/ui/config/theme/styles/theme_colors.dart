@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+/// LightThemeColors class defines the light theme colours for the app.
 class LightThemeColors {
   static const Color primaryDarkest = Color.fromRGBO(174, 213, 170, 1);
   static const Color primaryDark = Color.fromRGBO(159, 205, 154, 1);
