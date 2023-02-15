@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_module/config/theme_colors.dart';
 
 class QIcon extends StatelessWidget {
   const QIcon(this.icon,
@@ -38,7 +37,7 @@ class QIcon extends StatelessWidget {
         onPressed: onPressed,
         child: Icon(
           icon,
-          color: filled! ? ThemeColors.pageBgColor : color,
+          //color: filled! ? ThemeColors.pageBgColor : color,
           size: size,
         ),
       ),

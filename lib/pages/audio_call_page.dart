@@ -1,19 +1,13 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'package:chatsampleapp/utils/local_notifications.dart';
+import 'package:chatsampleapp/services/audio_call_fg_service.dart';
+import 'package:chatsampleapp/services/audio_call_state.dart';
+import 'package:chatsampleapp/ui/icon.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_module/components/calltimer.dart';
-import 'package:flutter_module/config/theme_colors.dart';
-import 'package:flutter_module/local_notifications.dart';
-import 'package:flutter_module/services/audio_call_fg_service.dart';
-import 'package:flutter_module/services/audio_call_state.dart';
-import 'package:flutter_module/ui/avatar.dart';
-import 'package:flutter_module/ui/icon.dart';
-import 'package:flutter_module/ui/typography/text.dart';
-import 'package:flutter_module/usync_app.dart';
+
 import 'package:redux/redux.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_audio_manager_plus/flutter_audio_manager_plus.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 

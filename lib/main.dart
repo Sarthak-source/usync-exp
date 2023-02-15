@@ -1,72 +1,41 @@
-import 'dart:async';
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_module/background_main.dart';
-import 'package:flutter_module/config/theme_colors.dart';
-import 'package:flutter_module/pages/audio_call_page.dart';
-import 'package:flutter_module/pages/welcome_page.dart';
-import 'package:flutter_module/services/audio_call_fg_service.dart';
-import 'package:flutter_module/services/platform_bg_service.dart';
-import 'package:flutter_module/usync_app.dart';
-import 'cordova_handler.dart';
-import 'local_notifications.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// ignore_for_file: must_be_immutable, library_private_types_in_public_api
 
-Future<void> loadEnv() async {
-  await dotenv.load(fileName: "env.usync");
-  await UsyncApp.instance.setAppEnv({"APP": dotenv.env});
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'ui/config/theme/theme.dart';
+import 'pages/Conversation/conversation.dart';
+
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ),
+  );
+  runApp(EasyDynamicThemeWidget(child: const MyApp()));
 }
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
-// Main app
-Future<void> main() async {
-  // needed if you intend to initialize in the `main` function
-  WidgetsFlutterBinding.ensureInitialized();
-  DartPluginRegistrant.ensureInitialized();
-
-  //  COmmon
-  final service = await initializeBgService();
-  initAudioCallFgService(service);
-  await loadEnv();
-  await UsyncApp.instance.initStore();
-
-  initLocalNotificationsPlugins();
-
-  runApp(StoreProvider(
-      store: UsyncApp.instance.store, child: const UsyncAppMain()));
-
-  await initCordovaFlutterPlatformChannel();
-  // initBackgroundService();
-}
-
-class UsyncAppMain extends StatelessWidget {
-  const UsyncAppMain({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      title: 'uSync',
-      theme: const CupertinoThemeData(
-          brightness: Brightness.dark,
-          primaryColor: ThemeColors.primaryColor,
-          primaryContrastingColor: ThemeColors.primaryColor,
-          textTheme: CupertinoTextThemeData(
-              primaryColor: ThemeColors.primaryColor,
-              textStyle:
-                  TextStyle(color: ThemeColors.textColor, fontSize: 18.0),
-              actionTextStyle:
-                  TextStyle(backgroundColor: ThemeColors.primaryColor)),
-          barBackgroundColor: null,
-          scaffoldBackgroundColor: ThemeColors.pageBgColor),
-      navigatorKey: navigatorKey,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const AudioCallPage()
-      },
+    final brightness = SchedulerBinding.instance.window.platformBrightness;
+
+    return MaterialApp(
+      title: 'Chat Demo',
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.light(context),
+      darkTheme: AppTheme.dark(context),
+      themeMode: EasyDynamicTheme.of(context).themeMode,
+      home: Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+          child: const MyHomePage(title: 'Conversation')),
     );
   }
 }
