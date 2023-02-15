@@ -1,15 +1,11 @@
 import 'dart:ui';
 
+import 'package:chatsampleapp/services/audio_call_bg_service.dart';
+import 'package:chatsampleapp/utils/cordova_handler.dart';
+import 'package:chatsampleapp/utils/local_notifications.dart';
+import 'package:chatsampleapp/utils/usync_app.dart';
 import 'package:connectanum/connectanum.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_background_service_android/flutter_background_service_android.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_module/cordova_handler.dart';
-import 'package:flutter_module/local_notifications.dart';
-import 'package:flutter_module/main.dart';
-import 'package:flutter_module/services/audio_call_bg_service.dart';
-import 'package:flutter_module/usync_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<FlutterBackgroundService> initializeBgService() async {
