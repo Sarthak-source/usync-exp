@@ -1,10 +1,37 @@
-# chatsampleapp
+# uSync Flutter
 
-A new Flutter project.
+Flutter project for uSync App.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Clone this project to your working directory using the following command.
+
+```shell
+git clone git@git.usync.us:usync/usync-flutter.git
+```
+
+##  Project Structure
+
+```shell
+<project-root>
+  |
+  |- android (Android related files)/
+  |- ios (iOs related files)/
+  |- lib/
+  |     |- components/
+  |     |- config/
+  |     |- modules/
+  |           |- <ModuleName>
+  |                     |- screens/
+  |                     |- model/
+  |     |- services
+  |     |- utils
+  |     |- main.dart
+  |
+```
+
+
+## Resources
 
 A few resources to get you started if this is your first Flutter project:
 
