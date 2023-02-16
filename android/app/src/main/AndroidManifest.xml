@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chatsampleapp">
+    package="com.usync">
    <application
         android:label="chatsampleapp"
         android:name="${applicationName}"
