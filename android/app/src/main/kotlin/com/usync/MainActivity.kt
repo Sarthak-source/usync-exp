@@ -1,4 +1,4 @@
-package com.example.chatsampleapp
+package com.usync
 
 import io.flutter.embedding.android.FlutterActivity
 
