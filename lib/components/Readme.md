@@ -1,3 +1,3 @@
 # Components
 
-This directory will common components shared throughout the project.
+This directory will contain common components shared throughout the project.
