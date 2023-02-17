@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
-import 'ui/config/theme/theme.dart';
+import 'ui_components/config/theme/theme.dart';
 import 'pages/Conversation/conversation.dart';
 
 void main() {

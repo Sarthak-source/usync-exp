@@ -1,7 +1,7 @@
-import 'package:chatsampleapp/ui/config/theme/dark_theme.dart';
-import 'package:chatsampleapp/ui/config/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:usync/ui_components/config/theme/dark_theme.dart';
+import 'package:usync/ui_components/config/theme/light_theme.dart';
 
 import 'styles/theme_colors.dart';
 

@@ -1,4 +1,3 @@
-import 'package:chatsampleapp/ui/typography/text.dart';
 import 'package:flutter/cupertino.dart';
 // Import stop_watch_timer
 
