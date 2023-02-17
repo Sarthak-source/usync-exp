@@ -1,5 +1,5 @@
-import 'package:chatsampleapp/ui/typography/text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:usync/ui_components/typography/text.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
