@@ -1,5 +1,5 @@
-import 'package:chatsampleapp/utils/cordova.dart';
-import 'package:chatsampleapp/utils/usync_app.dart';
+import 'package:usync/utils/cordova.dart';
+import 'package:usync/utils/usync_app.dart';
 
 import '../main.dart';
 

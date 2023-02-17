@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ///Normal Message bar with more actions
@@ -86,11 +87,9 @@ class MessageBar extends StatelessWidget {
                         size: 24,
                       ),
                       Expanded(
-                        child: Container(
-                          child: Text(
-                            'Re : ' + replyingTo,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                        child: Text(
+                          'Re : $replyingTo',
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       InkWell(
@@ -120,40 +119,38 @@ class MessageBar extends StatelessWidget {
               children: <Widget>[
                 ...actions,
                 Expanded(
-                  child: Container(
-                    child: TextField(
-                      controller: _textController,
-                      keyboardType: TextInputType.multiline,
-                      textCapitalization: TextCapitalization.sentences,
-                      minLines: 1,
-                      maxLines: 3,
-                      onChanged: onTextChanged,
-                      decoration: InputDecoration(
-                        hintText: "Type your message here",
-                        hintMaxLines: 1,
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 10),
-                        hintStyle: const TextStyle(
-                          fontSize: 16,
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                          borderSide: const BorderSide(
-                            color: Colors.white,
-                            width: 0.2,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                          borderSide: const BorderSide(
-                            color: Colors.black26,
-                            width: 0.2,
-                          ),
-                        ),
-                      ),
-                    ),
+                  child: CupertinoTextField(
+                    controller: _textController,
+                    keyboardType: TextInputType.multiline,
+                    textCapitalization: TextCapitalization.sentences,
+                    minLines: 1,
+                    maxLines: 3,
+                    onChanged: onTextChanged,
+                    // decoration: InputDecoration(
+                    //   hintText: "Type your message here",
+                    //   hintMaxLines: 1,
+                    //   contentPadding: const EdgeInsets.symmetric(
+                    //       horizontal: 8.0, vertical: 10),
+                    //   hintStyle: const TextStyle(
+                    //     fontSize: 16,
+                    //   ),
+                    //   fillColor: Colors.white,
+                    //   filled: true,
+                    //   enabledBorder: OutlineInputBorder(
+                    //     borderRadius: BorderRadius.circular(30.0),
+                    //     borderSide: const BorderSide(
+                    //       color: Colors.white,
+                    //       width: 0.2,
+                    //     ),
+                    //   ),
+                    //   focusedBorder: OutlineInputBorder(
+                    //     borderRadius: BorderRadius.circular(30.0),
+                    //     borderSide: const BorderSide(
+                    //       color: Colors.black26,
+                    //       width: 0.2,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                 ),
                 sendbutton == false

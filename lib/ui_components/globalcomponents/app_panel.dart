@@ -4,10 +4,10 @@ enum AppPanelRadius { xs, sm, md, lg, xl, none }
 
 class AppPanel extends StatefulWidget {
   const AppPanel(
-      {super.key, this.radiusType = AppPanelRadius.md, required this.body});
+      {super.key, this.radius = AppPanelRadius.md, required this.content});
 
-  final Widget body;
-  final AppPanelRadius radiusType;
+  final List<Widget> content;
+  final AppPanelRadius radius;
   static Map<AppPanelRadius, BorderRadius> radiusMap = {
     AppPanelRadius.xs: BorderRadius.circular(4.0),
     AppPanelRadius.sm: BorderRadius.circular(8.0),
@@ -25,9 +25,11 @@ class _AppPanelState extends State<AppPanel> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: AppPanel.radiusMap[widget.radiusType],
+      borderRadius: AppPanel.radiusMap[widget.radius],
       child: Scaffold(
-        body: widget.body,
+        body: Column(
+          children: widget.content,
+        ),
       ),
     );
   }
