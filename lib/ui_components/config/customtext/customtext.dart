@@ -21,9 +21,9 @@ extension UsyncTextType on TextTheme {
 
   Color _themecolor(BuildContext context) {
     if (EasyDynamicTheme.of(context).themeMode == ThemeMode.dark) {
-      return DarkThemeColors.textColor;
-    } else {
       return LightThemeColors.textColor;
+    } else {
+      return DarkThemeColors.textColor;
     }
   }
 
