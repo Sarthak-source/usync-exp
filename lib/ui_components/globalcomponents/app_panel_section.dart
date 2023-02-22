@@ -27,6 +27,7 @@ class _AppPanelSectionState extends State<AppPanelSection> {
     final List<Widget> bodyItems = widget.body;
 
     return SizedBox(
+      height: MediaQuery.of(context).size.height / 2,
       width: widget.fullwidth ? double.infinity : null,
       child: Column(
         crossAxisAlignment: widget.alignment,

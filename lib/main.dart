@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'pages/conversation/chat_list/conversation_page.dart';
 import 'ui_components/config/theme/theme.dart';
-import 'pages/Conversation/conversation.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -25,17 +25,12 @@ class MyApp extends StatelessWidget {
     final brightness = SchedulerBinding.instance.window.platformBrightness;
 
     return MaterialApp(
-      title: 'Chat Demo',
+      title: 'usync',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(context),
       darkTheme: AppTheme.dark(context),
       themeMode: EasyDynamicTheme.of(context).themeMode,
-      home: Card(
-          elevation: 10,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-          child: const MyHomePage(title: 'Conversation')),
+      home: const ConversationsPage(title: 'Conversation'),
     );
   }
 }
