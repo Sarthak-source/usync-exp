@@ -13,7 +13,7 @@ class AppTheme {
     return lightTheme.copyWith(
       //textTheme: UsyncTextType(),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: LightThemeColors.pageBgColor,
+        backgroundColor: LightThemeColors.subpanel,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -43,7 +43,7 @@ class AppTheme {
     return darkTheme.copyWith(
       //textTheme: darkTextTheme(context),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: DarkThemeColors.pageBgColor,
+        backgroundColor: DarkThemeColors.subpanel,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),

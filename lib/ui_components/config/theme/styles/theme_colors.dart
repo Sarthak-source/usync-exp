@@ -25,6 +25,7 @@ class LightThemeColors {
   static const Color pageBgColor = Color(0xfff6f6f6);
   static const Color textColor = Color(0xff2f2f37);
   static const Color negativeColor = Color(0xffE57373);
+  static const Color subpanel = Color.fromRGBO(248, 248, 248, 0.95);
 }
 
 class DarkThemeColors {
@@ -53,4 +54,5 @@ class DarkThemeColors {
   static const Color pageBgColor = Color.fromRGBO(60, 60, 67, 1);
   static const Color textColor = Color.fromRGBO(248, 248, 248, 0.95);
   static const Color negativeColor = Color(0xffE57373);
+  static const Color subpanel = Color.fromRGBO(77, 77, 83, 1);
 }

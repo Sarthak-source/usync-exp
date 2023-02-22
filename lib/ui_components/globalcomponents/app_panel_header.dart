@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:usync/ui_components/config/customtext/customtext.dart';
 import 'package:usync/ui_components/typography/text.dart';
+import 'package:usync/ui_components/usync_text_field.dart';
 
 class AppPanelHeader extends StatefulWidget {
   final bool back;
@@ -34,8 +35,9 @@ class AppPanelHeader extends StatefulWidget {
 class _AppPanelHeaderState extends State<AppPanelHeader> {
   late Widget appBarTitle = widget.child;
   Widget action = const Icon(Icons.search);
-  late List<Widget> folllowedAction = widget.actionButtons;
+  late List<Widget> followedAction = widget.actionButtons;
   late bool backstate = widget.back;
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> actionItems = <Widget>[
@@ -47,29 +49,25 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
                 setState(
                   () {
                     if (appBarTitle == widget.child) {
-                      action = TextButton(
-                        onPressed: widget.onSearchCancel,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10, left: 10),
-                          child: Text(
-                            'close',
-                            style: const TextTheme().title3(
-                                context, FontWeight.normal, FontStyle.normal),
-                          ),
-                        ),
+                      action = Padding(
+                        padding: const EdgeInsets.only(right: 1000, left: 1),
+                        child: IconButton(
+                            constraints: const BoxConstraints.expand(width: 80),
+                            onPressed: widget.onSearchCancel,
+                            icon: const Icon(Icons.cancel)),
                       );
-                      appBarTitle = CupertinoTextField(
+
+                      appBarTitle = UsyncTextField(
+                        placeholderString: "search",
                         onChanged: widget.onSearchInput,
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(0, 160, 160, 160)),
                       );
-                      folllowedAction = [];
+                      followedAction = [];
                       backstate = false;
                       debugPrint(backstate.toString());
                     } else {
                       action = const Icon(Icons.search);
                       appBarTitle = widget.child;
-                      folllowedAction = widget.actionButtons;
+                      followedAction = widget.actionButtons;
                       backstate = widget.back;
                       debugPrint(backstate.toString());
                     }
@@ -78,26 +76,26 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
               },
             )
           : const SizedBox.shrink(),
-    ].followedBy(folllowedAction).toList();
+    ].followedBy(followedAction).toList();
 
     return AppBar(
-      toolbarHeight: 70.0,
+      toolbarHeight: 80.0,
       elevation: 1,
       leading: backstate == true
-          ? Padding(
-              padding: const EdgeInsets.only(
-                left: 15,
-                right: 15,
-              ),
-              child: IconButton(
-                icon: const FaIcon(
+          ? IconButton(
+              icon: const Padding(
+                padding: EdgeInsets.only(
+                  left: 10,
+                ),
+                child: FaIcon(
                   Icons.arrow_back_ios,
                 ),
-                onPressed: widget.onBackClick,
               ),
+              onPressed: widget.onBackClick,
             )
           : const SizedBox.shrink(),
-      leadingWidth: 30,
+      //leadingWidth: 30,
+
       title: appBarTitle,
       centerTitle: widget.alignment,
       bottom: widget.bottomWidget,
