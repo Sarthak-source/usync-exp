@@ -21,12 +21,19 @@ class AppTheme {
           ),
         ),
       ),
+
+      dividerTheme: const DividerThemeData(
+        color: LightThemeColors.textColor,
+      ),
+
+      dividerColor: LightThemeColors.textColor,
+
       appBarTheme: const AppBarTheme().copyWith(
         color: LightThemeColors.pageBgColor,
         titleTextStyle: const TextTheme()
             .title3(context, FontWeight.normal, FontStyle.normal),
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        elevation: 0,
+        elevation: 1,
         centerTitle: true,
         toolbarHeight: 64,
         shape: const RoundedRectangleBorder(
@@ -51,12 +58,16 @@ class AppTheme {
           ),
         ),
       ),
+      dividerTheme: const DividerThemeData(
+        color: DarkThemeColors.textColor,
+      ),
+      dividerColor: DarkThemeColors.textColor,
       appBarTheme: const AppBarTheme().copyWith(
         color: DarkThemeColors.pageBgColor,
         titleTextStyle: const TextTheme()
             .title3(context, FontWeight.normal, FontStyle.normal),
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        elevation: 0,
+        elevation: 1,
         centerTitle: true,
         toolbarHeight: 64,
         shape: const RoundedRectangleBorder(

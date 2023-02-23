@@ -27,7 +27,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           actionButtons: [
             IconButton(
               onPressed: () {
-                SubPanel().showSubPanel(context, subpaneldetails(context), 1.1);
+                SubPanel().showSubPanel(context, subpaneldetails(context), 1.1,
+                    MainAxisAlignment.start);
               },
               icon: const Icon(
                 Icons.info_outline,

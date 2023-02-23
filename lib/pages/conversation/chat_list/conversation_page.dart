@@ -43,28 +43,19 @@ class _ConversationsPageState extends State<ConversationsPage> {
             'Conversations',
           ),
         ),
-        AppPanelSection(
-          height: 2,
-          //title: Text('kokk'),
-          body: [
-            ListView.builder(
-              itemCount: chatUsers.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return ConversationList(
-                  name: chatUsers[index].name,
-                  messageText: chatUsers[index].messageText,
-                  imageUrl: chatUsers[index].imageURL,
-                  time: chatUsers[index].time,
-                  isMessageRead: chatUsers[index].isMessageRead,
-                );
-              },
-            ),
-          ],
-          gutter: 0,
-          direction: Axis.horizontal,
-          alignment: CrossAxisAlignment.stretch,
-        )
+        ListView.builder(
+          itemCount: chatUsers.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return ConversationList(
+              name: chatUsers[index].name,
+              messageText: chatUsers[index].messageText,
+              imageUrl: chatUsers[index].imageURL,
+              time: chatUsers[index].time,
+              isMessageRead: chatUsers[index].isMessageRead,
+            );
+          },
+        ),
       ],
     );
   }

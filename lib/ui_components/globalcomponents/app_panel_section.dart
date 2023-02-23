@@ -31,7 +31,7 @@ class _AppPanelSectionState extends State<AppPanelSection> {
 
     return Container(
       color: ThemeColor().bgThemecolor(context),
-      height: MediaQuery.of(context).size.height / widget.height,
+      height: widget.height,
       width: widget.fullwidth ? double.infinity : null,
       child: Column(
         crossAxisAlignment: widget.alignment,
