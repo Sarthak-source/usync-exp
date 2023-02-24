@@ -45,9 +45,9 @@ dependencies:
   redux_thunk: ^0.4.0
   flutter_audio_manager_plus: ^0.0.1
   flutter_webrtc: ^0.9.22
-  font_awesome_flutter:
   flutter_staggered_grid_view:
   transparent_image: ^2.0.1
+  font_awesome_flutter: ^10.4.0
   
 
 dev_dependencies:
