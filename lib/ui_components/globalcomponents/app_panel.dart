@@ -28,6 +28,9 @@ class _AppPanelState extends State<AppPanel> {
       borderRadius: AppPanel.radiusMap[widget.radius],
       child: Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: widget.content,
         ),
       ),

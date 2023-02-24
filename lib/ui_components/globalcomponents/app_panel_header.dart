@@ -38,62 +38,69 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
   late List<Widget> followedAction = widget.actionButtons;
   late bool backstate = widget.back;
 
+  search() {
+    return IconButton(
+      icon: action,
+      onPressed: () {
+        debugPrint('SEARCH');
+        setState(
+          () {
+            if (appBarTitle == widget.child) {
+              action = IconButton(
+                constraints: const BoxConstraints.expand(width: 30),
+                onPressed: widget.onSearchCancel,
+                icon: const Text('cancel'),
+              );
+
+              appBarTitle = Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: UsyncTextField(
+                  placeholderString: "search",
+                  onChanged: widget.onSearchInput,
+                ),
+              );
+              followedAction = [];
+              backstate = false;
+              debugPrint(backstate.toString());
+            } else {
+              action = const Icon(Icons.search);
+              appBarTitle = widget.child;
+              followedAction = widget.actionButtons;
+              backstate = widget.back;
+              debugPrint(backstate.toString());
+            }
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> actionItems = <Widget>[
-      widget.search == true
-          ? IconButton(
-              icon: action,
-              onPressed: () {
-                debugPrint('SEARCH');
-                setState(
-                  () {
-                    if (appBarTitle == widget.child) {
-                      action = Padding(
-                        padding: const EdgeInsets.only(right: 1000, left: 1),
-                        child: IconButton(
-                            constraints: const BoxConstraints.expand(width: 80),
-                            onPressed: widget.onSearchCancel,
-                            icon: const Icon(Icons.cancel)),
-                      );
-
-                      appBarTitle = UsyncTextField(
-                        placeholderString: "search",
-                        onChanged: widget.onSearchInput,
-                      );
-                      followedAction = [];
-                      backstate = false;
-                      debugPrint(backstate.toString());
-                    } else {
-                      action = const Icon(Icons.search);
-                      appBarTitle = widget.child;
-                      followedAction = widget.actionButtons;
-                      backstate = widget.back;
-                      debugPrint(backstate.toString());
-                    }
-                  },
-                );
-              },
-            )
-          : const SizedBox.shrink(),
+      widget.search == true ? search() : const SizedBox.shrink(),
     ].followedBy(followedAction).toList();
 
     return AppBar(
       toolbarHeight: 80.0,
       elevation: 1,
       leading: backstate == true
-          ? IconButton(
-              icon: const Padding(
-                padding: EdgeInsets.only(
-                  left: 10,
-                ),
-                child: FaIcon(
-                  Icons.arrow_back_ios,
-                ),
-              ),
-              onPressed: widget.onBackClick,
+          ? Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                  ),
+                  onPressed: () {
+                    widget.onBackClick;
+                  },
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                );
+              },
             )
-          : const SizedBox.shrink(),
+          : null,
+
       //leadingWidth: 30,
 
       title: appBarTitle,

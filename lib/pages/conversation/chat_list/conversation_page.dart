@@ -43,18 +43,21 @@ class _ConversationsPageState extends State<ConversationsPage> {
             'Conversations',
           ),
         ),
-        ListView.builder(
-          itemCount: chatUsers.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return ConversationList(
-              name: chatUsers[index].name,
-              messageText: chatUsers[index].messageText,
-              imageUrl: chatUsers[index].imageURL,
-              time: chatUsers[index].time,
-              isMessageRead: chatUsers[index].isMessageRead,
-            );
-          },
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(2),
+            itemCount: chatUsers.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ConversationList(
+                name: chatUsers[index].name,
+                messageText: chatUsers[index].messageText,
+                imageUrl: chatUsers[index].imageURL,
+                time: chatUsers[index].time,
+                isMessageRead: chatUsers[index].isMessageRead,
+              );
+            },
+          ),
         ),
       ],
     );
