@@ -40,31 +40,31 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
 
   search() {
     return IconButton(
+      // padding: const EdgeInsets.only(left: 30),
+      constraints: const BoxConstraints.expand(width: 80),
       icon: action,
       onPressed: () {
         debugPrint('SEARCH');
         setState(
           () {
             if (appBarTitle == widget.child) {
-              action = IconButton(
-                constraints: const BoxConstraints.expand(width: 30),
-                onPressed: widget.onSearchCancel,
-                icon: const Text('cancel'),
-              );
-
-              appBarTitle = Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: UsyncTextField(
-                  placeholderString: "search",
-                  onChanged: widget.onSearchInput,
+              action = const Expanded(
+                child: Text(
+                  'cancel',
                 ),
+              );
+              appBarTitle = UsyncTextField(
+                placeholderString: "search",
+                onChanged: widget.onSearchInput,
               );
               followedAction = [];
               backstate = false;
+
               debugPrint(backstate.toString());
             } else {
               action = const Icon(Icons.search);
               appBarTitle = widget.child;
+
               followedAction = widget.actionButtons;
               backstate = widget.back;
               debugPrint(backstate.toString());
@@ -78,32 +78,30 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> actionItems = <Widget>[
-      widget.search == true ? search() : const SizedBox.shrink(),
+      widget.search == true ? search() : Container(),
     ].followedBy(followedAction).toList();
 
     return AppBar(
       toolbarHeight: 80.0,
       elevation: 1,
       leading: backstate == true
-          ? Builder(
-              builder: (BuildContext context) {
-                return IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                  ),
-                  onPressed: () {
-                    widget.onBackClick;
-                  },
-                  tooltip:
-                      MaterialLocalizations.of(context).openAppDrawerTooltip,
-                );
-              },
+          ? IconButton(
+              icon: const Padding(
+                padding: EdgeInsets.only(
+                  left: 15,
+                ),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                ),
+              ),
+              onPressed: widget.onBackClick,
             )
           : null,
 
-      //leadingWidth: 30,
+      leadingWidth: 35,
 
       title: appBarTitle,
+      //titleSpacing: 1,
       centerTitle: widget.alignment,
       bottom: widget.bottomWidget,
       actions: actionItems,

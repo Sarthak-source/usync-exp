@@ -76,7 +76,7 @@ class MessageBar extends StatelessWidget {
           Container(
             color: messageBarColor,
             padding: const EdgeInsets.symmetric(
-              vertical: 8,
+              vertical: 20,
               horizontal: 16,
             ),
             child: Row(
