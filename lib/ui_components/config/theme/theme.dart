@@ -13,7 +13,7 @@ class AppTheme {
     return lightTheme.copyWith(
       //textTheme: UsyncTextType(),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: LightThemeColors.pageBgColor,
+        backgroundColor: LightThemeColors.subpanel,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -21,12 +21,23 @@ class AppTheme {
           ),
         ),
       ),
+
+      dividerTheme: const DividerThemeData(
+        color: LightThemeColors.textColor,
+      ),
+
+      dividerColor: LightThemeColors.textColor,
+      bottomAppBarTheme: const BottomAppBarTheme().copyWith(
+        color: LightThemeColors.pageBgColor,
+        elevation: 1,
+      ),
+
       appBarTheme: const AppBarTheme().copyWith(
         color: LightThemeColors.pageBgColor,
         titleTextStyle: const TextTheme()
             .title3(context, FontWeight.normal, FontStyle.normal),
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        elevation: 0,
+        elevation: 1,
         centerTitle: true,
         toolbarHeight: 64,
         shape: const RoundedRectangleBorder(
@@ -43,7 +54,7 @@ class AppTheme {
     return darkTheme.copyWith(
       //textTheme: darkTextTheme(context),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: DarkThemeColors.pageBgColor,
+        backgroundColor: DarkThemeColors.subpanel,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
@@ -51,12 +62,21 @@ class AppTheme {
           ),
         ),
       ),
+      dividerTheme: const DividerThemeData(
+        color: DarkThemeColors.textColor,
+      ),
+
+      bottomAppBarTheme: const BottomAppBarTheme().copyWith(
+        color: DarkThemeColors.pageBgColor,
+        elevation: 1,
+      ),
+      dividerColor: DarkThemeColors.textColor,
       appBarTheme: const AppBarTheme().copyWith(
         color: DarkThemeColors.pageBgColor,
         titleTextStyle: const TextTheme()
             .title3(context, FontWeight.normal, FontStyle.normal),
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        elevation: 0,
+        elevation: 1,
         centerTitle: true,
         toolbarHeight: 64,
         shape: const RoundedRectangleBorder(

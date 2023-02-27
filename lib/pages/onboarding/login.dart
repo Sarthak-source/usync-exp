@@ -6,14 +6,16 @@ class LoginScreen extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text("Login"),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -31,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                   controller: _usernameController,
                   keyboardType: TextInputType.emailAddress,
                   placeholder: "Username",
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                     vertical: 8.0,
                   ),
@@ -43,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                   // },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16.0,
               ),
               Container(
@@ -58,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                   controller: _passwordController,
                   obscureText: true,
                   placeholder: "Password",
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                     vertical: 8.0,
                   ),
@@ -70,11 +72,11 @@ class LoginScreen extends StatelessWidget {
                   // },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16.0,
               ),
               CupertinoButton(
-                child: Text("Login"),
+                child: const Text("Login"),
                 onPressed: () {
                   // if (_formKey.currentState.validate()) {
                   //   // Perform login

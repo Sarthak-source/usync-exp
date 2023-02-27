@@ -54,7 +54,7 @@ class BubbleNormalImage extends StatelessWidget {
     Icon? stateIcon;
     if (sent) {
       stateTick = true;
-      stateIcon = Icon(
+      stateIcon = const Icon(
         Icons.done,
         size: 18,
         color: Color(0xFF97AD8E),
@@ -62,7 +62,7 @@ class BubbleNormalImage extends StatelessWidget {
     }
     if (delivered) {
       stateTick = true;
-      stateIcon = Icon(
+      stateIcon = const Icon(
         Icons.done_all,
         size: 18,
         color: Color(0xFF97AD8E),
@@ -70,7 +70,7 @@ class BubbleNormalImage extends StatelessWidget {
     }
     if (seen) {
       stateTick = true;
-      stateIcon = Icon(
+      stateIcon = const Icon(
         Icons.done_all,
         size: 18,
         color: Color(0xFF92DEDA),
@@ -129,7 +129,7 @@ class BubbleNormalImage extends StatelessWidget {
                               right: 6,
                               child: stateIcon,
                             )
-                          : SizedBox(
+                          : const SizedBox(
                               width: 1,
                             ),
                     ],

@@ -45,7 +45,12 @@ dependencies:
   redux_thunk: ^0.4.0
   flutter_audio_manager_plus: ^0.0.1
   flutter_webrtc: ^0.9.22
+  flutter_staggered_grid_view:
+  transparent_image: ^2.0.1
   font_awesome_flutter: ^10.4.0
+  #flutter_local_notifications: ^8.2.0
+  flutter_background_service: ^2.4.6
+  miniplayer: ^1.0.1
   
 
 dev_dependencies:
@@ -59,10 +64,10 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
-
 dependency_overrides:
   font_awesome_flutter:
     path: ./font_awesome_flutter
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

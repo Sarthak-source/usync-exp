@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:usync/utils/theme_color.dart';
 
 class AppPanelSection extends StatefulWidget {
   final Widget title;
@@ -7,6 +8,7 @@ class AppPanelSection extends StatefulWidget {
   final CrossAxisAlignment alignment;
   final Axis direction;
   final bool fullwidth;
+  final double height;
   const AppPanelSection({
     super.key,
     this.title = const SizedBox.shrink(),
@@ -15,6 +17,7 @@ class AppPanelSection extends StatefulWidget {
     this.alignment = CrossAxisAlignment.start,
     required this.direction,
     this.fullwidth = false,
+    required this.height,
   });
 
   @override
@@ -26,8 +29,9 @@ class _AppPanelSectionState extends State<AppPanelSection> {
   Widget build(BuildContext context) {
     final List<Widget> bodyItems = widget.body;
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 2,
+    return Container(
+      color: ThemeColor().bgThemecolor(context),
+      height: widget.height,
       width: widget.fullwidth ? double.infinity : null,
       child: Column(
         crossAxisAlignment: widget.alignment,

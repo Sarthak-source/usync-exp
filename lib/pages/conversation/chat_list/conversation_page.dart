@@ -28,6 +28,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
       content: [
         AppPanelHeader(
           search: true,
+          toolbarHeight: 65,
           onBackClick: () {},
           onSearchCancel: () {},
           onSearchInput: (p0) {},
@@ -36,36 +37,29 @@ class _ConversationsPageState extends State<ConversationsPage> {
               icon: const FaIcon(
                 Icons.add_circle_outline,
               ),
-              onPressed: () {
-                SubPanel().showSubPanel(context, subpaneldetails, 1.1);
-              },
+              onPressed: () {},
             ),
           ],
           child: const Text(
             'Conversations',
           ),
         ),
-        AppPanelSection(
-          //title: Text('kokk'),
-          body: [
-            ListView.builder(
-              itemCount: chatUsers.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return ConversationList(
-                  name: chatUsers[index].name,
-                  messageText: chatUsers[index].messageText,
-                  imageUrl: chatUsers[index].imageURL,
-                  time: chatUsers[index].time,
-                  isMessageRead: chatUsers[index].isMessageRead,
-                );
-              },
-            ),
-          ],
-          gutter: 0,
-          direction: Axis.horizontal,
-          alignment: CrossAxisAlignment.stretch,
-        )
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(2),
+            itemCount: chatUsers.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ConversationList(
+                name: chatUsers[index].name,
+                messageText: chatUsers[index].messageText,
+                imageUrl: chatUsers[index].imageURL,
+                time: chatUsers[index].time,
+                isMessageRead: chatUsers[index].isMessageRead,
+              );
+            },
+          ),
+        ),
       ],
     );
   }

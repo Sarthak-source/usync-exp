@@ -1,6 +1,5 @@
-import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
+import 'package:usync/utils/theme_color.dart';
 
 extension UsyncTextType on TextTheme {
   TextStyle _textStyle({
@@ -19,14 +18,6 @@ extension UsyncTextType on TextTheme {
     );
   }
 
-  Color _themecolor(BuildContext context) {
-    if (EasyDynamicTheme.of(context).themeMode == ThemeMode.dark) {
-      return LightThemeColors.textColor;
-    } else {
-      return DarkThemeColors.textColor;
-    }
-  }
-
   TextStyle largeTitle(
     BuildContext context,
     FontWeight fontWeight,
@@ -35,7 +26,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 34,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -49,7 +40,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 28,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -63,7 +54,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 22,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -77,7 +68,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 20,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -91,7 +82,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 17,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -105,7 +96,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 17,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -119,7 +110,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 16,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -133,7 +124,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 15,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -147,7 +138,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 13,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -161,7 +152,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 12,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );
@@ -175,7 +166,7 @@ extension UsyncTextType on TextTheme {
     return _textStyle(
       context: context,
       size: 11,
-      color: _themecolor(context),
+      color: ThemeColor().textThemecolor(context),
       fontStyle: fontStyle,
       fontWeight: fontWeight,
     );

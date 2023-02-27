@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
@@ -39,7 +37,8 @@ class Avatar extends StatelessWidget {
             : null,
         child: CircleAvatar(
           radius: size,
-          backgroundImage: NetworkImage(src, scale: 2), // TODO: Add fallback handler
+          backgroundImage:
+              NetworkImage(src, scale: 2), // TODO: Add fallback handler
         ),
       ),
     );

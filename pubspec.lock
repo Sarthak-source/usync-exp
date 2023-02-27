@@ -134,6 +134,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  flutter_background_service:
+    dependency: "direct main"
+    description:
+      name: flutter_background_service
+      sha256: "7b9f15ab7d1a5784850ecfde722be4ace4dbcf1072a1fe33b7f9cbe871241e53"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.6"
+  flutter_background_service_android:
+    dependency: transitive
+    description:
+      name: flutter_background_service_android
+      sha256: "57fd631d800f7e56ca5bfadcfc00c8903eb721b23506b1a387342039521883ec"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.3"
+  flutter_background_service_ios:
+    dependency: transitive
+    description:
+      name: flutter_background_service_ios
+      sha256: d3f1dc009137c1ac19f5e3d88668836f088a7e078396733547339765d46ff12f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
+  flutter_background_service_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_background_service_platform_interface
+      sha256: "5f0480ee8378984f718d640abbe09b4d6d024d58a72b2d8b86bdedb3cf095ff8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -142,6 +174,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      sha256: "1312314293acceb65b92754298754801b0e1f26a1845833b740b30415bbbcf07"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -163,10 +203,9 @@ packages:
   font_awesome_flutter:
     dependency: "direct main"
     description:
-      name: font_awesome_flutter
-      sha256: "959ef4add147753f990b4a7c6cccb746d5792dbdc81b1cde99e62e7edb31b206"
-      url: "https://pub.dev"
-    source: hosted
+      path: font_awesome_flutter
+      relative: true
+    source: path
     version: "10.4.0"
   hex:
     dependency: transitive
@@ -248,6 +287,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
+  miniplayer:
+    dependency: "direct main"
+    description:
+      name: miniplayer
+      sha256: "6e12c27aef7432fc16508460a6dc824f3edfeb01761bd0dbfbccc84d516121bf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   msgpack_dart:
     dependency: transitive
     description:
@@ -533,6 +580,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  transparent_image:
+    dependency: "direct main"
+    description:
+      name: transparent_image
+      sha256: e8991d955a2094e197ca24c645efec2faf4285772a4746126ca12875e54ca02f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   typed_data:
     dependency: transitive
     description:

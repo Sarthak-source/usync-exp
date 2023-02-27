@@ -5,6 +5,10 @@ import 'package:usync/pages/conversation/chat_list/utility/messagebar.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_section.dart';
+import 'package:usync/ui_components/globalcomponents/sub_panel.dart';
+import 'package:usync/utils/theme_color.dart';
+
+import 'conversation_details.dart';
 
 class ChatDetailPage extends StatefulWidget {
   const ChatDetailPage({super.key});
@@ -20,9 +24,13 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       radius: AppPanelRadius.xs,
       content: [
         AppPanelHeader(
+          toolbarHeight: 90,
           actionButtons: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                SubPanel().showSubPanel(context, subpaneldetails(context), 1.1,
+                    MainAxisAlignment.start);
+              },
               icon: const Icon(
                 Icons.info_outline,
                 //color: Colors.grey,
@@ -31,6 +39,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
           ],
           back: true,
           onBackClick: () {
+            debugPrint('back');
             Navigator.pop(context);
           },
           alignment: true,
@@ -59,6 +68,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         ),
         Expanded(
           child: AppPanelSection(
+            height: 0,
             body: [
               SingleChildScrollView(
                 child: Column(
@@ -110,7 +120,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         Align(
           alignment: Alignment.bottomCenter,
           child: MessageBar(
-            messageBarColor: Colors.white,
+            messageBarColor: ThemeColor().themecolor(context),
             // ignore: avoid_print
             sendbutton: false,
             //onSend: (_)
@@ -120,8 +130,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 child: InkWell(
                   child: const Icon(
                     Icons.cloud_upload_outlined,
-                    color: Colors.grey,
-                    size: 24,
                   ),
                   onTap: () {},
                 ),
@@ -131,8 +139,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 child: InkWell(
                   child: const Icon(
                     Icons.gif_box_outlined,
-                    color: Colors.grey,
-                    size: 24,
                   ),
                   onTap: () {},
                 ),
@@ -142,8 +148,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 child: InkWell(
                   child: const Icon(
                     Icons.chat_bubble_outline_outlined,
-                    color: Colors.grey,
-                    size: 24,
                   ),
                   onTap: () {},
                 ),

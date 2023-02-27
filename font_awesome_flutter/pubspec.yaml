@@ -35,7 +35,8 @@ flutter:
     - family: FontAwesomeSolid
       fonts:
         - asset: lib/fonts/fa-solid-900.ttf
-          weight: 900
+          weight: 900         
+          
     - family: FontAwesomeLight
       fonts:
         - asset: lib/fonts/fa-light-300.ttf
