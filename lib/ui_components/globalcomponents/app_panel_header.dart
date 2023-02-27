@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:usync/ui_components/config/customtext/customtext.dart';
@@ -6,6 +5,7 @@ import 'package:usync/ui_components/typography/text.dart';
 import 'package:usync/ui_components/usync_text_field.dart';
 
 class AppPanelHeader extends StatefulWidget {
+  final double toolbarHeight;
   final bool back;
   final void Function()? onBackClick;
   final Widget child;
@@ -17,6 +17,7 @@ class AppPanelHeader extends StatefulWidget {
   final void Function()? onSearchCancel;
   const AppPanelHeader({
     super.key,
+    required this.toolbarHeight,
     this.back = true,
     this.onBackClick,
     required this.child,
@@ -48,10 +49,8 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
         setState(
           () {
             if (appBarTitle == widget.child) {
-              action = const Expanded(
-                child: Text(
-                  'cancel',
-                ),
+              action = const Text(
+                'cancel',
               );
               appBarTitle = UsyncTextField(
                 placeholderString: "search",
@@ -82,7 +81,7 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
     ].followedBy(followedAction).toList();
 
     return AppBar(
-      toolbarHeight: 80.0,
+      toolbarHeight: widget.toolbarHeight,
       elevation: 1,
       leading: backstate == true
           ? IconButton(
@@ -97,11 +96,8 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
               onPressed: widget.onBackClick,
             )
           : null,
-
       leadingWidth: 35,
-
       title: appBarTitle,
-      //titleSpacing: 1,
       centerTitle: widget.alignment,
       bottom: widget.bottomWidget,
       actions: actionItems,

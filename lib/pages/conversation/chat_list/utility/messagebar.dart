@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:usync/ui_components/usync_text_field.dart';
@@ -76,7 +78,7 @@ class MessageBar extends StatelessWidget {
           Container(
             color: messageBarColor,
             padding: const EdgeInsets.symmetric(
-              vertical: 20,
+              vertical: 12,
               horizontal: 16,
             ),
             child: Row(
@@ -84,6 +86,15 @@ class MessageBar extends StatelessWidget {
                 Expanded(
                   child: UsyncTextField(
                     placeholderString: "message....",
+                    suffix: InkWell(
+                      onTap: () {},
+                      child: const Padding(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Icon(
+                          Icons.emoji_emotions,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 ...actions,

@@ -5,16 +5,19 @@ import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_section.dart';
 import 'package:usync/ui_components/globalcomponents/photo_grid.dart';
 import 'package:usync/ui_components/usync_text_field.dart';
-import 'package:flutter/rendering.dart';
 import 'package:usync/utils/place_holder.dart';
 
 List<Widget> subpaneldetails(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
 
   return [
-    const AppPanelHeader(
-      actionButtons: [],
-      child: Text('details'),
+    AppPanelHeader(
+      toolbarHeight: 70,
+      actionButtons: const [],
+      onBackClick: () {
+        Navigator.pop(context);
+      },
+      child: const Text('details'),
     ),
     const SizedBox(
       height: 30,

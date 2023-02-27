@@ -1,6 +1,4 @@
-import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/utils/theme_color.dart';
 
 extension UsyncTextType on TextTheme {

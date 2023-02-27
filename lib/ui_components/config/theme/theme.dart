@@ -27,6 +27,10 @@ class AppTheme {
       ),
 
       dividerColor: LightThemeColors.textColor,
+      bottomAppBarTheme: const BottomAppBarTheme().copyWith(
+        color: LightThemeColors.pageBgColor,
+        elevation: 1,
+      ),
 
       appBarTheme: const AppBarTheme().copyWith(
         color: LightThemeColors.pageBgColor,
@@ -60,6 +64,11 @@ class AppTheme {
       ),
       dividerTheme: const DividerThemeData(
         color: DarkThemeColors.textColor,
+      ),
+
+      bottomAppBarTheme: const BottomAppBarTheme().copyWith(
+        color: DarkThemeColors.pageBgColor,
+        elevation: 1,
       ),
       dividerColor: DarkThemeColors.textColor,
       appBarTheme: const AppBarTheme().copyWith(

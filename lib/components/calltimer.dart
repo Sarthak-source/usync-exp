@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-// Import stop_watch_timer
+import 'package:usync/ui_components/typography/text.dart';
 
 class CallTimer extends StatefulWidget {
   const CallTimer({super.key});

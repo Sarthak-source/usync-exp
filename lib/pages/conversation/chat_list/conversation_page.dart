@@ -28,6 +28,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
       content: [
         AppPanelHeader(
           search: true,
+          toolbarHeight: 65,
           onBackClick: () {},
           onSearchCancel: () {},
           onSearchInput: (p0) {},

@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:usync/utils/theme_color.dart';
 
 class UsyncTextField extends StatefulWidget {
   final TextEditingController textController = TextEditingController();
-  Widget prifix;
+  final Widget prifix;
+  final Widget suffix;
   final String placeholderString;
   final Function(String)? onChanged;
-  UsyncTextField(
-      {super.key,
-      required this.placeholderString,
-      this.onChanged,
-      this.prifix = const SizedBox.shrink()});
+  UsyncTextField({
+    super.key,
+    required this.placeholderString,
+    this.onChanged,
+    this.prifix = const SizedBox.shrink(),
+    this.suffix = const SizedBox.shrink(),
+  });
 
   @override
   State<UsyncTextField> createState() => _UsyncTextFieldState();
@@ -22,6 +24,7 @@ class _UsyncTextFieldState extends State<UsyncTextField> {
   Widget build(BuildContext context) {
     return CupertinoTextField(
       prefix: widget.prifix,
+      suffix: widget.suffix,
       controller: widget.textController,
       placeholder: widget.placeholderString,
       decoration: BoxDecoration(

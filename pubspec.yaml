@@ -48,6 +48,9 @@ dependencies:
   flutter_staggered_grid_view:
   transparent_image: ^2.0.1
   font_awesome_flutter: ^10.4.0
+  #flutter_local_notifications: ^8.2.0
+  flutter_background_service: ^2.4.6
+  miniplayer: ^1.0.1
   
 
 dev_dependencies:

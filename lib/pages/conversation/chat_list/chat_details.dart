@@ -24,6 +24,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       radius: AppPanelRadius.xs,
       content: [
         AppPanelHeader(
+          toolbarHeight: 90,
           actionButtons: [
             IconButton(
               onPressed: () {
@@ -129,8 +130,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 child: InkWell(
                   child: const Icon(
                     Icons.cloud_upload_outlined,
-                    color: Colors.grey,
-                    size: 24,
                   ),
                   onTap: () {},
                 ),
@@ -140,8 +139,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 child: InkWell(
                   child: const Icon(
                     Icons.gif_box_outlined,
-                    color: Colors.grey,
-                    size: 24,
                   ),
                   onTap: () {},
                 ),
@@ -151,8 +148,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 child: InkWell(
                   child: const Icon(
                     Icons.chat_bubble_outline_outlined,
-                    color: Colors.grey,
-                    size: 24,
                   ),
                   onTap: () {},
                 ),
