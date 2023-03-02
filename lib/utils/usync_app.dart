@@ -7,8 +7,7 @@ import 'package:redux_persist/redux_persist.dart'
     show JsonSerializer, Persistor;
 import 'package:redux_persist_flutter/redux_persist_flutter.dart';
 import 'package:http/http.dart' as http;
-
-import '../services/audio_call_state.dart';
+import 'package:usync/services/audio_call/audio_call_state.dart';
 
 class UsyncApp {
   static final UsyncApp instance = UsyncApp._init();

@@ -1,21 +1,40 @@
 // ignore_for_file: must_be_immutable, library_private_types_in_public_api
 
+import 'dart:io';
+import 'package:clean_api/clean_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:usync/config/config.dart';
 import 'package:usync/pages/now_playing/now_playing.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'pages/conversation/chat_list/conversation_page.dart';
 import 'ui_components/config/theme/theme.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  const String hiveBox = 'hive_box';
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
+  CleanApi.instance.setup(baseUrl: MyConfig.appApiUrl);
+  //Shared Pref Initialization
+  await initialize();
+  await Hive.initFlutter();
+  await Hive.openBox(hiveBox);
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ),
   );
-  runApp(EasyDynamicThemeWidget(child: const MyApp()));
+
+  runApp(
+    EasyDynamicThemeWidget(
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +53,15 @@ class MyApp extends StatelessWidget {
       themeMode: EasyDynamicTheme.of(context).themeMode,
       home: const HomePage(),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 

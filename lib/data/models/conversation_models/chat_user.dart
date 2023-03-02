@@ -12,3 +12,5 @@ class ChatUsers {
     required this.isMessageRead,
   });
 }
+
+

@@ -20,8 +20,9 @@ ThemeData lightTheme = ThemeData.light().copyWith(
       backgroundColor: LightThemeColors.pageBgColor,
       actionTextColor: LightThemeColors.textColor),
   iconTheme: const IconThemeData(
-    color: DarkThemeColors.textColor,
+    color: LightThemeColors.textColor,
     size: 24,
+    weight: 1,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

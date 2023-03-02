@@ -1,7 +1,6 @@
 import 'dart:async';
-
-import 'package:flutter_module/services/audio_call_state.dart';
-import 'package:flutter_module/services/call_details.dart';
+import 'package:usync/services/audio_call/audio_call_state.dart';
+import 'package:usync/services/audio_call/call_details.dart';
 
 import 'cordova.dart';
 import 'usync_app.dart';

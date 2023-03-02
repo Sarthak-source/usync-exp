@@ -32,6 +32,8 @@ class AppTheme {
         elevation: 1,
       ),
 
+      
+
       appBarTheme: const AppBarTheme().copyWith(
         color: LightThemeColors.pageBgColor,
         titleTextStyle: const TextTheme()

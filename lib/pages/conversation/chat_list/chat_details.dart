@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:usync/pages/conversation/chat_list/utility/chatbubble.dart';
 import 'package:usync/pages/conversation/chat_list/utility/chatimage.dart';
 import 'package:usync/pages/conversation/chat_list/utility/messagebar.dart';
@@ -128,27 +129,21 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 12, right: 8),
                 child: InkWell(
-                  child: const Icon(
-                    Icons.cloud_upload_outlined,
-                  ),
+                  child: const FaIcon(FontAwesomeIcons.cloudArrowUp),
                   onTap: () {},
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: InkWell(
-                  child: const Icon(
-                    Icons.gif_box_outlined,
-                  ),
+                  child: const FaIcon(FontAwesomeIcons.gif),
                   onTap: () {},
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: InkWell(
-                  child: const Icon(
-                    Icons.chat_bubble_outline_outlined,
-                  ),
+                  child: const FaIcon(FontAwesomeIcons.messageDollar),
                   onTap: () {},
                 ),
               ),
