@@ -1,15 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:usync/models/conversation_models.dart/chat_user.dart';
+import 'package:stacked/stacked.dart';
+import 'package:usync/data/models/hive_coversation/conversation.dart';
+import 'package:usync/data/view_models/chat_view/conversation_list_view_model.dart';
 import 'package:usync/pages/conversation/chat_list/conversation_list.dart';
-import 'package:usync/pages/conversation/chat_list/conversation_details.dart';
-import 'package:usync/utils/place_holder.dart';
-import 'package:usync/ui_components/config/customtext/customtext.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
-import 'package:usync/ui_components/globalcomponents/app_panel_section.dart';
-import 'package:usync/ui_components/globalcomponents/sub_panel.dart';
 
 class ConversationsPage extends StatefulWidget {
   const ConversationsPage({super.key, required this.title});
@@ -45,17 +41,24 @@ class _ConversationsPageState extends State<ConversationsPage> {
           ),
         ),
         Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.all(2),
-            itemCount: chatUsers.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return ConversationList(
-                name: chatUsers[index].name,
-                messageText: chatUsers[index].messageText,
-                imageUrl: chatUsers[index].imageURL,
-                time: chatUsers[index].time,
-                isMessageRead: chatUsers[index].isMessageRead,
+          child: ViewModelBuilder<CoversationListViewModel>.reactive(
+            viewModelBuilder: () => CoversationListViewModel(),
+            onViewModelReady: (model) => model.getData(),
+            builder: (context, model, child) {
+              List<Conversation> conversation = model.conversationList;
+              return ListView.builder(
+                padding: const EdgeInsets.all(2),
+                itemCount: conversation.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return ConversationList(
+                    name: conversation[index].name,
+                    messageText: conversation[index].lastMessage?.content,
+                    imageUrl: conversation[index].users[index].avatar_data,
+                    time: conversation[index].updated_at.toString(),
+                    isMessageRead: conversation[index].type!.isEmpty,
+                  );
+                },
               );
             },
           ),

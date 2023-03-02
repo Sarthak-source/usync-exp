@@ -51,11 +51,20 @@ dependencies:
   #flutter_local_notifications: ^8.2.0
   flutter_background_service: ^2.4.6
   miniplayer: ^1.0.1
+  clean_api: ^0.3.0
+  nb_utils: ^5.0.5
+  hive:
+  hive_flutter: 
+  injectable: ^2.1.0
+  stacked: ^3.1.1
+  
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  hive_generator:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -63,6 +72,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  
 
 dependency_overrides:
   font_awesome_flutter:

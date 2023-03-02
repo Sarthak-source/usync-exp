@@ -21,6 +21,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   iconTheme: const IconThemeData(
     color: DarkThemeColors.textColor,
     size: 24,
+    weight: 1,
   ),
 
   elevatedButtonTheme: ElevatedButtonThemeData(

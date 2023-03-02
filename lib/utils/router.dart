@@ -1,8 +1,6 @@
 import 'package:usync/utils/cordova.dart';
 import 'package:usync/utils/usync_app.dart';
 
-import '../main.dart';
-
 class NavRouter {
   static final NavRouter instance = NavRouter._init();
 

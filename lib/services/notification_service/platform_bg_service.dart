@@ -2,10 +2,13 @@ import 'dart:ui';
 
 import 'package:connectanum/connectanum.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:usync/services/audio_call_bg_service.dart';
+import 'package:usync/utils/cordova_handler.dart';
 import 'package:usync/utils/local_notifications.dart';
 import 'package:usync/utils/usync_app.dart';
+
+import '../audio_call/audio_call_bg_service.dart';
 
 Future<FlutterBackgroundService> initializeBgService() async {
   final service = FlutterBackgroundService();
