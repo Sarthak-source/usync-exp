@@ -53,7 +53,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
                 itemBuilder: (context, index) {
                   return ConversationList(
                     name: conversation[index].name,
-                    messageText: conversation[index].lastMessage?.content,
+                    messageText: conversation[index].lastMessage?.content ?? "",
                     imageUrl: conversation[index].users[index].avatar_data,
                     time: conversation[index].updated_at.toString(),
                     isMessageRead: conversation[index].type!.isEmpty,
