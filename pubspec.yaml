@@ -57,6 +57,7 @@ dependencies:
   hive_flutter: 
   injectable: ^2.1.0
   stacked: ^3.1.1
+  connectivity_plus:
   
   
 

@@ -9,8 +9,8 @@ class CoversationViewModel extends BaseViewModel {
   final HiveService hiveService = HiveService();
   final APIService apiService = APIService();
 
-  List<Message> _conversationList = [];
-  List<Message> get conversationList => _conversationList;
+  List<Message> _messageList = [];
+  List<Message> get conversationList => _messageList;
   String _text = "";
   String get text => _text;
 
@@ -19,12 +19,12 @@ class CoversationViewModel extends BaseViewModel {
   getData() async {
     debugPrint("Entered get Data()");
     _text = "Fetching data";
-    bool exists = await hiveService.isExists(boxName: "ConversationList");
+    bool exists = await hiveService.isExists(boxName: "MessageList");
     if (exists) {
       _text = "Fetching from hive";
       debugPrint("Getting data from Hive");
       setBusy(true);
-      _conversationList = await hiveService.getBoxes("ConversationList");
+      _messageList = await hiveService.getBoxes("MessageList");
       setBusy(false);
     } else {
       _text = "Fetching from hive";
@@ -50,10 +50,10 @@ class CoversationViewModel extends BaseViewModel {
           created_at: e['created_at'],
           updated_at: e['updated_at'],
         );
-        _conversationList.add(conversation);
+        _messageList.add(conversation);
       }).toList();
       _text = "Caching data";
-      await hiveService.addBoxes(_conversationList, "ConversationList");
+      await hiveService.addBoxes(_messageList, "MessageList");
       setBusy(false);
     }
   }

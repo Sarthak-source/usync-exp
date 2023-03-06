@@ -8,21 +8,32 @@ import 'package:flutter/services.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:usync/config/config.dart';
+import 'package:usync/data/models/hive_coversation/conversation.dart';
+import 'package:usync/data/models/hive_default_conversation/default_conversation_preferences.dart';
+import 'package:usync/data/models/hive_file/file.dart';
+import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/pages/now_playing/now_playing.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
+import 'data/models/hive_messages/message.dart';
+import 'data/models/hive_pages/page.dart';
 import 'pages/conversation/chat_list/conversation_page.dart';
 import 'ui_components/config/theme/theme.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  const String hiveBox = 'hive_box';
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
   CleanApi.instance.setup(baseUrl: MyConfig.appApiUrl);
   //Shared Pref Initialization
   await initialize();
   await Hive.initFlutter();
-  await Hive.openBox(hiveBox);
+
+  Hive.registerAdapter(ConversationAdapter());
+  Hive.registerAdapter(DefaultConversationPreferencesAdapter());
+  Hive.registerAdapter(FileAdapter());
+  Hive.registerAdapter(MessageAdapter());
+  Hive.registerAdapter(PageAdapter());
+  Hive.registerAdapter(UserAdapter());
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

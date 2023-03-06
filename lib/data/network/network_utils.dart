@@ -13,14 +13,25 @@ class APIService {
   bool accessAllowed = false;
 
   String access = 'ACCESS';
+
+  String tokenValue =
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTA1NmEzZDE1N2FjZTEyYzQ3MWUyYmE3NDg2MzNiZWY5NjY5MjA4YWVkNWI5NDhhYjYyZTA3OWM3MzhiODFjZjM3OTYxZDkyZDFmNWUyNGMiLCJpYXQiOjE2NzU4NTY0NjguMTIyNzYsIm5iZiI6MTY3NTg1NjQ2OC4xMjI3NjcsImV4cCI6MTcwNzM5MjQ2Ny41NjQ4MjksInN1YiI6IjE1Iiwic2NvcGVzIjpbXX0.Ku8aUfjHSXjIfJwu6M9-jUxUNpdjcgBsQvrBN4gqeGiJ-4K2ERfh4jxVcryImgJYbO2C4Da-f7ffNt4wELPaXzI5qk9oCVY9aK5LlgAFJVrGkV8MlSpfWEVOLRAkrBXJCjREXsHNFVi2IDClCRuLsAPLPDdlBdOQGzHdzBD9kbYNkUxW8HllWO8fv7DNz3p_O-r3frzoBOa-ZUvn7iAwT57eNM6t-MYWKKWYB-fDxiDnk_yFHV9sYKqFuB_R4NtLAUvVc8kVHz2YnN3Ex6flogg4ogviWba5YVkal-y1BChnR6z7qUT5RAlAVsXHjA1x2QNdgp1V77IfaoGv-hjJ6VJhBeCeVx1TgyBN0MVhPAmmxkZ89aZjdXs46RDZ-AM-1WhEXH1XRqIGdZL8ifBMvvD18NN3OfOjnEWOddMrH7nNR5x2JFQgTfSwy5Ca7Z9XW6BKgL1r6f46fz-oJ04AaD06OtWbUmq9DWn10AghDBT73w0SHRUq6ODz-KEgefSM8cpAKqvbJYKyqSs8OPgrvKJd5nybhkuvDJKbwOifdZRJeh8udWPfMvvRlEamklbFzPPoHa8x-g73MdUilA9UOIPmTp0KeIAOg8_kgBlyCFUh6lXjj0Egk4nPopctMooF29v8ADOTOwqj2pL94VWnq5qGOzPrPs3pNS7Vc7JoqTw';
+
   String loggedIn = 'LOGGED_IN';
 
   bool isSuccessful(int code) {
     return code >= 200 && code <= 206;
   }
 
+  setToken(String key, String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(key, value);
+  }
+
   Future<Response> getRequest(String? endPoint,
       {bool bearerToken = false, bool noBaseUrl = false}) async {
+    setToken(access, tokenValue);
+
     if (await isNetworkAvailable()) {
       Map<String, String>? headers;
       Response response;
@@ -50,6 +61,7 @@ class APIService {
       }
 
       //debugPrint('Response: ${response.statusCode} ${response.body}');
+      Logger.i(response.body);
       return response;
     } else {
       throw noInternetMsg;

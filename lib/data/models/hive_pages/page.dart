@@ -1,9 +1,10 @@
 import 'package:hive/hive.dart';
 import 'package:usync/data/models/hive_file/file.dart';
-part 'user.g.dart';
+import 'package:usync/data/models/hive_messages/message.dart';
+part 'page.g.dart';
 
-@HiveType(typeId: 6)
-class User extends HiveObject {
+@HiveType(typeId: 5)
+class Page extends HiveObject {
   @HiveField(0)
   String? id;
 
@@ -50,12 +51,9 @@ class User extends HiveObject {
   Map<String, dynamic> settings;
 
   @HiveField(15)
-  String? username;
+  String? pagename;
 
-  @HiveField(16)
-  Map<String, dynamic> preferences;
-
-  User({
+  Page({
     this.id,
     this.type,
     this.name = const {'first': '', 'full': ''},
@@ -71,7 +69,6 @@ class User extends HiveObject {
     this.description_summary,
     this.isFirstView = false,
     this.settings = const {},
-    this.username,
-    this.preferences = const {},
+    this.pagename,
   });
 }

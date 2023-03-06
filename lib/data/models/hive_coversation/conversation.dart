@@ -7,13 +7,13 @@ part 'conversation.g.dart';
 @HiveType(typeId: 0)
 class Conversation extends HiveObject {
   @HiveField(0)
-  int? id;
+  String? id;
 
   @HiveField(1)
   String name;
 
   @HiveField(2)
-  int? user_id;
+  String? user_id;
 
   @HiveField(3)
   String? last_message_id;
@@ -31,10 +31,10 @@ class Conversation extends HiveObject {
   Message? lastMessage;
 
   @HiveField(8)
-  DateTime? created_at;
+  String? created_at;
 
   @HiveField(9)
-  DateTime? updated_at;
+  String? updated_at;
 
   @HiveField(10)
   String? type;

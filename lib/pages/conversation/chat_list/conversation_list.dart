@@ -4,14 +4,14 @@ import 'package:usync/pages/conversation/chat_list/chat_details.dart';
 
 class ConversationList extends StatefulWidget {
   final String name;
-  final String messageText;
+  final String? messageText;
   final List<String> imageUrl;
   final String time;
   final bool isMessageRead;
   const ConversationList(
       {super.key,
       required this.name,
-      required this.messageText,
+      this.messageText,
       required this.imageUrl,
       required this.time,
       required this.isMessageRead});
@@ -113,7 +113,7 @@ class _ConversationListState extends State<ConversationList> {
                             height: 6,
                           ),
                           Text(
-                            widget.messageText,
+                            widget.messageText ?? '',
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: 12,

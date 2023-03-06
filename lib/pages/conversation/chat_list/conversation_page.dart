@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:usync/data/models/hive_coversation/conversation.dart';
+import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/data/view_models/chat_view/conversation_list_view_model.dart';
 import 'package:usync/pages/conversation/chat_list/conversation_list.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
@@ -45,18 +46,20 @@ class _ConversationsPageState extends State<ConversationsPage> {
             viewModelBuilder: () => CoversationListViewModel(),
             onViewModelReady: (model) => model.getData(),
             builder: (context, model, child) {
-              List<Conversation> conversation = model.conversationList;
+              List<dynamic> conversation = model.conversationList;
               return ListView.builder(
                 padding: const EdgeInsets.all(2),
                 itemCount: conversation.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ConversationList(
-                    name: conversation[index].name,
-                    messageText: conversation[index].lastMessage?.content,
-                    imageUrl: conversation[index].users[index].avatar_data,
+                    name: conversation[index].name.toString(),
+                    messageText:
+                        conversation[index].lastMessage?.content.toString(),
+                    imageUrl: model.getAvatar(conversation[index]).toList(),
                     time: conversation[index].updated_at.toString(),
-                    isMessageRead: conversation[index].type!.isEmpty,
+                    isMessageRead:
+                        conversation[index].unseen_messages_count != 0,
                   );
                 },
               );

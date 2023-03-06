@@ -1,6 +1,4 @@
-
-
-import 'package:usync/data/models/conversation_models/chat_user.dart';
+import 'package:usync/data/models/place_holder/conversation_models/chat_user.dart';
 
 List<ChatUsers> chatUsers = [
   ChatUsers(

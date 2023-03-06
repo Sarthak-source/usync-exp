@@ -1,8 +1,7 @@
 import 'package:hive/hive.dart';
-
 part 'default_conversation_preferences.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class DefaultConversationPreferences {
   @HiveField(0)
   bool doNotDisturb;

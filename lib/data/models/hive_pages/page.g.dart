@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'page.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserAdapter extends TypeAdapter<User> {
+class PageAdapter extends TypeAdapter<Page> {
   @override
-  final int typeId = 6;
+  final int typeId = 5;
 
   @override
-  User read(BinaryReader reader) {
+  Page read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return User(
+    return Page(
       id: fields[0] as String?,
       type: fields[1] as String?,
       name: (fields[2] as Map?)?.cast<String, String>(),
@@ -32,15 +32,14 @@ class UserAdapter extends TypeAdapter<User> {
       description_summary: fields[12] as dynamic,
       isFirstView: fields[13] as bool,
       settings: (fields[14] as Map).cast<String, dynamic>(),
-      username: fields[15] as String?,
-      preferences: (fields[16] as Map).cast<String, dynamic>(),
+      pagename: fields[15] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, User obj) {
+  void write(BinaryWriter writer, Page obj) {
     writer
-      ..writeByte(17)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -72,9 +71,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(14)
       ..write(obj.settings)
       ..writeByte(15)
-      ..write(obj.username)
-      ..writeByte(16)
-      ..write(obj.preferences);
+      ..write(obj.pagename);
   }
 
   @override
@@ -83,7 +80,7 @@ class UserAdapter extends TypeAdapter<User> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserAdapter &&
+      other is PageAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
