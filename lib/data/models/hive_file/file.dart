@@ -55,7 +55,7 @@ class File extends HiveObject {
   String aspect_ratio;
 
   @HiveField(22)
-  Map<String, dynamic> links;
+  Map<String, dynamic>? links;
 
   @HiveField(17)
   Map<String, dynamic>? timestamps;

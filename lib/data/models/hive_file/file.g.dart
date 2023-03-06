@@ -24,17 +24,17 @@ class FileAdapter extends TypeAdapter<File> {
       description: fields[4] as String,
       description_summary: fields[5] as String,
       poster_id: fields[6] as String,
-      cover: fields[7] as File,
+      cover: fields[7] as File?,
       original_extension: fields[8] as String,
       playable_length: fields[9] as int,
-      data: (fields[10] as Map).cast<String, dynamic>(),
+      data: (fields[10] as Map?)?.cast<String, dynamic>(),
       user_id: fields[11] as int,
-      user: fields[12] as User,
+      user: fields[12] as User?,
       page_id: fields[13] as String,
-      page: fields[14] as Page,
+      page: fields[14] as Page?,
       aspect_ratio: fields[15] as String,
-      links: (fields[22] as Map).cast<String, dynamic>(),
-      timestamps: (fields[17] as Map).cast<String, dynamic>(),
+      links: (fields[22] as Map?)?.cast<String, dynamic>(),
+      timestamps: (fields[17] as Map?)?.cast<String, dynamic>(),
       manageable: fields[18] as bool,
       meta: fields[19] as bool,
       marked_as_nsfw: fields[20] as bool,
@@ -78,7 +78,7 @@ class FileAdapter extends TypeAdapter<File> {
       ..write(obj.page)
       ..writeByte(15)
       ..write(obj.aspect_ratio)
-      ..writeByte(16)
+      ..writeByte(22)
       ..write(obj.links)
       ..writeByte(17)
       ..write(obj.timestamps)
