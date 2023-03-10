@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:usync/config/config.dart';
 import 'api.dart';
+import 'dart:developer';
 
 class APIService {
   String noInternetMsg = 'You are not connected to Internet';
@@ -56,8 +57,12 @@ class APIService {
       //debugPrint('Header: $headers');
 
       if (bearerToken) {
-        //String queryString = Uri(queryParameters: queryParams).query;
-        response = await get(Uri.https(API.base, endPoint, queryParams));
+        String apiBaseURL = API.base.startsWith('https://')
+            ? Uri.parse(API.base).host
+            : API.base;
+
+        String apiPrefix = Uri.parse(API.base).path;
+        response = await get(Uri.https(apiBaseURL, '$apiPrefix$endPoint', queryParams));
       } else if (noBaseUrl) {
         response = await get(
             Uri.parse(
@@ -88,6 +93,7 @@ class APIService {
       }
       Logger.i('body: $requestBody');
 
+// Get access token from store
       var accessToken = getStringAsync(access);
 
       var headers = {

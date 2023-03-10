@@ -9,9 +9,11 @@ class API {
   //Point the API to the base URL
   static const base = MyConfig.appApiUrl;
 
+  static const prefix = 'api';
+
   /// User
   static const register = 'auth/register';
-  static const login = 'auth/';
+  static const login = 'auth';
 
   static const logout = 'auth/logout';
   static const userInfo = 'account/update';

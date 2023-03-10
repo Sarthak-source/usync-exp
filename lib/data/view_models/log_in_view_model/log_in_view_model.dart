@@ -38,6 +38,7 @@ class LoginViewModel extends BaseViewModel {
       final decoded = await _apiService.handleResponse(result);
       final token = decoded['access_token'];
 
+// TODO: Set token in store 
       await _apiService.setToken(MyConfig.access, token);
       // store the token securely for future API requests
 

@@ -11,7 +11,10 @@ class UsyncTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final String placeholderString;
   final bool obscureText;
+  final bool enableSuggestions;
+  final bool autocorrect;
   final Function(String)? onChanged;
+
   const UsyncTextField({
     super.key,
     required this.textController,
@@ -21,6 +24,8 @@ class UsyncTextField extends StatefulWidget {
     this.prifix = const SizedBox.shrink(),
     this.suffix = const SizedBox.shrink(),
     this.obscureText = false,
+    this.enableSuggestions = true,
+    this.autocorrect = true,
   });
 
   @override

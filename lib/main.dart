@@ -27,6 +27,9 @@ void main() async {
   CleanApi.instance.setup(baseUrl: MyConfig.appApiUrl);
   //Shared Pref Initialization
   await initialize();
+  // TODO: Intialize a state management
+  // TODO: Reload shared preferences
+  // TODO: load access token from shared preferences to store
   await Hive.initFlutter();
 
   Hive.registerAdapter(ConversationAdapter());

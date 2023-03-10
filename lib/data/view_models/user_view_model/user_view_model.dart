@@ -36,10 +36,21 @@ class UserViewModel extends BaseViewModel {
     _text = "Fetching from hive";
     debugPrint("Getting data from Api");
     setBusy(true);
-    var result = await _apiService.getRequest(
-      loginUrl,
-      bearerToken: true,
-    );
+    var result =
+        await _apiService.getRequest(loginUrl, bearerToken: true, queryParams: {
+      'include': [
+        'communityUser.manageablePages.avatar',
+        'communityUser.manageablePages.cover',
+        'activeUser.avatar',
+        'activeUser.cover',
+        'communityUser.avatar',
+        'communityUser.cover',
+        'communities',
+        'role',
+        'language',
+        'settings'
+      ].join(',')
+    });
 
     if (result.statusCode == 200) {
       final userMap = await _apiService.handleResponse(result);

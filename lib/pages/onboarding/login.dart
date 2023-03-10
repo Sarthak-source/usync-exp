@@ -109,7 +109,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               child: UsyncTextField(
                                 textController: _passwordController,
+                                keyboardType: TextInputType.text,
                                 obscureText: true,
+                                enableSuggestions: false,
+                                autocorrect: false,
                                 placeholderString: "Password",
 
                                 // validator: (value) {
