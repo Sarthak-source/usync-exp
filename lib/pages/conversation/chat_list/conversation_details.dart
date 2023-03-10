@@ -9,6 +9,7 @@ import 'package:usync/utils/place_holder.dart';
 
 List<Widget> subpaneldetails(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
+  final searchController = TextEditingController();
 
   return [
     AppPanelHeader(
@@ -68,6 +69,7 @@ List<Widget> subpaneldetails(BuildContext context) {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: UsyncTextField(
+                    textController: searchController,
                     placeholderString: 'search',
                     prifix: const Padding(
                       padding: EdgeInsets.only(

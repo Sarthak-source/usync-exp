@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:usync/utils/theme_color.dart';
 
+import 'config/customtext/customtext.dart';
+
 class UsyncTextField extends StatefulWidget {
-  final TextEditingController textController = TextEditingController();
+  final TextEditingController textController;
   final Widget prifix;
   final Widget suffix;
+  final TextInputType keyboardType;
   final String placeholderString;
+  final bool obscureText;
   final Function(String)? onChanged;
-  UsyncTextField({
+  const UsyncTextField({
     super.key,
+    required this.textController,
     required this.placeholderString,
+    this.keyboardType = TextInputType.none,
     this.onChanged,
     this.prifix = const SizedBox.shrink(),
     this.suffix = const SizedBox.shrink(),
+    this.obscureText = false,
   });
 
   @override
@@ -27,6 +35,8 @@ class _UsyncTextFieldState extends State<UsyncTextField> {
       suffix: widget.suffix,
       controller: widget.textController,
       placeholder: widget.placeholderString,
+      style:
+          const TextTheme().body(context, FontWeight.normal, FontStyle.normal),
       decoration: BoxDecoration(
         color: ThemeColor().themecolor(
           context,
@@ -40,7 +50,7 @@ class _UsyncTextFieldState extends State<UsyncTextField> {
           ),
         ),
       ),
-      keyboardType: TextInputType.multiline,
+      keyboardType: widget.keyboardType,
       onChanged: widget.onChanged,
       textCapitalization: TextCapitalization.sentences,
       minLines: 1,

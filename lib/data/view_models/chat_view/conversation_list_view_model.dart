@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:usync/data/hive_service/hive_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:usync/data/models/hive_coversation/conversation.dart';
@@ -44,6 +43,7 @@ class CoversationListViewModel extends BaseViewModel {
       var result =
           await _apiService.getRequest(conversationUrl, bearerToken: true);
       var decoded = await _apiService.handleResponse(result);
+      debugPrint('decoded---$decoded["data"].toString()');
       (decoded['data'] as List).map((e) {
         debugPrint(
           e.toString(),
@@ -54,7 +54,7 @@ class CoversationListViewModel extends BaseViewModel {
           if (userMap['avatar'] != null && userMap['avatar']['links'] != null) {
             File avatar = File(
               id: userMap['id'] ?? "",
-              type_: userMap['type_'] ?? "",
+              type_: userMap['_type'] ?? "",
               type: userMap['type'] ?? "",
               name: userMap['name']['full'] ?? "",
               description: userMap['description'] ?? "",
@@ -107,19 +107,25 @@ class CoversationListViewModel extends BaseViewModel {
           }
         }
 
-        Message currentMessage = Message();
+        Message lastMessage = Message(
+          content: e['lastMessage']['content'],
+          conversation_id: e['lastMessage']['conversation_id'],
+        );
 
         Conversation conversation = Conversation(
           id: e['id'],
           type: e['type'],
+          name: e['name'] ?? '',
+          //lastMessage: e['lastMessage'],
           user_id: e['user_id'],
           created_at: e['created_at'],
           updated_at: e['updated_at'],
-          last_message_id: e['updated_at'],
+
+          last_message_id: e['last_message_id'],
           messages: e['messages'],
           user_ids: e['user_ids'],
           users: userList,
-          //lastMessage: e['lastMessage'],
+          lastMessage: lastMessage,
           //preferences: e['preferences'],
           unseen_messages_count: e['unseen_messages_count'],
         );
@@ -148,5 +154,22 @@ class CoversationListViewModel extends BaseViewModel {
     }
 
     return imageLinks;
+  }
+
+  String getNames(Conversation conversation) {
+    var users = conversation.users;
+    List<String> nameList = [];
+
+    for (var i = 0; i < users.length; i++) {
+      var userNames = users[i].name;
+      if (userNames != null) {
+        debugPrint(userNames['full']);
+        nameList.add(userNames['full'] ?? '');
+      }
+    }
+
+    final foldValue = nameList.join(", ");
+
+    return foldValue;
   }
 }

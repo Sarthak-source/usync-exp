@@ -93,6 +93,15 @@ class BubbleNormalImage extends StatelessWidget {
                 maxWidth: MediaQuery.of(context).size.width * .5,
                 maxHeight: MediaQuery.of(context).size.width * .5),
             child: GestureDetector(
+                onTap: onTap ??
+                    () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return _DetailScreen(
+                          tag: id,
+                          image: image,
+                        );
+                      }));
+                    },
                 child: Hero(
                   tag: id,
                   child: Stack(
@@ -134,16 +143,7 @@ class BubbleNormalImage extends StatelessWidget {
                             ),
                     ],
                   ),
-                ),
-                onTap: onTap ??
-                    () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return _DetailScreen(
-                          tag: id,
-                          image: image,
-                        );
-                      }));
-                    }),
+                )),
           ),
         )
       ],

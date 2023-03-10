@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
-import 'package:usync/data/models/hive_coversation/conversation.dart';
-import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/data/view_models/chat_view/conversation_list_view_model.dart';
-import 'package:usync/pages/conversation/chat_list/conversation_list.dart';
+import 'package:usync/pages/conversation/chat_list/list_component_view.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 
@@ -52,14 +51,22 @@ class _ConversationsPageState extends State<ConversationsPage> {
                 itemCount: conversation.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
+                  DateTime lastSeen =
+                      DateTime.parse(conversation[index].updated_at);
+                  final DateFormat formatter = DateFormat.yMMMd();
+                  final String formatted = formatter.format(lastSeen);
+
                   return ConversationList(
-                    name: conversation[index].name.toString(),
-                    messageText:
-                        conversation[index].lastMessage?.content.toString(),
-                    imageUrl: model.getAvatar(conversation[index]).toList(),
-                    time: conversation[index].updated_at.toString(),
+                    name: conversation[index].name == ''
+                        ? model.getNames(conversation[index]).toString()
+                        : conversation[index].name,
+                    messageText: conversation[index].lastMessage?.content,
+                    imageUrl: model.getAvatar(conversation[index]),
+                    time: formatted,
                     isMessageRead:
-                        conversation[index].unseen_messages_count != 0,
+                        conversation[index].unseen_messages_count == 0,
+                    convesationId:
+                        conversation[index].lastMessage.conversation_id,
                   );
                 },
               );

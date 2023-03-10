@@ -70,6 +70,7 @@ class MessageBar extends StatelessWidget {
   ///
   @override
   Widget build(BuildContext context) {
+    final messageController = TextEditingController();
     return Align(
       alignment: Alignment.bottomCenter,
       child: Column(
@@ -85,6 +86,7 @@ class MessageBar extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: UsyncTextField(
+                    textController: messageController,
                     placeholderString: "message....",
                     suffix: InkWell(
                       onTap: () {},

@@ -5,8 +5,6 @@ import 'package:redux/redux.dart';
 import 'package:flutter_audio_manager_plus/flutter_audio_manager_plus.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:usync/components/calltimer.dart';
-import 'package:usync/services/audio_call_fg_service.dart';
-import 'package:usync/services/audio_call_state.dart';
 import 'package:usync/ui_components/avatar.dart';
 import 'package:usync/ui_components/icon.dart';
 import 'package:usync/ui_components/typography/text.dart';

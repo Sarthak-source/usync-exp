@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:usync/pages/conversation/chat_list/conversation_page.dart';
-import 'package:usync/pages/conversation/chat_list/chat_details.dart';
+import 'package:usync/ui_components/avatar.dart';
+import 'chat_page.dart';
 
 class ConversationList extends StatefulWidget {
   final String name;
   final String? messageText;
   final List<String> imageUrl;
   final String time;
+  final String convesationId;
   final bool isMessageRead;
   const ConversationList(
       {super.key,
@@ -14,6 +15,7 @@ class ConversationList extends StatefulWidget {
       this.messageText,
       required this.imageUrl,
       required this.time,
+      required this.convesationId,
       required this.isMessageRead});
   @override
   _ConversationListState createState() => _ConversationListState();
@@ -29,7 +31,10 @@ class _ConversationListState extends State<ConversationList> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return const ChatDetailPage();
+              return ChatDetailPage(
+                convesationId: widget.convesationId,
+                imageUrl: widget.imageUrl,
+              );
             },
           ),
         );
@@ -52,30 +57,9 @@ class _ConversationListState extends State<ConversationList> {
                   const SizedBox(
                     width: 5,
                   ),
-                  SizedBox(
-                    height: 50,
-                    width: 65,
-                    child: Stack(
-                      children: [
-                        for (var i = 0; i < widget.imageUrl.length; i++)
-                          Positioned(
-                            left: (i * (1 - .4) * 20).toDouble(),
-                            top: 0,
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                widget.imageUrl[i],
-                              ),
-                              radius: 25,
-                              child: Container(
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50)),
-                                padding: const EdgeInsets.all(5.0),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
+                  Avatar(
+                    imageUrl: widget.imageUrl,
+                    size: 25,
                   ),
                   const SizedBox(
                     width: 10,
@@ -88,10 +72,15 @@ class _ConversationListState extends State<ConversationList> {
                         children: <Widget>[
                           Row(
                             children: [
-                              Text(
-                                widget.name,
-                                style: const TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
+                              SizedBox(
+                                width: 160,
+                                child: Text(
+                                  widget.name,
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
                               ),
                               const Spacer(),
                               Text(

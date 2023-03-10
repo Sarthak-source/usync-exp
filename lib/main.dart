@@ -13,6 +13,7 @@ import 'package:usync/data/models/hive_default_conversation/default_conversation
 import 'package:usync/data/models/hive_file/file.dart';
 import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/pages/now_playing/now_playing.dart';
+import 'package:usync/pages/onboarding/login.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'data/models/hive_messages/message.dart';
 import 'data/models/hive_pages/page.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light(context),
       darkTheme: AppTheme.dark(context),
       themeMode: EasyDynamicTheme.of(context).themeMode,
-      home: const HomePage(),
+      home: const LoginScreen(),
     );
   }
 }
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage> {
             icon: pageIndex == 0
                 ? const Icon(
                     Icons.home_filled,
-                    color: Colors.white,
+                    color: LightThemeColors.primary,
                   )
                 : const Icon(
                     Icons.home_outlined,
@@ -140,7 +141,7 @@ class _HomePageState extends State<HomePage> {
             icon: pageIndex == 1
                 ? const Icon(
                     Icons.play_circle,
-                    color: Colors.white,
+                    color: LightThemeColors.primary,
                   )
                 : const Icon(
                     Icons.play_circle,
@@ -167,7 +168,7 @@ class _HomePageState extends State<HomePage> {
             icon: pageIndex == 2
                 ? const Icon(
                     Icons.widgets_rounded,
-                    color: Colors.white,
+                    color: LightThemeColors.primary,
                   )
                 : const Icon(
                     Icons.widgets_outlined,
@@ -184,7 +185,7 @@ class _HomePageState extends State<HomePage> {
             icon: pageIndex == 3
                 ? const Icon(
                     Icons.person,
-                    color: Colors.white,
+                    color: LightThemeColors.primary,
                   )
                 : const Icon(
                     Icons.person_outline,

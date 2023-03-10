@@ -6,11 +6,17 @@ import 'package:usync/data/network/api.dart';
 import 'package:usync/data/network/network_utils.dart';
 
 class CoversationViewModel extends BaseViewModel {
+  final String? convesationId;
+
+  CoversationViewModel({
+    required this.convesationId,
+  });
+
   final HiveService hiveService = HiveService();
   final APIService apiService = APIService();
 
   List<Message> _messageList = [];
-  List<Message> get conversationList => _messageList;
+  List<Message> get messageList => _messageList;
   String _text = "";
   String get text => _text;
 
@@ -31,6 +37,7 @@ class CoversationViewModel extends BaseViewModel {
       debugPrint("Getting data from Api");
       setBusy(true);
       var result = await apiService.getRequest(conversationUrl);
+      notifyListeners();
       (result as List).map((e) {
         Message conversation = Message(
           id: e['id'],

@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:clean_api/clean_api.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:usync/config/config.dart';
 import 'api.dart';
 
 class APIService {
@@ -12,12 +14,12 @@ class APIService {
   /// Variables
   bool accessAllowed = false;
 
-  String access = 'ACCESS';
-
-  String tokenValue =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTA1NmEzZDE1N2FjZTEyYzQ3MWUyYmE3NDg2MzNiZWY5NjY5MjA4YWVkNWI5NDhhYjYyZTA3OWM3MzhiODFjZjM3OTYxZDkyZDFmNWUyNGMiLCJpYXQiOjE2NzU4NTY0NjguMTIyNzYsIm5iZiI6MTY3NTg1NjQ2OC4xMjI3NjcsImV4cCI6MTcwNzM5MjQ2Ny41NjQ4MjksInN1YiI6IjE1Iiwic2NvcGVzIjpbXX0.Ku8aUfjHSXjIfJwu6M9-jUxUNpdjcgBsQvrBN4gqeGiJ-4K2ERfh4jxVcryImgJYbO2C4Da-f7ffNt4wELPaXzI5qk9oCVY9aK5LlgAFJVrGkV8MlSpfWEVOLRAkrBXJCjREXsHNFVi2IDClCRuLsAPLPDdlBdOQGzHdzBD9kbYNkUxW8HllWO8fv7DNz3p_O-r3frzoBOa-ZUvn7iAwT57eNM6t-MYWKKWYB-fDxiDnk_yFHV9sYKqFuB_R4NtLAUvVc8kVHz2YnN3Ex6flogg4ogviWba5YVkal-y1BChnR6z7qUT5RAlAVsXHjA1x2QNdgp1V77IfaoGv-hjJ6VJhBeCeVx1TgyBN0MVhPAmmxkZ89aZjdXs46RDZ-AM-1WhEXH1XRqIGdZL8ifBMvvD18NN3OfOjnEWOddMrH7nNR5x2JFQgTfSwy5Ca7Z9XW6BKgL1r6f46fz-oJ04AaD06OtWbUmq9DWn10AghDBT73w0SHRUq6ODz-KEgefSM8cpAKqvbJYKyqSs8OPgrvKJd5nybhkuvDJKbwOifdZRJeh8udWPfMvvRlEamklbFzPPoHa8x-g73MdUilA9UOIPmTp0KeIAOg8_kgBlyCFUh6lXjj0Egk4nPopctMooF29v8ADOTOwqj2pL94VWnq5qGOzPrPs3pNS7Vc7JoqTw';
+  // String tokenValue =
+  //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTA1NmEzZDE1N2FjZTEyYzQ3MWUyYmE3NDg2MzNiZWY5NjY5MjA4YWVkNWI5NDhhYjYyZTA3OWM3MzhiODFjZjM3OTYxZDkyZDFmNWUyNGMiLCJpYXQiOjE2NzU4NTY0NjguMTIyNzYsIm5iZiI6MTY3NTg1NjQ2OC4xMjI3NjcsImV4cCI6MTcwNzM5MjQ2Ny41NjQ4MjksInN1YiI6IjE1Iiwic2NvcGVzIjpbXX0.Ku8aUfjHSXjIfJwu6M9-jUxUNpdjcgBsQvrBN4gqeGiJ-4K2ERfh4jxVcryImgJYbO2C4Da-f7ffNt4wELPaXzI5qk9oCVY9aK5LlgAFJVrGkV8MlSpfWEVOLRAkrBXJCjREXsHNFVi2IDClCRuLsAPLPDdlBdOQGzHdzBD9kbYNkUxW8HllWO8fv7DNz3p_O-r3frzoBOa-ZUvn7iAwT57eNM6t-MYWKKWYB-fDxiDnk_yFHV9sYKqFuB_R4NtLAUvVc8kVHz2YnN3Ex6flogg4ogviWba5YVkal-y1BChnR6z7qUT5RAlAVsXHjA1x2QNdgp1V77IfaoGv-hjJ6VJhBeCeVx1TgyBN0MVhPAmmxkZ89aZjdXs46RDZ-AM-1WhEXH1XRqIGdZL8ifBMvvD18NN3OfOjnEWOddMrH7nNR5x2JFQgTfSwy5Ca7Z9XW6BKgL1r6f46fz-oJ04AaD06OtWbUmq9DWn10AghDBT73w0SHRUq6ODz-KEgefSM8cpAKqvbJYKyqSs8OPgrvKJd5nybhkuvDJKbwOifdZRJeh8udWPfMvvRlEamklbFzPPoHa8x-g73MdUilA9UOIPmTp0KeIAOg8_kgBlyCFUh6lXjj0Egk4nPopctMooF29v8ADOTOwqj2pL94VWnq5qGOzPrPs3pNS7Vc7JoqTw';
 
   String loggedIn = 'LOGGED_IN';
+
+  String access = MyConfig.access;
 
   bool isSuccessful(int code) {
     return code >= 200 && code <= 206;
@@ -25,23 +27,25 @@ class APIService {
 
   setToken(String key, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     return prefs.setString(key, value);
   }
 
-  Future<Response> getRequest(String? endPoint,
-      {bool bearerToken = false, bool noBaseUrl = false}) async {
-    setToken(access, tokenValue);
-
+  Future<Response> getRequest(String endPoint,
+      {bool bearerToken = false, bool noBaseUrl = false, queryParams}) async {
     if (await isNetworkAvailable()) {
       Map<String, String>? headers;
       Response response;
       var accessToken = getStringAsync(access);
+
+      debugPrint('getRequest token-----$accessToken');
 
       if (bearerToken) {
         headers = {
           HttpHeaders.acceptHeader: 'application/json; charset=utf-8',
           "Authorization": "Bearer $accessToken"
         };
+        debugPrint('header-----$headers');
       }
 
       if (!noBaseUrl) {
@@ -52,12 +56,17 @@ class APIService {
       //debugPrint('Header: $headers');
 
       if (bearerToken) {
+        //String queryString = Uri(queryParameters: queryParams).query;
+        response = await get(Uri.https(API.base, endPoint, queryParams));
+      } else if (noBaseUrl) {
+        response = await get(
+            Uri.parse(
+              endPoint,
+            ),
+            headers: headers);
+      } else {
         response =
             await get(Uri.parse('${API.base}$endPoint'), headers: headers);
-      } else if (noBaseUrl) {
-        response = await get(Uri.parse('$endPoint'));
-      } else {
-        response = await get(Uri.parse('${API.base}$endPoint'));
       }
 
       //debugPrint('Response: ${response.statusCode} ${response.body}');
