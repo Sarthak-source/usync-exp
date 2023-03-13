@@ -9,6 +9,7 @@ import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
 import 'package:usync/pages/conversation/chat_list/utility/chatbubble.dart';
 import 'package:usync/pages/conversation/chat_list/utility/chatimage.dart';
 import 'package:usync/pages/conversation/chat_list/utility/messagebar.dart';
+import 'package:usync/ui_components/avatar.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
@@ -21,10 +22,12 @@ import 'conversation_details.dart';
 class ChatDetailPage extends StatefulWidget {
   const ChatDetailPage({
     super.key,
+    required this.name,
     required this.imageUrl,
     this.convesationId,
   });
   final String? convesationId;
+  final String name;
   final List<String> imageUrl;
 
   @override
@@ -34,67 +37,31 @@ class ChatDetailPage extends StatefulWidget {
 class _ChatDetailPageState extends State<ChatDetailPage> {
   @override
   Widget build(BuildContext context) {
-    List<Widget> chat = [
-      const BubbleSpecialThree(
-        text: 'pizza?',
-        color: Color.fromARGB(255, 0, 186, 9),
-        tail: false,
-        textStyle: TextStyle(color: Colors.white, fontSize: 16),
-      ),
-      const BubbleSpecialThree(
-        text: 'Let\'s do it! I\'m in a meeting until noon.',
-        color: Color.fromARGB(255, 0, 186, 9),
-        tail: false,
-        textStyle: TextStyle(color: Colors.white, fontSize: 16),
-      ),
-      const BubbleSpecialThree(
-        text:
-            'That\'s perfect. There\'s a new place on Main St I\'ve been wanting to check out. I hear their hawaiian pizza is off the hook!',
-        color: Color(0xFFE8E8EE),
-        tail: true,
-        isSender: false,
-      ),
-      BubbleNormalImage(
-        id: 'id001',
-        image: FadeInImage.memoryNetwork(
-            placeholder: kTransparentImage,
-            image:
-                'https://www.mensjournal.com/wp-content/uploads/2018/06/man-weight-lifting.jpg?w=940&h=529&crop=1&quality=86&strip=all'),
-        bubbleRadius: BUBBLE_RADIUS_IMAGE,
-        color: Colors.transparent,
-        tail: true,
-        //delivered: true,
-      ),
-      const BubbleSpecialThree(
-        text:
-            "I don't know why people are so anti pineapple pizza. I kind of like it.",
-        color: Color(0xFFE8E8EE),
-        tail: true,
-        isSender: false,
-      )
-    ];
-
     return ViewModelBuilder<UserViewModel>.reactive(
         viewModelBuilder: () => UserViewModel(),
         builder: (context, usermodel, child) {
-          dynamic user = usermodel.user;
+          dynamic activeUser = usermodel.user;
           return ViewModelBuilder<CoversationViewModel>.reactive(
-              viewModelBuilder: () =>
-                  CoversationViewModel(convesationId: widget.convesationId),
+              viewModelBuilder: () => CoversationViewModel(
+                  convesationId: widget.convesationId, page: 0, limit: 10),
               onViewModelReady: (model) => model.getData(),
               builder: (context, model, child) {
                 List<dynamic> messages = model.messageList;
 
+                debugPrint('chat--------$messages');
+
                 bool isSender(int i) {
-                  if (user.id == messages[i].user['id']) {
+                  if (activeUser.id == messages[i].user.id) {
                     return true;
                   } else {
                     return false;
                   }
                 }
 
+                debugPrint('user id--------${activeUser.id}');
+
                 Color bubbleColor(int i) {
-                  if (user.id == messages[i].user['id']) {
+                  if (activeUser.id == messages[i].user.id) {
                     return DarkThemeColors.primary;
                   } else {
                     return const Color(0xFFE8E8EE);
@@ -104,7 +71,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 Widget bubble(int i, bool isSender, Color bubbleColor) {
                   //if (messages[i].user['type'] == 'message') {
                   return BubbleSpecialThree(
-                    text: messages[i].user['content'],
+                    text: messages[i].content,
                     color: bubbleColor,
                     tail: true,
                     isSender: isSender,
@@ -152,24 +119,23 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       },
                       alignment: true,
                       child: Column(
-                        children: const [
-                          SizedBox(
+                        children: [
+                          const SizedBox(
                             height: 20,
                           ),
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/775358/pexels-photo-775358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-                            maxRadius: 20,
+                          Avatar(
+                            imageUrl: widget.imageUrl,
+                            size: 25,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                           Text(
-                            "Sarah Williamson",
-                            style: TextStyle(
+                            widget.name,
+                            style: const TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.normal),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                         ],
@@ -183,7 +149,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                             child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
-                              itemCount: chat.length,
+                              itemCount: messages.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return bubble(
                                   index,

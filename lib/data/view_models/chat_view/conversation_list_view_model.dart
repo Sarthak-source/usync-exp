@@ -25,7 +25,7 @@ class CoversationListViewModel extends BaseViewModel {
     bool checkConnectivity =
         await _connectivityService.checkInternetConnection();
 
-    debugPrint("Entered get Data()");
+    debugPrint("Entered get Data()--chat");
     _text = "Fetching data";
     bool exists = await _hiveService.isExists(boxName: "ConversationList");
     if (exists && (checkConnectivity == false)) {
@@ -43,11 +43,12 @@ class CoversationListViewModel extends BaseViewModel {
       var result =
           await _apiService.getRequest(conversationUrl, bearerToken: true);
       var decoded = await _apiService.handleResponse(result);
-      debugPrint('decoded---$decoded["data"].toString()');
+      debugPrint('decoded---$decoded');
       (decoded['data'] as List).map((e) {
         debugPrint(
           e.toString(),
         );
+
         List<dynamic> users = e['users'];
         List<User> userList = [];
         for (var userMap in users) {

@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:clean_api/clean_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:usync/config/config.dart';
+import 'package:usync/main.dart';
+import 'package:usync/utils/redux_token.dart';
 import 'api.dart';
 import 'dart:developer';
 
@@ -33,13 +36,15 @@ class APIService {
   }
 
   Future<Response> getRequest(String endPoint,
-      {bool bearerToken = false, bool noBaseUrl = false, queryParams}) async {
+      {bool bearerToken = false,
+      bool noBaseUrl = false,
+      Map<String, dynamic>? queryParams}) async {
     if (await isNetworkAvailable()) {
       Map<String, String>? headers;
       Response response;
-      var accessToken = getStringAsync(access);
+      var accessToken = ReduxToken.instance.store.state.accessToken;
 
-      debugPrint('getRequest token-----$accessToken');
+      debugPrint('getRequest ReduxToken-----$accessToken');
 
       if (bearerToken) {
         headers = {
@@ -55,23 +60,22 @@ class APIService {
         Logger.i('URL: $endPoint');
       }
       //debugPrint('Header: $headers');
+      String apiBaseURL =
+          API.base.startsWith('https://') ? Uri.parse(API.base).host : API.base;
+
+      String apiPrefix = Uri.parse(API.base).path;
 
       if (bearerToken) {
-        String apiBaseURL = API.base.startsWith('https://')
-            ? Uri.parse(API.base).host
-            : API.base;
-
-        String apiPrefix = Uri.parse(API.base).path;
-        response = await get(Uri.https(apiBaseURL, '$apiPrefix$endPoint', queryParams));
-      } else if (noBaseUrl) {
         response = await get(
-            Uri.parse(
-              endPoint,
-            ),
+            Uri.https(apiBaseURL, '$apiPrefix$endPoint', queryParams),
+            headers: headers);
+      } else if (noBaseUrl) {
+        response = await get(Uri.https(apiBaseURL, endPoint, queryParams),
             headers: headers);
       } else {
-        response =
-            await get(Uri.parse('${API.base}$endPoint'), headers: headers);
+        response = await get(
+            Uri.https(apiBaseURL, '$apiPrefix$endPoint', queryParams),
+            headers: headers);
       }
 
       //debugPrint('Response: ${response.statusCode} ${response.body}');
@@ -94,7 +98,7 @@ class APIService {
       Logger.i('body: $requestBody');
 
 // Get access token from store
-      var accessToken = getStringAsync(access);
+      var accessToken = ReduxToken.instance.store.state.accessToken;
 
       var headers = {
         HttpHeaders.acceptHeader: 'application/json; charset=utf-8',
@@ -130,7 +134,7 @@ class APIService {
       Logger.i('URL: ${API.base}$endPoint');
       Logger.i('Request: $request');
 
-      var accessToken = getStringAsync(access);
+      var accessToken = ReduxToken.instance.store.state.accessToken;
 
       var headers = {
         HttpHeaders.acceptHeader: 'application/json; charset=utf-8',
@@ -162,7 +166,7 @@ class APIService {
 
   deleteRequest(String endPoint, {bool bearerToken = true}) async {
     if (await isNetworkAvailable()) {
-      var accessToken = getStringAsync(access);
+      var accessToken = ReduxToken.instance.store.state.accessToken;
       Logger.i('URL: ${API.base}$endPoint');
 
       var headers = {

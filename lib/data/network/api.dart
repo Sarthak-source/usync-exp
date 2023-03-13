@@ -25,4 +25,5 @@ class API {
 
   /// Conversation
   static const conversation = 'conversations';
+  static const messages = 'messages';
 }

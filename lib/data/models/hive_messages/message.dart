@@ -14,7 +14,7 @@ class Message extends HiveObject {
   String? type = '';
 
   @HiveField(2)
-  String? from_system = '';
+  int? from_system = 0;
 
   @HiveField(3)
   String? conversation_id = '';
@@ -41,7 +41,7 @@ class Message extends HiveObject {
   HiveObject? attachable;
 
   @HiveField(11)
-  List<int>? file_ids;
+  List<dynamic>? file_ids;
 
   @HiveField(12)
   List<File>? files;
@@ -50,10 +50,10 @@ class Message extends HiveObject {
   Geolocation? geolocation;
 
   @HiveField(14)
-  DateTime? created_at;
+  String? created_at;
 
   @HiveField(15)
-  DateTime? updated_at;
+  String? updated_at;
 
   Message({
     this.id,

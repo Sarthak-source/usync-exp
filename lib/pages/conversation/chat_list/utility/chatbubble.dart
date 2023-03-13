@@ -36,7 +36,7 @@ class BubbleSpecialThree extends StatelessWidget {
   ///chat bubble builder method
   @override
   Widget build(BuildContext context) {
-    Color color = ThemeColor().textThemecolor(context);
+    Color TextColor = ThemeColor().textThemecolor(context);
     bool stateTick = false;
     Icon? stateIcon;
     if (sent) {
@@ -90,7 +90,13 @@ class BubbleSpecialThree extends StatelessWidget {
                       : const EdgeInsets.only(left: 4, right: 4),
                   child: Text(
                     text,
-                    style: textStyle,
+                    style: isSender == true
+                        ? const TextTheme()
+                            .body(context, FontWeight.normal, FontStyle.normal)
+                            .copyWith(color: Colors.white)
+                        : const TextTheme()
+                            .body(context, FontWeight.normal, FontStyle.normal)
+                            .copyWith(color: Colors.black),
                     textAlign: TextAlign.left,
                   ),
                 ),

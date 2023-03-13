@@ -19,7 +19,7 @@ class MessageAdapter extends TypeAdapter<Message> {
     return Message(
       id: fields[0] as String?,
       type: fields[1] as String?,
-      from_system: fields[2] as String?,
+      from_system: fields[2] as int?,
       conversation_id: fields[3] as String?,
       conversation: fields[4] as Conversation?,
       user_id: fields[5] as int?,
@@ -31,8 +31,8 @@ class MessageAdapter extends TypeAdapter<Message> {
       file_ids: (fields[11] as List?)?.cast<int>(),
       files: (fields[12] as List?)?.cast<File>(),
       geolocation: fields[13] as Geolocation?,
-      created_at: fields[14] as DateTime?,
-      updated_at: fields[15] as DateTime?,
+      created_at: fields[14] as String?,
+      updated_at: fields[15] as String?,
     );
   }
 

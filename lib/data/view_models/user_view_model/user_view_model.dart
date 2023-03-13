@@ -5,6 +5,7 @@ import 'package:usync/data/hive_service/hive_service.dart';
 import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/data/network/api.dart';
 import 'package:usync/data/network/network_utils.dart';
+import 'dart:developer';
 
 class UserViewModel extends BaseViewModel {
   final APIService _apiService = APIService();
@@ -22,35 +23,39 @@ class UserViewModel extends BaseViewModel {
     if (exists) {
       _text = "Fetching from hive";
       debugPrint("Getting user from Hive");
-      setBusy(true);
-      _user = await _hiveService.getBoxes(MyConfig.user);
-      debugPrint(_user.toString());
+
+      _user = await _hiveService.getBoxItem(MyConfig.user);
+      debugPrint('user model');
+      log(_user.id);
       setBusy(false);
     } else {
       await getUser();
-      setBusy(true);
+      setBusy(false);
     }
   }
 
   getUser() async {
-    _text = "Fetching from hive";
+    _text = "Fetching from API";
     debugPrint("Getting data from Api");
     setBusy(true);
-    var result =
-        await _apiService.getRequest(loginUrl, bearerToken: true, queryParams: {
-      'include': [
-        'communityUser.manageablePages.avatar',
-        'communityUser.manageablePages.cover',
-        'activeUser.avatar',
-        'activeUser.cover',
-        'communityUser.avatar',
-        'communityUser.cover',
-        'communities',
-        'role',
-        'language',
-        'settings'
-      ].join(',')
-    });
+    var result = await _apiService.getRequest(
+      loginUrl,
+      bearerToken: true,
+      queryParams: {
+        'include': [
+          'communityUser.manageablePages.avatar',
+          'communityUser.manageablePages.cover',
+          'activeUser.avatar',
+          'activeUser.cover',
+          'communityUser.avatar',
+          'communityUser.cover',
+          'communities',
+          'role',
+          'language',
+          'settings'
+        ].join(',')
+      },
+    );
 
     if (result.statusCode == 200) {
       final userMap = await _apiService.handleResponse(result);

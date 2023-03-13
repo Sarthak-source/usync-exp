@@ -3,6 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:usync/config/config.dart';
 import 'package:usync/data/network/api.dart';
 import 'package:usync/data/network/network_utils.dart';
+import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
+import 'package:usync/utils/redux_token.dart';
 
 class LoginViewModel extends BaseViewModel {
   final APIService _apiService = APIService();
@@ -38,7 +40,7 @@ class LoginViewModel extends BaseViewModel {
       final decoded = await _apiService.handleResponse(result);
       final token = decoded['access_token'];
 
-// TODO: Set token in store 
+      setAccessToken(token)(ReduxToken.instance.store);
       await _apiService.setToken(MyConfig.access, token);
       // store the token securely for future API requests
 

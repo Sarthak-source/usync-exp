@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:redux/redux.dart';
 import 'package:usync/config/config.dart';
 import 'package:usync/data/models/hive_coversation/conversation.dart';
 import 'package:usync/data/models/hive_default_conversation/default_conversation_preferences.dart';
@@ -15,6 +17,7 @@ import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/pages/now_playing/now_playing.dart';
 import 'package:usync/pages/onboarding/login.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
+import 'package:usync/utils/redux_token.dart';
 import 'data/models/hive_messages/message.dart';
 import 'data/models/hive_pages/page.dart';
 import 'pages/conversation/chat_list/conversation_page.dart';
@@ -25,11 +28,23 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
   CleanApi.instance.setup(baseUrl: MyConfig.appApiUrl);
-  //Shared Pref Initialization
+  // Shared Pref Initialization
   await initialize();
-  // TODO: Intialize a state management
-  // TODO: Reload shared preferences
-  // TODO: load access token from shared preferences to store
+
+  // Initialize Redux Store
+  ReduxToken.instance.initStore();
+
+  // Reload accessToken preference
+
+  //await prefs.reload();
+  // Load Access Token from Shared Preferences
+  final accessToken = await SharedPreferences.getInstance().then(
+    (prefs) => prefs.getString(MyConfig.access),
+  );
+  if (accessToken != null) {
+    setAccessToken(accessToken)(ReduxToken.instance.store);
+  }
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(ConversationAdapter());
@@ -47,7 +62,10 @@ void main() async {
 
   runApp(
     EasyDynamicThemeWidget(
-      child: const MyApp(),
+      child: StoreProvider<TokenState>(
+        store: ReduxToken.instance.store,
+        child: const MyApp(),
+      ),
     ),
   );
 }

@@ -34,6 +34,7 @@ class _ConversationListState extends State<ConversationList> {
               return ChatDetailPage(
                 convesationId: widget.convesationId,
                 imageUrl: widget.imageUrl,
+                name: widget.name,
               );
             },
           ),
