@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 import 'package:usync/config/config.dart';
 import 'package:usync/data/network/api.dart';
 import 'package:usync/data/network/network_utils.dart';
-import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
 import 'package:usync/utils/redux_token.dart';
 
 class LoginViewModel extends BaseViewModel {

@@ -17,7 +17,7 @@ class UserViewModel extends BaseViewModel {
   String loginUrl = API.login;
 
   getUserHive() async {
-    debugPrint("Entered get Data()");
+    setBusy(true);
     _text = "Fetching data";
     bool exists = await _hiveService.isExists(boxName: MyConfig.user);
     if (exists) {
@@ -26,12 +26,11 @@ class UserViewModel extends BaseViewModel {
 
       _user = await _hiveService.getBoxItem(MyConfig.user);
       debugPrint('user model');
-      log(_user.id);
-      setBusy(false);
+      debugPrint(_user.id);
     } else {
       await getUser();
-      setBusy(false);
     }
+    setBusy(false);
   }
 
   getUser() async {
@@ -88,6 +87,7 @@ class UserViewModel extends BaseViewModel {
       _user = await _hiveService.addBoxItem(user, MyConfig.user);
 
       debugPrint('LOGIN--USER--$user');
+      setBusy(false);
     }
   }
 }

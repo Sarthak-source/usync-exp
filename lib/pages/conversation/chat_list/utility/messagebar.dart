@@ -37,7 +37,7 @@ class MessageBar extends StatelessWidget {
   final bool replying;
   final String replyingTo;
   final List<Widget> actions;
-  final TextEditingController _textController = TextEditingController();
+  final TextEditingController textController;
   final Color replyWidgetColor;
   final Color replyIconColor;
   final Color replyCloseColor;
@@ -55,6 +55,7 @@ class MessageBar extends StatelessWidget {
       {super.key,
       this.replying = false,
       this.replyingTo = "",
+      required this.textController,
       this.actions = const [],
       this.replyWidgetColor = const Color(0xffF4F4F5),
       this.replyIconColor = Colors.blue,
@@ -70,7 +71,6 @@ class MessageBar extends StatelessWidget {
   ///
   @override
   Widget build(BuildContext context) {
-    final messageController = TextEditingController();
     return Align(
       alignment: Alignment.bottomCenter,
       child: Column(
@@ -86,7 +86,8 @@ class MessageBar extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: UsyncTextField(
-                    textController: messageController,
+                    textController: textController,
+                    keyboardType: TextInputType.text,
                     placeholderString: "message....",
                     suffix: InkWell(
                       onTap: () {},

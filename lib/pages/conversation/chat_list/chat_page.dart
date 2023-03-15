@@ -1,13 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:usync/data/view_models/chat_send_view_model/chat_send_view_model.dart';
 import 'package:usync/data/view_models/conversation_view/message_view_model.dart';
 import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
 import 'package:usync/pages/conversation/chat_list/utility/chatbubble.dart';
-import 'package:usync/pages/conversation/chat_list/utility/chatimage.dart';
 import 'package:usync/pages/conversation/chat_list/utility/messagebar.dart';
 import 'package:usync/ui_components/avatar.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
@@ -35,6 +32,20 @@ class ChatDetailPage extends StatefulWidget {
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
+  late UserViewModel _usermodel;
+  late CoversationViewModel _model;
+  TextEditingController message = TextEditingController();
+
+  @override
+  void initState() {
+    _usermodel = UserViewModel();
+    _model = CoversationViewModel(
+        convesationId: widget.convesationId, page: 0, limit: 10);
+    _usermodel.getUserHive();
+    _model.getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<UserViewModel>.reactive(
@@ -102,7 +113,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                           onPressed: () {
                             SubPanel().showSubPanel(
                                 context,
-                                subpaneldetails(context),
+                                subpaneldetails(
+                                    context, widget.name, widget.imageUrl),
                                 1.1,
                                 MainAxisAlignment.start);
                           },
@@ -167,37 +179,48 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: MessageBar(
-                        messageBarColor: ThemeColor().themecolor(context),
-                        // ignore: avoid_print
-                        sendbutton: false,
-                        //onSend: (_)
-                        actions: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12, right: 8),
-                            child: InkWell(
-                              child:
-                                  const FaIcon(FontAwesomeIcons.cloudArrowUp),
-                              onTap: () {},
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: InkWell(
-                              child: const FaIcon(FontAwesomeIcons.gif),
-                              onTap: () {},
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: InkWell(
-                              child:
-                                  const FaIcon(FontAwesomeIcons.messageDollar),
-                              onTap: () {},
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: ViewModelBuilder<SendChatViewModel>.reactive(
+                          viewModelBuilder: () => SendChatViewModel(
+                              convesationId: widget.convesationId),
+                          onViewModelReady: (model) => model.sendChat(
+                              message.text, widget.convesationId ?? ''),
+                          builder: (context, model, child) {
+                            return MessageBar(
+                              messageBarColor: ThemeColor().themecolor(context),
+                              // ignore: avoid_print
+                              sendbutton: false,
+                              textController: message,
+                              //onSend: (_)
+                              actions: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 12, right: 8),
+                                  child: InkWell(
+                                    child: const FaIcon(
+                                        FontAwesomeIcons.cloudArrowUp),
+                                    onTap: () {},
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: InkWell(
+                                    child: const FaIcon(FontAwesomeIcons.gif),
+                                    onTap: () {},
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: InkWell(
+                                    child: const FaIcon(
+                                        FontAwesomeIcons.messageDollar),
+                                    onTap: () {},
+                                  ),
+                                ),
+                              ],
+                            );
+                          }),
                     ),
                   ],
                 );

@@ -38,7 +38,7 @@ class _AvatarState extends State<Avatar> {
       padding: widget.padding ?? const EdgeInsets.all(0),
       child: Container(
         width: widget.size! * 2,
-        height: widget.size! * 2,
+        height: 5 + (widget.size! * 2),
         decoration: widget.border! > 0.0
             ? BoxDecoration(
                 shape: BoxShape.circle,
@@ -50,7 +50,7 @@ class _AvatarState extends State<Avatar> {
             : null,
         child: SizedBox(
           height: 50,
-          width: 70,
+          width: 75,
           child: Stack(
             children: [
               for (var i = 0; i < widget.imageUrl.length.clamp(0, 3); i++)

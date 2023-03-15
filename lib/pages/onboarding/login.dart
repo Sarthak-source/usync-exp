@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
-import 'package:usync/data/network/api.dart';
-import 'package:usync/data/network/network_utils.dart';
 import 'package:usync/data/view_models/log_in_view_model/log_in_view_model.dart';
 import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
 import 'package:usync/main.dart';

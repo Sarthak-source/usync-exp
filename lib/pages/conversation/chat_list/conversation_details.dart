@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:usync/ui_components/avatar.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_section.dart';
 import 'package:usync/ui_components/globalcomponents/photo_grid.dart';
 import 'package:usync/ui_components/usync_text_field.dart';
 import 'package:usync/utils/place_holder.dart';
 
-List<Widget> subpaneldetails(BuildContext context) {
+List<Widget> subpaneldetails(
+    BuildContext context, String name, List<String> imageUrl) {
   double width = MediaQuery.of(context).size.width;
   final searchController = TextEditingController();
 
@@ -37,22 +39,14 @@ List<Widget> subpaneldetails(BuildContext context) {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircleAvatar(
-                        backgroundImage: const NetworkImage(
-                          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png',
-                        ),
-                        radius: 25,
-                        child: Container(
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50)),
-                          padding: const EdgeInsets.all(5.0),
-                        ),
+                      Avatar(
+                        imageUrl: imageUrl,
+                        size: 25,
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      const Text('Ann Williams'),
+                      Text(name),
                       const Spacer(),
                       IconButton(
                           onPressed: () {}, icon: const FaIcon(Icons.message)),
