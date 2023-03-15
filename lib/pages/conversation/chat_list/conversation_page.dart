@@ -57,16 +57,11 @@ class _ConversationsPageState extends State<ConversationsPage> {
                   final String formatted = formatter.format(lastSeen);
 
                   return ConversationList(
-                    name: conversation[index].name == ''
-                        ? model.getNames(conversation[index]).toString()
-                        : conversation[index].name,
-                    messageText: conversation[index].lastMessage?.content,
-                    imageUrl: model.getAvatar(conversation[index]),
-                    time: formatted,
-                    isMessageRead:
-                        conversation[index].unseen_messages_count == 0,
-                    convesationId:
-                        conversation[index].lastMessage.conversation_id,
+                    name: conversation[index].name,
+                    messageText: conversation[index].lastMessage?.content ?? "",
+                    imageUrl: conversation[index].users[index].avatar_data,
+                    time: conversation[index].updated_at.toString(),
+                    isMessageRead: conversation[index].type!.isEmpty,
                   );
                 },
               );
