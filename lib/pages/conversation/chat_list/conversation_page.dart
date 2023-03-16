@@ -11,6 +11,7 @@ class ConversationsPage extends StatefulWidget {
   const ConversationsPage({super.key, required this.title});
 
   final String title;
+  
 
   @override
   State<ConversationsPage> createState() => _ConversationsPageState();
@@ -57,11 +58,11 @@ class _ConversationsPageState extends State<ConversationsPage> {
                   final String formatted = formatter.format(lastSeen);
 
                   return ConversationList(
-                    name: conversation[index].name,
+                    name:   model.getNames(conversation[index]),
                     messageText: conversation[index].lastMessage?.content ?? "",
-                    imageUrl: conversation[index].users[index].avatar_data,
-                    time: conversation[index].updated_at.toString(),
-                    isMessageRead: conversation[index].type!.isEmpty,
+                    imageUrl: model.getAvatar(conversation[index]),
+                    time: formatted,
+                    isMessageRead: conversation[index].type!.isEmpty, convesationId: conversation[index].lastMessage.conversation_id,
                   );
                 },
               );

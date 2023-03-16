@@ -28,7 +28,7 @@ class MessageAdapter extends TypeAdapter<Message> {
       attachable_type: fields[8] as String?,
       attachable_id: fields[9] as int?,
       attachable: fields[10] as HiveObject?,
-      file_ids: (fields[11] as List?)?.cast<int>(),
+      file_ids: (fields[11] as List?)?.cast<dynamic>(),
       files: (fields[12] as List?)?.cast<File>(),
       geolocation: fields[13] as Geolocation?,
       created_at: fields[14] as String?,

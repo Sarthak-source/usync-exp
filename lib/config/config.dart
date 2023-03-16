@@ -26,7 +26,7 @@ class MyConfig {
 
   static const String access = 'ACCESS';
   static const String loggedIn = 'LOGGED_IN';
-  static const String user = 'USER';
+  static const String activeUser = 'ACTIVE_USER';
 
   /// Dont change the code below
   MyConfig._();

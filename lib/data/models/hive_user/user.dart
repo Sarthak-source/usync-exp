@@ -47,7 +47,7 @@ class User extends HiveObject {
   bool isFirstView;
 
   @HiveField(14)
-  Map<String, dynamic> settings;
+  String? settings;
 
   @HiveField(15)
   String? username;
@@ -70,7 +70,7 @@ class User extends HiveObject {
     this.description,
     this.description_summary,
     this.isFirstView = false,
-    this.settings = const {},
+    this.settings = '',
     this.username,
     this.preferences = const {},
   });

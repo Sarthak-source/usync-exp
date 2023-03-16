@@ -96,9 +96,8 @@ class CoversationListViewModel extends BaseViewModel {
               description: userMap['description'],
               description_summary: userMap['description_summary'],
               isFirstView: userMap['isFirstView'] as bool? ?? false,
-              settings: userMap['settings'] != null
-                  ? Map<String, dynamic>.from(userMap['settings'] as Map)
-                  : {},
+              settings: userMap['settings'] as String?,
+                 
               username: userMap['username'] as String?,
               preferences: userMap['preferences'] != null
                   ? Map<String, dynamic>.from(userMap['preferences'] as Map)

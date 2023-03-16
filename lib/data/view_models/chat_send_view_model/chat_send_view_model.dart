@@ -31,6 +31,7 @@ class SendChatViewModel extends BaseViewModel {
     var result = await _apiService.postRequest(
       sendChatUrl,
       {'message': message, 'conversation': convesationId},
+      bearerToken: true,
     );
 
     if (result.statusCode == 200) {

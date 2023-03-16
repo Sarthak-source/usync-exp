@@ -8,8 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:redux/redux.dart';
 import 'package:usync/config/config.dart';
+import 'package:usync/data/models/hive_account/account.dart';
 import 'package:usync/data/models/hive_coversation/conversation.dart';
 import 'package:usync/data/models/hive_default_conversation/default_conversation_preferences.dart';
 import 'package:usync/data/models/hive_file/file.dart';
@@ -18,6 +18,7 @@ import 'package:usync/pages/now_playing/now_playing.dart';
 import 'package:usync/pages/onboarding/login.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/utils/redux_token.dart';
+import 'data/models/hive_language/language.dart';
 import 'data/models/hive_messages/message.dart';
 import 'data/models/hive_pages/page.dart';
 import 'pages/conversation/chat_list/conversation_page.dart';
@@ -53,6 +54,8 @@ void main() async {
   Hive.registerAdapter(MessageAdapter());
   Hive.registerAdapter(PageAdapter());
   Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(AccountAdapter());
+  Hive.registerAdapter(LanguageAdapter());
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

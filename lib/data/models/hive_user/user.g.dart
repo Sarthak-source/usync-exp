@@ -31,7 +31,7 @@ class UserAdapter extends TypeAdapter<User> {
       description: fields[11] as dynamic,
       description_summary: fields[12] as dynamic,
       isFirstView: fields[13] as bool,
-      settings: (fields[14] as Map).cast<String, dynamic>(),
+      settings: fields[14] as String?,
       username: fields[15] as String?,
       preferences: (fields[16] as Map).cast<String, dynamic>(),
     );

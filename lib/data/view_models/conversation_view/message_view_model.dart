@@ -6,6 +6,7 @@ import 'package:usync/data/models/hive_messages/message.dart';
 import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/data/network/api.dart';
 import 'package:usync/data/network/network_utils.dart';
+import 'package:usync/utils/connectivity.dart';
 
 class CoversationViewModel extends BaseViewModel {
   final String? convesationId;
@@ -26,18 +27,22 @@ class CoversationViewModel extends BaseViewModel {
   List<dynamic> get messageList => _messageList;
   String _text = "";
   String get text => _text;
-
+  final ConnectivityService _connectivityService = ConnectivityService();
   final String messageUrl = API.messages;
 
   getData() async {
+    bool checkConnectivity =
+        await _connectivityService.checkInternetConnection();
+
     debugPrint("Entered get Data()");
     _text = "Fetching data";
-    bool exists = await hiveService.isExists(boxName: "MessageList");
-    if (exists) {
+    bool exists =
+        await hiveService.isExists(boxName: "MessageList$convesationId");
+    if (exists && (checkConnectivity == false)) {
       _text = "Fetching from hive";
       debugPrint("Getting data from Hive");
       setBusy(true);
-      _messageList = await hiveService.getBoxes("MessageList");
+      _messageList = await hiveService.getBoxes("MessageList$convesationId");
       setBusy(false);
     } else {
       _text = "Fetching from hive";
@@ -105,9 +110,7 @@ class CoversationViewModel extends BaseViewModel {
           description: userMap['description'],
           description_summary: userMap['description_summary'],
           isFirstView: userMap['isFirstView'] as bool? ?? false,
-          settings: userMap['settings'] != null
-              ? Map<String, dynamic>.from(userMap['settings'] as Map)
-              : {},
+          settings: userMap['settings'] as String?,
           username: userMap['username'] as String?,
           preferences: userMap['preferences'] != null
               ? Map<String, dynamic>.from(userMap['preferences'] as Map)
@@ -135,7 +138,7 @@ class CoversationViewModel extends BaseViewModel {
         _messageList.add(conversation);
       }).toList();
       _text = "Caching data";
-      await hiveService.addBoxes(_messageList, "MessageList");
+      await hiveService.addBoxes(_messageList, "MessageList$convesationId");
       setBusy(false);
     }
   }
