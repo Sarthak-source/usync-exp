@@ -57,6 +57,9 @@ dependencies:
   hive_flutter: 
   injectable: ^2.1.0
   stacked: ^3.1.1
+  connectivity_plus:
+  intl: ^0.18.0
+  flutter_redux: ^0.10.0
   
   
 

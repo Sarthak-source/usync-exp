@@ -25,10 +25,10 @@ class _NowPlayingState extends State<NowPlaying> {
     int _selectedIndex = 0;
 
     final pages = [
-      const ConversationsPage(title: 'Conversation'),
-      const ConversationsPage(title: 'Conversation'),
-      const ConversationsPage(title: 'Conversation'),
-      const ConversationsPage(title: 'Conversation'),
+      const ConversationsPage(title: 'Conversation',),
+      const ConversationsPage(title: 'Conversation',),
+      const ConversationsPage(title: 'Conversation',),
+      const ConversationsPage(title: 'Conversation',),
     ];
 
     return AppPanel(

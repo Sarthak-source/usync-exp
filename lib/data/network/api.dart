@@ -1,4 +1,3 @@
-
 import 'package:usync/config/config.dart';
 
 class API {
@@ -10,19 +9,14 @@ class API {
   //Point the API to the base URL
   static const base = MyConfig.appApiUrl;
 
-  //
-
-  //
-
-  //
+  static const prefix = 'api';
 
   /// User
   static const register = 'auth/register';
-  static const login = 'auth/login';
-  
+  static const login = 'auth';
+
   static const logout = 'auth/logout';
   static const userInfo = 'account/update';
-  
 
   /// Forgot password & Reset
   static const forgot = 'auth/forgot';
@@ -31,5 +25,5 @@ class API {
 
   /// Conversation
   static const conversation = 'conversations';
- 
+  static const messages = 'messages';
 }

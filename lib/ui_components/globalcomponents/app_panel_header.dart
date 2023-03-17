@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:usync/ui_components/config/customtext/customtext.dart';
-import 'package:usync/ui_components/typography/text.dart';
 import 'package:usync/ui_components/usync_text_field.dart';
 
 class AppPanelHeader extends StatefulWidget {
@@ -38,6 +35,7 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
   Widget action = const Icon(Icons.search);
   late List<Widget> followedAction = widget.actionButtons;
   late bool backstate = widget.back;
+  final _searchController = TextEditingController();
 
   search() {
     return IconButton(
@@ -55,6 +53,7 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
               appBarTitle = UsyncTextField(
                 placeholderString: "search",
                 onChanged: widget.onSearchInput,
+                textController: _searchController,
               );
               followedAction = [];
               backstate = false;

@@ -4,9 +4,22 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class HiveService {
   isExists({String? boxName}) async {
-    final openBox = await Hive.openBox(boxName??'');
+    final openBox = await Hive.openBox(boxName ?? '');
     int length = openBox.length;
     return length != 0;
+  }
+
+  addBoxItem<T>(T items, String boxName) async {
+    print("adding box");
+    final openBox = await Hive.openBox(boxName);
+
+    openBox.put(boxName, items);
+  }
+
+  getBoxItem<T>(String boxName) async {
+    final openBox = await Hive.openBox(boxName);
+
+    return openBox.get(boxName) as T;
   }
 
   addBoxes<T>(List<T> items, String boxName) async {

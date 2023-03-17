@@ -1,9 +1,11 @@
 import 'package:hive/hive.dart';
 import 'package:usync/data/models/hive_coversation/conversation.dart';
+import 'package:usync/data/models/hive_file/file.dart';
+import 'package:usync/data/models/hive_location/geolocation.dart';
 import 'package:usync/data/models/hive_user/user.dart';
 part 'message.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 4)
 class Message extends HiveObject {
   @HiveField(0)
   String? id;
@@ -12,7 +14,7 @@ class Message extends HiveObject {
   String? type = '';
 
   @HiveField(2)
-  String? from_system = '';
+  int? from_system = 0;
 
   @HiveField(3)
   String? conversation_id = '';
@@ -39,7 +41,7 @@ class Message extends HiveObject {
   HiveObject? attachable;
 
   @HiveField(11)
-  List<int>? file_ids;
+  List<dynamic>? file_ids;
 
   @HiveField(12)
   List<File>? files;
@@ -48,10 +50,10 @@ class Message extends HiveObject {
   Geolocation? geolocation;
 
   @HiveField(14)
-  DateTime? created_at;
+  String? created_at;
 
   @HiveField(15)
-  DateTime? updated_at;
+  String? updated_at;
 
   Message({
     this.id,
@@ -71,25 +73,4 @@ class Message extends HiveObject {
     this.created_at,
     this.updated_at,
   });
-}
-
-@HiveType(typeId: 3)
-class File extends HiveObject {
-  @HiveField(0)
-  int? id;
-
-  @HiveField(1)
-  String name = '';
-
-  @HiveField(2)
-  String path = '';
-}
-
-@HiveType(typeId: 4)
-class Geolocation extends HiveObject {
-  @HiveField(0)
-  String latitude = '';
-
-  @HiveField(1)
-  String longitude = '';
 }

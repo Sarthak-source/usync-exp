@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:usync/ui_components/config/customtext/customtext.dart';
+import 'package:usync/utils/theme_color.dart';
 
 ///iMessage's chat bubble type
 ///
@@ -28,15 +30,13 @@ class BubbleSpecialThree extends StatelessWidget {
     this.sent = false,
     this.delivered = false,
     this.seen = false,
-    this.textStyle = const TextStyle(
-      color: Colors.black87,
-      fontSize: 16,
-    ),
+    this.textStyle = const TextStyle(),
   }) : super(key: key);
 
   ///chat bubble builder method
   @override
   Widget build(BuildContext context) {
+    Color TextColor = ThemeColor().textThemecolor(context);
     bool stateTick = false;
     Icon? stateIcon;
     if (sent) {
@@ -90,7 +90,13 @@ class BubbleSpecialThree extends StatelessWidget {
                       : const EdgeInsets.only(left: 4, right: 4),
                   child: Text(
                     text,
-                    style: textStyle,
+                    style: isSender == true
+                        ? const TextTheme()
+                            .body(context, FontWeight.normal, FontStyle.normal)
+                            .copyWith(color: Colors.white)
+                        : const TextTheme()
+                            .body(context, FontWeight.normal, FontStyle.normal)
+                            .copyWith(color: Colors.black),
                     textAlign: TextAlign.left,
                   ),
                 ),
