@@ -29,10 +29,10 @@ class ChatDetailPage extends StatefulWidget {
   final List<String> imageUrl;
 
   @override
-  _ChatDetailPageState createState() => _ChatDetailPageState();
+  ChatDetailPageState createState() => ChatDetailPageState();
 }
 
-class _ChatDetailPageState extends State<ChatDetailPage> {
+class ChatDetailPageState extends State<ChatDetailPage> {
   late UserViewModel _usermodel;
   late CoversationViewModel _model;
   TextEditingController message = TextEditingController();

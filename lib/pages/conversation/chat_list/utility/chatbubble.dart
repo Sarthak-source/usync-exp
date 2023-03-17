@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:usync/ui_components/config/customtext/customtext.dart';
-import 'package:usync/utils/theme_color.dart';
 
 ///iMessage's chat bubble type
 ///
@@ -36,7 +35,7 @@ class BubbleSpecialThree extends StatelessWidget {
   ///chat bubble builder method
   @override
   Widget build(BuildContext context) {
-    Color TextColor = ThemeColor().textThemecolor(context);
+   
     bool stateTick = false;
     Icon? stateIcon;
     if (sent) {
