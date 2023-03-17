@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:usync/data/view_models/chat_view/conversation_list_view_model.dart';
 import 'package:usync/pages/conversation/chat_list/list_component_view.dart';
@@ -11,7 +10,6 @@ class ConversationsPage extends StatefulWidget {
   const ConversationsPage({super.key, required this.title});
 
   final String title;
-  
 
   @override
   State<ConversationsPage> createState() => _ConversationsPageState();
@@ -52,17 +50,14 @@ class _ConversationsPageState extends State<ConversationsPage> {
                 itemCount: conversation.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  DateTime lastSeen =
-                      DateTime.parse(conversation[index].updated_at);
-                  final DateFormat formatter = DateFormat.yMMMd();
-                  final String formatted = formatter.format(lastSeen);
-
                   return ConversationList(
-                    name:   model.getNames(conversation[index]),
+                    name: model.getNames(conversation[index]),
                     messageText: conversation[index].lastMessage?.content ?? "",
                     imageUrl: model.getAvatar(conversation[index]),
-                    time: formatted,
-                    isMessageRead: conversation[index].type!.isEmpty, convesationId: conversation[index].lastMessage.conversation_id,
+                    time: model.getDate(conversation[index]),
+                    isMessageRead: (conversation[index].unseen_messages_count!=0),
+                    convesationId:
+                        conversation[index].lastMessage.conversation_id,
                   );
                 },
               );

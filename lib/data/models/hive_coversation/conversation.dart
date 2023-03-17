@@ -61,3 +61,26 @@ class Conversation extends HiveObject {
     this.unseen_messages_count = 0,
   });
 }
+
+Conversation mapJsonToConversation(
+  Map<String, dynamic> json,
+  List<User> userList,
+  Message? lastMessage,
+  List<Message>? messages,
+) {
+  return Conversation(
+    id: json['id'],
+    type: json['type'],
+    name: json['name'] ?? '',
+    user_id: json['user_id'],
+    created_at: json['created_at'],
+    updated_at: json['updated_at'],
+    last_message_id: json['last_message_id'],
+    messages: messages,
+    user_ids:json['user_ids'],
+    users: userList,
+    lastMessage: lastMessage,
+    // preferences: json['preferences'],
+    unseen_messages_count: json['unseen_messages_count'] ?? 0,
+  );
+}

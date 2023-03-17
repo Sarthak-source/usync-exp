@@ -58,36 +58,28 @@ class _LoginScreenState extends State<LoginScreen> {
         Expanded(
           child: ViewModelBuilder<LoginViewModel>.reactive(
             viewModelBuilder: () => LoginViewModel(),
-            builder: (context, loginmodel, child) => Scaffold(
-              body: ViewModelBuilder<UserViewModel>.reactive(
-                  viewModelBuilder: () => UserViewModel(),
-                  builder: (context, usermodel, child) {
-                    return Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text('usync'),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Text('What matters is the experience.'),
-                            const Spacer(),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: CupertinoColors.systemGrey4,
-                                  width: 1.0,
-                                ),
+            builder: (context, loginmodel, child) {
+              return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Form(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                        child: SizedBox(
+                          height: (MediaQuery.maybeOf(context)?.size.height)!/1.2,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text('usync'),
+                              const SizedBox(
+                                height: 20,
                               ),
-                              child: UsyncTextField(
+                              const Text('What matters is the experience.'),
+                              const Spacer(),
+                              UsyncTextField(
                                 textController: _usernameController,
                                 keyboardType: TextInputType.emailAddress,
                                 placeholderString: "Username",
-
+                                        
                                 // validator: (value) {
                                 //   if (value.isEmpty) {
                                 //     return "Please enter a username";
@@ -95,26 +87,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 //   return null;
                                 // },
                               ),
-                            ),
-                            const SizedBox(
-                              height: 16.0,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: CupertinoColors.systemGrey4,
-                                  width: 1.0,
-                                ),
+                              const SizedBox(
+                                height: 20.0,
                               ),
-                              child: UsyncTextField(
+                              UsyncTextField(
                                 textController: _passwordController,
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 placeholderString: "Password",
-
+                                        
                                 // validator: (value) {
                                 //   if (value.isEmpty) {
                                 //     return "Please enter a password";
@@ -122,14 +105,38 @@ class _LoginScreenState extends State<LoginScreen> {
                                 //   return null;
                                 // },
                               ),
-                            ),
-                            const SizedBox(
-                              height: 16.0,
-                            ),
-                            SizedBox(
-                              width: width,
-                              child: CupertinoButton(
-                                color: LightThemeColors.primary,
+                              const SizedBox(
+                                height: 20.0,
+                              ),
+                              ViewModelBuilder<UserViewModel>.reactive(
+                                  viewModelBuilder: () => UserViewModel(),
+                                  builder: (context, usermodel, child) {
+                                    return SizedBox(
+                                      width: width,
+                                      child: CupertinoButton(
+                                        color: LightThemeColors.primary,
+                                        onPressed: () async {
+                                          if (_formKey.currentState!.validate()) {
+                                            var success = await loginmodel.login(
+                                              _usernameController.text,
+                                              _passwordController.text,
+                                            );
+                                            if (success) {
+                                              await usermodel.getUser();
+                                              if (!mounted) return;
+                                              myAsyncMethod(context);
+                                            } else {
+                                              // Handle login failure
+                                              debugPrint('no login');
+                                            }
+                                          }
+                                        },
+                                        child: const Text("Sign in"),
+                                      ),
+                                    );
+                                  }),
+                            
+                              TextButton(
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
                                     var success = await loginmodel.login(
@@ -137,7 +144,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       _passwordController.text,
                                     );
                                     if (success) {
-                                      await usermodel.getUser();
                                       if (!mounted) return;
                                       myAsyncMethod(context);
                                     } else {
@@ -146,126 +152,106 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
                                   }
                                 },
-                                child: const Text("Sign in"),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  var success = await loginmodel.login(
-                                    _usernameController.text,
-                                    _passwordController.text,
-                                  );
-                                  if (success) {
-                                    if (!mounted) return;
-                                    myAsyncMethod(context);
-                                  } else {
-                                    // Handle login failure
-                                    debugPrint('no login');
-                                  }
-                                }
-                              },
-                              child: const Text(
-                                "Forgot password?",
-                                style: TextStyle(
-                                  color: LightThemeColors.primary,
+                                child: const Text(
+                                  "Forgot password?",
+                                  style: TextStyle(
+                                    color: LightThemeColors.primary,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 30.0,
-                            ),
-                            const Text('Don\'t have an account?'),
-                            const SizedBox(
-                              height: 16.0,
-                            ),
-                            SizedBox(
-                              width: width,
-                              child: CupertinoButton(
-                                color: LightThemeColors.primary,
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    var success = await loginmodel.login(
-                                      _usernameController.text,
-                                      _passwordController.text,
-                                    );
-                                    if (success) {
-                                      if (!mounted) return;
-                                      myAsyncMethod(context);
-                                    } else {
-                                      // Handle login failure
-                                      debugPrint('no login');
+                              const SizedBox(
+                                height: 30.0,
+                              ),
+                              const Text('Don\'t have an account?'),
+                              const SizedBox(
+                                height: 16.0,
+                              ),
+                              SizedBox(
+                                width: width,
+                                child: CupertinoButton(
+                                  color: LightThemeColors.primary,
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      var success = await loginmodel.login(
+                                        _usernameController.text,
+                                        _passwordController.text,
+                                      );
+                                      if (success) {
+                                        if (!mounted) return;
+                                        myAsyncMethod(context);
+                                      } else {
+                                        // Handle login failure
+                                        debugPrint('no login');
+                                      }
                                     }
-                                  }
-                                },
-                                child: const Text("Sign up"),
+                                  },
+                                  child: const Text("Sign up"),
+                                ),
                               ),
-                            ),
-                            const Spacer(),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child: Row(
-                                children: [
-                                  TextButton(
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        var success = await loginmodel.login(
-                                          _usernameController.text,
-                                          _passwordController.text,
-                                        );
-                                        if (success) {
-                                          if (!mounted) return;
-                                          myAsyncMethod(context);
-                                        } else {
-                                          // Handle login failure
-                                          debugPrint('no login');
+                              const Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          var success = await loginmodel.login(
+                                            _usernameController.text,
+                                            _passwordController.text,
+                                          );
+                                          if (success) {
+                                            if (!mounted) return;
+                                            myAsyncMethod(context);
+                                          } else {
+                                            // Handle login failure
+                                            debugPrint('no login');
+                                          }
                                         }
-                                      }
-                                    },
-                                    child: const Text(
-                                      "About",
-                                      style: TextStyle(
-                                        color: LightThemeColors.primary,
+                                      },
+                                      child: const Text(
+                                        "About",
+                                        style: TextStyle(
+                                          color: LightThemeColors.primary,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const Spacer(),
-                                  TextButton(
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate()) {
-                                        var success = await loginmodel.login(
-                                          _usernameController.text,
-                                          _passwordController.text,
-                                        );
-                                        if (success) {
-                                          if (!mounted) return;
-                                          myAsyncMethod(context);
-                                        } else {
-                                          // Handle login failure
-                                          debugPrint('no login');
+                                    const Spacer(),
+                                    TextButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          var success = await loginmodel.login(
+                                            _usernameController.text,
+                                            _passwordController.text,
+                                          );
+                                          if (success) {
+                                            if (!mounted) return;
+                                            myAsyncMethod(context);
+                                          } else {
+                                            // Handle login failure
+                                            debugPrint('no login');
+                                          }
                                         }
-                                      }
-                                    },
-                                    child: const Text(
-                                      "Legal",
-                                      style: TextStyle(
-                                        color: LightThemeColors.primary,
+                                      },
+                                      child: const Text(
+                                        "Legal",
+                                        style: TextStyle(
+                                          color: LightThemeColors.primary,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    );
-                  }),
-            ),
+                    ),
+                  
+                );
+              
+            },
           ),
         ),
       ],

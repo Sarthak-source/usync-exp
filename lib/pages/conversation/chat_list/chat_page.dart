@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:usync/data/models/hive_messages/message.dart';
+import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/data/view_models/chat_send_view_model/chat_send_view_model.dart';
 import 'package:usync/data/view_models/conversation_view/message_view_model.dart';
 import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
@@ -185,7 +186,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
 
                           if (result) {
                             addMessage(Message(
-                                content: message.text, id: accountId));
+                                content: message.text, user: User(id: accountId)));
+                                message.clear();
                           } else {}
                         },
                         //onSend: (_)

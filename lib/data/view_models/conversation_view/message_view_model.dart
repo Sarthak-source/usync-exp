@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:usync/data/hive_service/hive_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:usync/data/models/hive_coversation/conversation.dart';
 import 'package:usync/data/models/hive_file/file.dart';
 import 'package:usync/data/models/hive_messages/message.dart';
 import 'package:usync/data/models/hive_user/user.dart';
@@ -61,80 +62,16 @@ class CoversationViewModel extends BaseViewModel {
       debugPrint('decoded---$decoded');
       notifyListeners();
       (decoded['data'] as List).map((e) {
-        debugPrint(
-          e.toString(),
-        );
+        debugPrint(e.toString());
 
         var userMap = e['user'];
 
         // if (userMap['avatar'] != null && userMap['avatar']['links'] != null) {
-        File avatar = File(
-          id: userMap['id'] ?? "",
-          type_: userMap['_type'] ?? "",
-          type: userMap['type'] ?? "",
-          name: userMap['name']['full'] ?? "",
-          description: userMap['description'] ?? "",
-          description_summary: userMap['description_summary'] ?? "",
-          poster_id: userMap['poster_id'] ?? "",
-          cover: userMap['cover'],
-          original_extension: userMap['original_extension'] ?? "",
-          playable_length: userMap['playable_length'] ?? 0,
-          data: userMap['data'] ?? {},
-          user_id: userMap['user_id'] ?? 0,
-          //user: fileMap['user'],
-          page_id: userMap['page_id'] ?? "",
-          //page: fileMap['page'],
-          aspect_ratio: userMap['aspect_ratio'] ?? "",
-          links:
-              userMap['avatar'] != null ? userMap['avatar']['links'] ?? {} : {},
-          timestamps: userMap['timestamps'] ?? {},
-          manageable: userMap['manageable'] ?? false,
-          //meta: fileMap['meta'] ?? false,
-          marked_as_nsfw: userMap['marked_as_nsfw'] ?? false,
-          m3u8_path: userMap['m3u8_path'] ?? "",
-        );
+        File avatar = mapJsonToFile(userMap);
 
-        User user = User(
-          id: userMap['id'] as String?,
-          type: userMap['type'] as String?,
-          name: userMap['name'] != null
-              ? Map<String, String>.from(userMap['name'] as Map)
-              : null,
-          account: userMap['account'],
-          avatar: avatar,
-          avatar_id: userMap['avatar_id'] as String?,
-          cover_id: userMap['cover_id'] as String?,
-          avatar_data: userMap['avatar_data'],
-          cover_data: userMap['cover_data'],
-          sub_title: userMap['sub_title'] as String?,
-          description: userMap['description'],
-          description_summary: userMap['description_summary'],
-          isFirstView: userMap['isFirstView'] as bool? ?? false,
-          settings: userMap['settings'] as String?,
-          username: userMap['username'] as String?,
-          preferences: userMap['preferences'] != null
-              ? Map<String, dynamic>.from(userMap['preferences'] as Map)
-              : {},
-        );
+        User user = mapJsonToUser(userMap, avatar, File());
 
-        Message conversation = Message(
-          id: e['id'],
-          type: e['type'],
-          from_system: e['from_system'],
-          conversation_id: e['conversation_id'],
-          conversation: e['conversation'],
-          user_id: e['user_id'],
-          user: user,
-          content: e['content'],
-          attachable_type: e['attachable_type'],
-          attachable_id: e['attachable_id'],
-          attachable: e['attachable'],
-          file_ids: e['file_ids'],
-          // files: e['files'],
-          // geolocation: e['geolocation'],
-          created_at: e['created_at'],
-          updated_at: e['updated_at'],
-        );
+        Message conversation = mapJsonToMessage(e, user, Conversation());
         _messageList.add(conversation);
       }).toList();
       _text = "Caching data";
