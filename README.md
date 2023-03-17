@@ -103,6 +103,11 @@ flutter build appbundle --build-name=<versionCode> --build-number=<versionCode>
 - to know more about how to version your app, please read this [documentation](https://developer.android.com/studio/publish/versioning).
 
 
+- **Note:-** To create a debug apk run
+
+```sh
+flutter build apk --debug
+```
 
 ## Resources
 
