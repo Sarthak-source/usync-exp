@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.usync">
    <application
-        android:label="chatsampleapp"
+        android:label="uSync (Flutter)"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
