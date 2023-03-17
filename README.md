@@ -50,6 +50,7 @@ git clone git@git.usync.us:usync/usync-flutter.git
 - Ensure these two files are excluded from git repository
 - Configure gradle to use your upload key when building your app in release mode by editing the **[project]/android/app/build.gradle** file.
 - Add the keystore information from your properties file before the android block
+
 ```
  def keystoreProperties = new Properties()
    def keystorePropertiesFile = rootProject.file('key.properties')
@@ -61,7 +62,9 @@ git clone git@git.usync.us:usync/usync-flutter.git
          ...
    }
 ```
+
 - Find the **buildTypes** block:
+
 ```
 buildTypes {
        release {
@@ -72,7 +75,9 @@ buildTypes {
        }
    }
 ```
+
 And replace it with the following signing configuration info
+
 ```
  signingConfigs {
        release {
@@ -88,10 +93,13 @@ And replace it with the following signing configuration info
        }
    }
 ```
+
 - Create a release bundle using the following command
+
 ```sh
 flutter build appbundle --build-name=<versionCode> --build-number=<versionCode>
 ```
+
 - to know more about how to version your app, please read this [documentation](https://developer.android.com/studio/publish/versioning).
 
 
