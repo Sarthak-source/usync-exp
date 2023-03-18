@@ -11,6 +11,14 @@ class ThemeColor {
     }
   }
 
+  Color themeTextFieldColor(BuildContext context) {
+    if (EasyDynamicTheme.of(context).themeMode == ThemeMode.dark) {
+      return LightThemeColors.secondaryLightest;
+    } else {
+      return DarkThemeColors.secondaryLightest;
+    }
+  }
+
   Color textThemecolor(BuildContext context) {
     if (EasyDynamicTheme.of(context).themeMode == ThemeMode.dark) {
       return LightThemeColors.secondaryDark;

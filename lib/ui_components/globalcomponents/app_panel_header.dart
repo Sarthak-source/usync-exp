@@ -51,6 +51,7 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
                 'cancel',
               );
               appBarTitle = UsyncTextField(
+                border: false,
                 placeholderString: "search",
                 onChanged: widget.onSearchInput,
                 textController: _searchController,

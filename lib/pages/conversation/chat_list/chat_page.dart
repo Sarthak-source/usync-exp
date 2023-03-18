@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:usync/data/models/hive_messages/message.dart';
+import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/data/view_models/chat_send_view_model/chat_send_view_model.dart';
 import 'package:usync/data/view_models/conversation_view/message_view_model.dart';
 import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
@@ -28,10 +29,10 @@ class ChatDetailPage extends StatefulWidget {
   final List<String> imageUrl;
 
   @override
-  _ChatDetailPageState createState() => _ChatDetailPageState();
+  ChatDetailPageState createState() => ChatDetailPageState();
 }
 
-class _ChatDetailPageState extends State<ChatDetailPage> {
+class ChatDetailPageState extends State<ChatDetailPage> {
   late UserViewModel _usermodel;
   late CoversationViewModel _model;
   TextEditingController message = TextEditingController();
@@ -84,7 +85,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
               if (activeUserOrNot) {
                 return DarkThemeColors.primary;
               } else {
-                return const Color(0xFFE8E8EE);
+                return  DarkThemeColors.secondaryDarkest;
               }
             }
 
@@ -185,7 +186,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
 
                           if (result) {
                             addMessage(Message(
-                                content: message.text, id: accountId));
+                                content: message.text, user: User(id: accountId)));
+                                message.clear();
                           } else {}
                         },
                         //onSend: (_)

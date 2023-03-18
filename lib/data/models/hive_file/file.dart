@@ -107,3 +107,30 @@ class File extends HiveObject {
     this.m3u8_path = "",
   });
 }
+
+File mapJsonToFile(Map<String, dynamic> json) {
+  return File(
+    id: json['id'] ?? "",
+    type_: json['_type'] ?? "",
+    type: json['type'] ?? "",
+    name: json['name']['full'] ?? "",
+    description: json['description'] ?? "",
+    description_summary: json['description_summary'] ?? "",
+    poster_id: json['poster_id'] ?? "",
+    cover: json['cover'],
+    original_extension: json['original_extension'] ?? "",
+    playable_length: json['playable_length'] ?? 0,
+    data: json['data'] ?? {},
+    user_id: json['user_id'] ?? 0,
+    //user: json['user'],
+    page_id: json['page_id'] ?? "",
+    //page: json['page'],
+    aspect_ratio: json['aspect_ratio'] ?? "",
+    links: json['avatar'] != null ? json['avatar']['links'] ?? {} : {},
+    timestamps: json['timestamps'] ?? {},
+    manageable: json['manageable'] ?? false,
+    //meta: json['meta'] ?? false,
+    marked_as_nsfw: json['marked_as_nsfw'] ?? false,
+    m3u8_path: json['m3u8_path'] ?? "",
+  );
+}

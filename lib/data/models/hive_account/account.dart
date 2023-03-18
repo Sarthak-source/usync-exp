@@ -72,3 +72,35 @@ class Account {
     this.id,
   });
 }
+
+Account mapJsonToAccount(
+  Map<String, dynamic> json,
+  Language language,
+  User activeUser,
+  User communityUser,
+  List<User> users,
+) {
+  return Account(
+    status: json['status'] as String?,
+    firstName: json['firstName'] as String?,
+    middleName: json['middleName'] as String?,
+    email: json['email'] as String?,
+    gender: json['gender'] as String?,
+    lastName: json['lastName'] as String?,
+    language: language,
+    timezone: json['timezone'],
+    lastLoginAt: json['lastLoginAt'] as String?,
+    doNotDisturb: json['doNotDisturb'] as int?,
+    locationDetail: json['locationDetail'],
+    isNewUser: json['isNewUser'] as bool?,
+    phone: json['phone'] as String?,
+    location: json['location'] as String?,
+    birthdateAt: json['birthdateAt'] as String?,
+    type: json['type'] as String?,
+    activeUser: activeUser,
+    communityUser: communityUser,
+    users: users,
+    communities: json['communities'],
+    id: json['id'] as String?,
+  );
+}

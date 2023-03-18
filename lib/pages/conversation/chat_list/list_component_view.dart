@@ -18,10 +18,10 @@ class ConversationList extends StatefulWidget {
       required this.convesationId,
       required this.isMessageRead});
   @override
-  _ConversationListState createState() => _ConversationListState();
+  ConversationListState createState() => ConversationListState();
 }
 
-class _ConversationListState extends State<ConversationList> {
+class ConversationListState extends State<ConversationList> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

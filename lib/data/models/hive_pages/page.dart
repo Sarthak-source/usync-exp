@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:usync/data/models/hive_file/file.dart';
-import 'package:usync/data/models/hive_messages/message.dart';
 part 'page.g.dart';
 
 @HiveType(typeId: 5)

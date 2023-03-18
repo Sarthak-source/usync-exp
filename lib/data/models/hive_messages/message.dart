@@ -74,3 +74,27 @@ class Message extends HiveObject {
     this.updated_at,
   });
 }
+
+Message mapJsonToMessage(Map<String, dynamic> json, User user,Conversation conversation) {
+  return Message(
+    id: json['id'] as String?,
+    type: json['type'] as String? ?? '',
+    from_system: json['from_system'] as int? ?? 0,
+    conversation_id: json['conversation_id'] as String? ?? '',
+    conversation: conversation,
+    user_id: json['user_id'] as int?,
+    user: user,
+    content: json['content'] as String? ?? '',
+    attachable_type: json['attachable_type'] as String?,
+    attachable_id: json['attachable_id'] as int?,
+    attachable: json['attachable'],
+    file_ids: json['file_ids'] ,
+    // files: json['files'] != null
+    //     ? List<File>.from(json['files'].map((f) => File.fromJson(f)))
+    //     : null,
+    // geolocation: json['geolocation'] != null
+    //     ? Geolocation.fromJson(json['geolocation'] as Map<String, dynamic>)
+    //     : null,
+    created_at: json['created_at'] as String?,
+    updated_at: json['updated'] as String?,
+  );}

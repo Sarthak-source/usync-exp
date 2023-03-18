@@ -51,7 +51,7 @@ class MessageBar extends StatelessWidget {
   /// [MessageBar] constructor
   ///
   ///
-  MessageBar(
+const  MessageBar(
       {super.key,
       this.replying = false,
       this.replyingTo = "",

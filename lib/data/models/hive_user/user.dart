@@ -75,3 +75,30 @@ class User extends HiveObject {
     this.preferences = const {},
   });
 }
+
+
+User mapJsonToUser(Map<String, dynamic> json,File? avatar,File? cover) {
+    return User(
+      id: json['id'] as String?,
+      type: json['type'] as String?,
+      name: json['name'] != null
+          ? Map<String, String>.from(json['name'] as Map)
+          : null,
+      account: json['account'],
+      avatar_id: json['avatar_id'] as String?,
+      avatar: avatar,
+      cover_id: json['cover_id'] as String?,
+      cover: cover,
+      avatar_data: json['avatar_data'],
+      cover_data: json['cover_data'],
+      sub_title: json['sub_title'] as String?,
+      description: json['description'],
+      description_summary: json['description_summary'],
+      isFirstView: json['isFirstView'] as bool? ?? false,
+      settings: json['settings'] as String?,
+      username: json['username'] as String?,
+      preferences: json['preferences'] != null
+          ? Map<String, dynamic>.from(json['preferences'] as Map)
+          : {},
+    );
+  }
