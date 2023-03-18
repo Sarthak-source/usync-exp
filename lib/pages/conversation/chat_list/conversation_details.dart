@@ -46,7 +46,13 @@ List<Widget> subpaneldetails(
                       const SizedBox(
                         width: 20,
                       ),
-                      Text(name),
+                      SizedBox(
+                        width: 160,
+                        child: Text(name,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis)),
+                      ),
                       const Spacer(),
                       IconButton(
                           onPressed: () {}, icon: const FaIcon(Icons.message)),

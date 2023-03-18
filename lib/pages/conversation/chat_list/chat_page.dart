@@ -85,7 +85,7 @@ class ChatDetailPageState extends State<ChatDetailPage> {
               if (activeUserOrNot) {
                 return DarkThemeColors.primary;
               } else {
-                return const Color(0xFFE8E8EE);
+                return  DarkThemeColors.secondaryDarkest;
               }
             }
 
