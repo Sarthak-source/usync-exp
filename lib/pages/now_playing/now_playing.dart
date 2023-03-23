@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:miniplayer/miniplayer.dart';
-import 'package:usync/pages/conversation/chat_list/conversation_page.dart';
+import 'package:usync/pages/conversation/chat_list/conversation/conversation_page.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';

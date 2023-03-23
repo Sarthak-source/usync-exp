@@ -82,6 +82,7 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
 
     return AppBar(
       toolbarHeight: widget.toolbarHeight,
+      
       elevation: 1,
       leading: backstate == true
           ? IconButton(
@@ -100,7 +101,9 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
       title: appBarTitle,
       centerTitle: widget.alignment,
       bottom: widget.bottomWidget,
+      
       actions: actionItems,
     );
+    
   }
 }

@@ -15,24 +15,25 @@ class UsyncTextField extends StatefulWidget {
   final bool autocorrect;
   final bool border;
   final Function(String)? onChanged;
-  final Function()? onTap;
   final Function()? onEditingComplete;
+  final Function()? onTap;
   final double height;
+ 
 
   const UsyncTextField(
       {super.key,
       required this.textController,
-      required this.placeholderString,
-      this.keyboardType = TextInputType.none,
+       this.placeholderString='',
+      this.keyboardType = TextInputType.text,
       this.onChanged,
       this.prifix = const SizedBox.shrink(),
       this.suffix = const SizedBox.shrink(),
       this.obscureText = false,
       this.enableSuggestions = true,
-      this.autocorrect = true,
-      this.onTap,
+      this.autocorrect = true,     
       this.border = true,
       this.height = 40,
+      this.onTap,    
       this.onEditingComplete});
 
   @override
@@ -45,11 +46,16 @@ class _UsyncTextFieldState extends State<UsyncTextField> {
     return SizedBox(
       height: widget.height,
       child: CupertinoTextField(
-        prefix: widget.prifix,
-        suffix: widget.suffix,
-        
+        prefix: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: widget.prifix,
+        ),
+        suffix: Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: widget.suffix,
+        ),  
+        onTap: widget.onTap,     
         controller: widget.textController,
-        onTap: widget.onTap,
         onEditingComplete: widget.onEditingComplete,
         placeholder: widget.placeholderString,
         style: const TextTheme()
