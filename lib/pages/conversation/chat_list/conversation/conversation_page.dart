@@ -47,9 +47,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
               },
             ),
           ],
-          child: const Text(
-            'Conversations'
-          ),
+          child: const Text('Conversations'),
         ),
         Expanded(
           child: ViewModelBuilder<CoversationListViewModel>.reactive(
@@ -68,7 +66,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
                     imageUrl: model.getAvatar(conversation[index]),
                     time: model.getDate(conversation[index]),
                     isMessageRead:
-                        (conversation[index].unseen_messages_count != 0),
+                        (conversation[index].unseen_messages_count > 0),
                     convesationId:
                         conversation[index].lastMessage.conversation_id,
                   );

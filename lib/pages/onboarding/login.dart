@@ -35,12 +35,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     double width = MediaQuery.of(context).size.width;
-    
 
     return AppPanel(
       radius: AppPanelRadius.xs,
       content: [
         AppPanelHeader(
+          elevation: 0,
           back: false,
           search: false,
           toolbarHeight: 65,
@@ -83,7 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             textController: _usernameController,
                             keyboardType: TextInputType.emailAddress,
                             placeholderString: "Username",
-                         
 
                             // validator: (value) {
                             //   if (value.isEmpty) {
@@ -95,7 +94,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             height: 20.0,
                           ),
-                        
                           UsyncTextField(
                             border: false,
                             height: 45,
@@ -105,8 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             enableSuggestions: false,
                             autocorrect: false,
                             placeholderString: "Password",
-
-                         
 
                             // validator: (value) {
                             //   if (value.isEmpty) {
@@ -141,11 +137,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         }
                                       }
                                     },
-                                    child:  Text("Sign in",style: const TextTheme().body(
-                  context,
-                  FontWeight.normal,
-                  FontStyle.normal,
-                ),),
+                                    child: Text(
+                                      "Sign in",
+                                      style: const TextTheme().body(
+                                        context,
+                                        FontWeight.normal,
+                                        FontStyle.normal,
+                                      ),
+                                    ),
                                   ),
                                 );
                               }),
@@ -198,11 +197,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }
                                 }
                               },
-                              child:  Text("Sign up",style: const TextTheme().body(
-                  context,
-                  FontWeight.normal,
-                  FontStyle.normal,
-                ),),
+                              child: Text(
+                                "Sign up",
+                                style: const TextTheme().body(
+                                  context,
+                                  FontWeight.normal,
+                                  FontStyle.normal,
+                                ),
+                              ),
                             ),
                           ),
                           const Spacer(),
