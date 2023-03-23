@@ -3,6 +3,7 @@ import 'package:usync/ui_components/usync_text_field.dart';
 
 class AppPanelHeader extends StatefulWidget {
   final double toolbarHeight;
+  final double elevation;
   final bool back;
   final void Function()? onBackClick;
   final Widget child;
@@ -14,6 +15,7 @@ class AppPanelHeader extends StatefulWidget {
   final void Function()? onSearchCancel;
   const AppPanelHeader({
     super.key,
+    this.elevation=1,
     required this.toolbarHeight,
     this.back = true,
     this.onBackClick,
@@ -82,7 +84,8 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
 
     return AppBar(
       toolbarHeight: widget.toolbarHeight,
-      elevation: 1,
+      
+      elevation: widget.elevation,
       leading: backstate == true
           ? IconButton(
               icon: const Padding(
@@ -100,7 +103,9 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
       title: appBarTitle,
       centerTitle: widget.alignment,
       bottom: widget.bottomWidget,
+      
       actions: actionItems,
     );
+    
   }
 }

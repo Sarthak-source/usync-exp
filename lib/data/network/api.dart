@@ -26,4 +26,5 @@ class API {
   /// Conversation
   static const conversation = 'conversations';
   static const messages = 'messages';
+  static const search = 'users/search';
 }

@@ -43,6 +43,7 @@ class MessageBar extends StatelessWidget {
   final Color replyCloseColor;
   final Color messageBarColor;
   final Color sendButtonColor;
+  final TextInputType keyBoardType;
   final void Function(String)? onTextChanged;
   final void Function() onSend;
   final void Function()? onTapCloseReply;
@@ -63,6 +64,7 @@ const  MessageBar(
       this.messageBarColor = const Color(0xffF4F4F5),
       this.sendButtonColor = Colors.blue,
       this.onTextChanged,
+      required this.keyBoardType,
       required this.onSend,
       this.onTapCloseReply,
       this.sendbutton});
@@ -88,7 +90,9 @@ const  MessageBar(
                 Expanded(
                   child: UsyncTextField(
                     textController: textController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: keyBoardType
+                    
+                    ,
                     placeholderString: "message....",
                     suffix: InkWell(
                       onTap: onSend,

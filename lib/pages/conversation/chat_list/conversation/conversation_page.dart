@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:usync/data/view_models/chat_view/conversation_list_view_model.dart';
-import 'package:usync/pages/conversation/chat_list/list_component_view.dart';
+import 'package:usync/pages/conversation/chat_list/conversation/list_component_view.dart';
+import 'package:usync/pages/new_conversation/new_conversation.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 
@@ -24,7 +25,9 @@ class _ConversationsPageState extends State<ConversationsPage> {
         AppPanelHeader(
           search: true,
           toolbarHeight: 65,
-          onBackClick: () {},
+          onBackClick: () {
+            //Navigator.pop(context);
+          },
           onSearchCancel: () {},
           onSearchInput: (p0) {},
           actionButtons: [
@@ -32,12 +35,19 @@ class _ConversationsPageState extends State<ConversationsPage> {
               icon: const FaIcon(
                 Icons.add_circle_outline,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const NewConversationPage(title: '');
+                    },
+                  ),
+                );
+              },
             ),
           ],
-          child: const Text(
-            'Conversations',
-          ),
+          child: const Text('Conversations'),
         ),
         Expanded(
           child: ViewModelBuilder<CoversationListViewModel>.reactive(
@@ -55,7 +65,8 @@ class _ConversationsPageState extends State<ConversationsPage> {
                     messageText: conversation[index].lastMessage?.content ?? "",
                     imageUrl: model.getAvatar(conversation[index]),
                     time: model.getDate(conversation[index]),
-                    isMessageRead: (conversation[index].unseen_messages_count!=0),
+                    isMessageRead:
+                        (conversation[index].unseen_messages_count > 0),
                     convesationId:
                         conversation[index].lastMessage.conversation_id,
                   );

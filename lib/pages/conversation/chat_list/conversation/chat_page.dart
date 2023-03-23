@@ -85,7 +85,7 @@ class ChatDetailPageState extends State<ChatDetailPage> {
               if (activeUserOrNot) {
                 return DarkThemeColors.primary;
               } else {
-                return  DarkThemeColors.secondaryDarkest;
+                return DarkThemeColors.secondaryDarkest;
               }
             }
 
@@ -103,14 +103,17 @@ class ChatDetailPageState extends State<ChatDetailPage> {
               radius: AppPanelRadius.xs,
               content: [
                 AppPanelHeader(
-                  toolbarHeight: 90,
+                  toolbarHeight: 100,
                   actionButtons: [
                     IconButton(
                       onPressed: () {
                         SubPanel().showSubPanel(
                             context,
                             subpaneldetails(
-                                context, widget.name, widget.imageUrl),
+                              context,
+                              widget.name,
+                              widget.imageUrl,
+                            ),
                             1.1,
                             MainAxisAlignment.start);
                       },
@@ -175,6 +178,7 @@ class ChatDetailPageState extends State<ChatDetailPage> {
                     onViewModelReady: (model) => model,
                     builder: (context, model, child) {
                       return MessageBar(
+                        keyBoardType:  TextInputType.text,
                         messageBarColor: ThemeColor().themecolor(context),
                         // ignore: avoid_print
                         sendbutton: false,
@@ -186,8 +190,9 @@ class ChatDetailPageState extends State<ChatDetailPage> {
 
                           if (result) {
                             addMessage(Message(
-                                content: message.text, user: User(id: accountId)));
-                                message.clear();
+                                content: message.text,
+                                user: User(id: accountId)));
+                            message.clear();
                           } else {}
                         },
                         //onSend: (_)
@@ -197,7 +202,9 @@ class ChatDetailPageState extends State<ChatDetailPage> {
                             child: InkWell(
                               child:
                                   const FaIcon(FontAwesomeIcons.cloudArrowUp),
-                              onTap: () {},
+                              onTap: () {
+                                //setState(() {
+                              },
                             ),
                           ),
                         ],

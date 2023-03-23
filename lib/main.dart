@@ -21,11 +21,12 @@ import 'package:usync/utils/redux_token.dart';
 import 'data/models/hive_language/language.dart';
 import 'data/models/hive_messages/message.dart';
 import 'data/models/hive_pages/page.dart';
-import 'pages/conversation/chat_list/conversation_page.dart';
+import 'pages/conversation/chat_list/conversation/conversation_page.dart';
 import 'ui_components/config/theme/theme.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
   CleanApi.instance.setup(baseUrl: MyConfig.appApiUrl);

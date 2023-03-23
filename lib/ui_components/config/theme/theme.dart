@@ -26,6 +26,8 @@ class AppTheme {
         color: LightThemeColors.textColor,
       ),
 
+     
+
       dividerColor: LightThemeColors.textColor,
       bottomAppBarTheme: const BottomAppBarTheme().copyWith(
         color: LightThemeColors.pageBgColor,

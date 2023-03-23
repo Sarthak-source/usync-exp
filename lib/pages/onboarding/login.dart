@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:usync/data/view_models/log_in_view_model/log_in_view_model.dart';
 import 'package:usync/data/view_models/user_view_model/user_view_model.dart';
 import 'package:usync/main.dart';
+import 'package:usync/ui_components/config/customtext/customtext.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
@@ -34,13 +35,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     double width = MediaQuery.of(context).size.width;
-    double height = (MediaQuery.of(context).size.height) / 4;
-    double defaultHeight = 0;
 
     return AppPanel(
       radius: AppPanelRadius.xs,
       content: [
         AppPanelHeader(
+          elevation: 0,
           back: false,
           search: false,
           toolbarHeight: 65,
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
             viewModelBuilder: () => LoginViewModel(),
             builder: (context, loginmodel, child) {
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
@@ -83,16 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             textController: _usernameController,
                             keyboardType: TextInputType.emailAddress,
                             placeholderString: "Username",
-                            onTap: () {
-                              setState(() {
-                                defaultHeight = height;
-                              });
-                            },
-                            onEditingComplete: () {
-                              setState(() {
-                                defaultHeight = 0;
-                              });
-                            },
 
                             // validator: (value) {
                             //   if (value.isEmpty) {
@@ -104,7 +94,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             height: 20.0,
                           ),
-                        
                           UsyncTextField(
                             border: false,
                             height: 45,
@@ -114,17 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             enableSuggestions: false,
                             autocorrect: false,
                             placeholderString: "Password",
-
-                            onTap: () {
-                              setState(() {
-                                defaultHeight = height;
-                              });
-                            },
-                            onEditingComplete: () {
-                              setState(() {
-                                defaultHeight = 0;
-                              });
-                            },
 
                             // validator: (value) {
                             //   if (value.isEmpty) {
@@ -159,7 +137,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         }
                                       }
                                     },
-                                    child: const Text("Sign in"),
+                                    child: Text(
+                                      "Sign in",
+                                      style: const TextTheme().body(
+                                        context,
+                                        FontWeight.normal,
+                                        FontStyle.normal,
+                                      ),
+                                    ),
                                   ),
                                 );
                               }),
@@ -212,7 +197,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }
                                 }
                               },
-                              child: const Text("Sign up"),
+                              child: Text(
+                                "Sign up",
+                                style: const TextTheme().body(
+                                  context,
+                                  FontWeight.normal,
+                                  FontStyle.normal,
+                                ),
+                              ),
                             ),
                           ),
                           const Spacer(),
@@ -279,9 +271,6 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           ),
         ),
-        SizedBox(
-          height: defaultHeight,
-        )
       ],
     );
   }
