@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:usync/services/audio_call/audio_call_state.dart';
 import 'package:usync/services/audio_call/call_details.dart';
 
@@ -60,7 +61,7 @@ class FlutterPlatformChannelManager {
   Stream get onAuthData {
     _bgService.on('authData').listen((data) async {
       if (data != null) {
-        print({"authData": data});
+        debugPrint({"authData": data}.toString());
         await UsyncApp.instance.setAuthData(data);
         // await resetAudioCallState()(UsyncApp.instance.store);
         _authDataStreamController.add(data);

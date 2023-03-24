@@ -38,7 +38,6 @@ void main() async {
 
   // Reload accessToken preference
 
-  //await prefs.reload();
   // Load Access Token from Shared Preferences
   final accessToken = await SharedPreferences.getInstance().then(
     (prefs) => prefs.getString(MyConfig.access),

@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:ffi';
-import 'package:flutter_module/services/call_details.dart';
-import 'package:flutter_module/usync_app.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
+import 'package:usync/utils/usync_app.dart';
+
+import 'call_details.dart';
 
 // Redux states
 

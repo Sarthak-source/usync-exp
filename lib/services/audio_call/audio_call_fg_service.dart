@@ -1,10 +1,13 @@
-import 'package:flutter_module/usync_app.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_module/router.dart';
-import 'package:flutter_module/services/audio_call_session_events.dart';
-import 'package:flutter_module/services/audio_call_state.dart';
+
 import 'package:http/http.dart' as http;
+import 'package:usync/utils/router.dart';
+import 'package:usync/utils/usync_app.dart';
+
+import 'audio_call_session_events.dart';
+import 'audio_call_state.dart';
 
 class AudioCallFgService {
   static final AudioCallFgService instance = AudioCallFgService._init();
@@ -110,24 +113,24 @@ class AudioCallFgService {
 
   void _registerRoomHandlers() {
     listener?.on<TrackSubscribedEvent>((TrackSubscribedEvent event) async {
-      print({"TrackSubscribedEvent": event.track});
+      debugPrint({"TrackSubscribedEvent": event.track}.toString());
     });
     listener?.on<TrackUnsubscribedEvent>((TrackUnsubscribedEvent event) async {
-      print({"TrackSubscribedEvent": event.track});
+      debugPrint({"TrackSubscribedEvent": event.track}.toString());
     });
     listener?.on<ActiveSpeakersChangedEvent>(
         (ActiveSpeakersChangedEvent event) async {
-      print({"ActiveSpeakersChangedEvent": event.speakers});
+      debugPrint({"ActiveSpeakersChangedEvent": event.speakers}.toString());
     });
     listener?.on<RoomDisconnectedEvent>((_) async {});
     listener
         ?.on<LocalTrackPublishedEvent>((LocalTrackPublishedEvent event) async {
-      print({"LocalTrackPublishedEvent": event.participant.trackPublications});
+      debugPrint({"LocalTrackPublishedEvent": event.participant.trackPublications}.toString());
     });
     listener?.on<LocalTrackUnpublishedEvent>(
         (LocalTrackUnpublishedEvent event) async {
-      print(
-          {"LocalTrackUnpublishedEvent": event.participant.trackPublications});
+      debugPrint(
+          {"LocalTrackUnpublishedEvent": event.participant.trackPublications}.toString());
     });
   }
 
@@ -140,7 +143,7 @@ class AudioCallFgService {
   _joinRoom(token) async {
     room = await _createRoom();
 
-    listener = room?.createListener()!!;
+    listener = room?.createListener();
     // set room
     _registerRoomHandlers();
 

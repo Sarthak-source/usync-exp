@@ -1,4 +1,4 @@
-import 'package:flutter_module/services/call_details.dart';
+import 'package:usync/services/audio_call/call_details.dart';
 
 // TODO: Create Event via object instance
 class AudioCallEvents {

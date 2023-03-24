@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:usync/pages/conversation/chat_list/conversation/conversation_page.dart';
@@ -20,15 +18,23 @@ class _NowPlayingState extends State<NowPlaying> {
   Widget build(BuildContext context) {
     int pageIndex = 0;
 
-    const double _playerMinHeight = 60.0;
+    const double playerMinHeight = 60.0;
 
-    int _selectedIndex = 0;
+    //int selectedIndex = 0;
 
     final pages = [
-      const ConversationsPage(title: 'Conversation',),
-      const ConversationsPage(title: 'Conversation',),
-      const ConversationsPage(title: 'Conversation',),
-      const ConversationsPage(title: 'Conversation',),
+      const ConversationsPage(
+        title: 'Conversation',
+      ),
+      const ConversationsPage(
+        title: 'Conversation',
+      ),
+      const ConversationsPage(
+        title: 'Conversation',
+      ),
+      const ConversationsPage(
+        title: 'Conversation',
+      ),
     ];
 
     return AppPanel(
@@ -61,7 +67,7 @@ class _NowPlayingState extends State<NowPlaying> {
               SizedBox.expand(child: PageView()),
               Miniplayer(
                 controller: null,
-                minHeight: _playerMinHeight,
+                minHeight: playerMinHeight,
                 maxHeight: MediaQuery.of(context).size.height / 1.2,
                 builder: (height, percentage) {
                   return Container(
@@ -72,8 +78,8 @@ class _NowPlayingState extends State<NowPlaying> {
                           children: [
                             Image.network(
                               'https://assets.rebelmouse.io/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8yNDk4NzQ0OS9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTY3MTk2MjkzM30.Uwvlog9sqX7t1zRWCMEWiletZn9O7VpsJ-J7j3AvoX0/img.jpg?width=980',
-                              height: _playerMinHeight - 4.0,
-                              width: 120.0,
+                              height: playerMinHeight - 4,
+                              width: 100.0,
                               fit: BoxFit.cover,
                             ),
                             Expanded(
@@ -89,7 +95,7 @@ class _NowPlayingState extends State<NowPlaying> {
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .caption!
+                                            .bodySmall!
                                             .copyWith(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500,
@@ -102,7 +108,7 @@ class _NowPlayingState extends State<NowPlaying> {
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .caption!
+                                            .bodySmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w500),
                                       ),

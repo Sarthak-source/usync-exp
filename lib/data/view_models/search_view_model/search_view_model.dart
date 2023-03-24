@@ -47,6 +47,7 @@ class SearchViewModel extends BaseViewModel {
       User user = mapJsonToUser(e, avatar, File());
 
       _searchList.add(user);
+      notifyListeners();
     }).toList();
     _text = "Caching data";
 
@@ -65,7 +66,7 @@ class SearchViewModel extends BaseViewModel {
         }
       }
     } catch (e) {
-      print('Error occurred while getting image: $e');
+      debugPrint('Error occurred while getting image: $e');
       // Return a default value or throw an error message
       // depending on your use case.
     }

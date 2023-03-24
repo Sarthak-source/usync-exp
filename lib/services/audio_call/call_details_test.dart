@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:flutter_module/services/call_details.dart';
 import 'package:test/test.dart';
+
+import 'call_details.dart';
 
 void main() {
   test('CallDetails to Json', () {

@@ -1,3 +1,4 @@
+import 'package:nb_utils/nb_utils.dart';
 import 'package:usync/utils/cordova.dart';
 import 'package:usync/utils/usync_app.dart';
 

@@ -1,10 +1,11 @@
-import 'package:flutter_module/services/audio_call_state.dart';
-import 'package:flutter_module/services/call_details.dart';
+
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:test/test.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import 'package:usync/services/audio_call/call_details.dart';
 import 'dart:convert';
+
+import 'audio_call_state.dart';
 
 void main() {
   Store<RAudioCallState> store = Store<RAudioCallState>(audioCallStateReducer,
@@ -84,7 +85,6 @@ void main() {
         callerData: CallParticipantData.mapFromJson(callerData),
         calleeData: CallParticipantData.mapFromJson(calleeData));
 
-    var expected = data.toJson();
 
     expect(store.state.callDetails, null);
     await updateCallDetails(data)(store);

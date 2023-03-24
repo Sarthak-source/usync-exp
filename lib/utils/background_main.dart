@@ -1,9 +1,6 @@
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_background/flutter_background.dart';
-import 'usync_app.dart';
 // import 'counter_service.dart';
 
 class BackgroundService {

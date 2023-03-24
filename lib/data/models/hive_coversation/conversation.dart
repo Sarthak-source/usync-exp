@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:hive/hive.dart';
 import 'package:usync/data/models/hive_default_conversation/default_conversation_preferences.dart';
 import 'package:usync/data/models/hive_messages/message.dart';

@@ -1,14 +1,16 @@
-import 'dart:ui';
+// ignore_for_file: depend_on_referenced_packages
 
+import 'dart:ui';
 import 'package:connectanum/connectanum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:usync/services/audio_call/audio_call_bg_service.dart';
 import 'package:usync/utils/cordova_handler.dart';
 import 'package:usync/utils/local_notifications.dart';
 import 'package:usync/utils/usync_app.dart';
 
-import '../audio_call/audio_call_bg_service.dart';
 
 Future<FlutterBackgroundService> initializeBgService() async {
   final service = FlutterBackgroundService();
@@ -17,7 +19,7 @@ Future<FlutterBackgroundService> initializeBgService() async {
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'my_foreground', // id
     'MY FOREGROUND SERVICE', // title
-    description:
+    
         'This channel is used for important notifications.', // description
     importance: Importance.low, // importance must be at low or higher level
   );
@@ -112,7 +114,7 @@ void onStart(ServiceInstance service) async {
     service.stopSelf();
   });
 
-  print('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
+  debugPrint('FLUTTER BACKGROUND SERVICE: ${DateTime.now()}');
 
   channelManager.onAuthData.listen((event) async {
     AudioCallBgService.instance.callerUserId = UsyncApp.instance.authUserID;

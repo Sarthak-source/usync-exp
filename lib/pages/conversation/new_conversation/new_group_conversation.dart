@@ -38,7 +38,7 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
             onSearchInput: (p0) {},
             actionButtons: const [],
             bottomWidget: buildPreferredSizeWidget(
-                Padding(
+               child: Padding(
                   padding: const EdgeInsets.only(left: 16,right: 16,bottom: 10),
                   child: UsyncTextField(
                     suffix: const Icon(CupertinoIcons.chevron_down),
@@ -47,7 +47,7 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
                     prifix: const Icon(CupertinoIcons.search),
                   ),
                 ),
-                50),
+               preferredHeight: 50),
             child: const Text(
               'New Group Conversation',
             ),
@@ -58,21 +58,14 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
             padding: const EdgeInsets.only(top: 10),
             child: ListView.builder(
                 padding: const EdgeInsets.all(2),
-                itemCount: 3,
+                itemCount: conversation.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: GestureDetector(
                       onTap: () {
                         debugPrint('chat page');
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const NewGroupConversation();
-                            },
-                          ),
-                        );
+                       
                       },
                       child: ListTile(
                         leading: Avatar(

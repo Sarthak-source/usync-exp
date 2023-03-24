@@ -2,14 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:clean_api/clean_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:usync/config/config.dart';
-import 'package:usync/main.dart';
 import 'package:usync/utils/redux_token.dart';
 import 'api.dart';
-import 'dart:developer';
 
 class APIService {
   String noInternetMsg = 'You are not connected to Internet';

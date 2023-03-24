@@ -1,6 +1,7 @@
-import 'package:flutter_module/services/audio_call_events.dart';
-import 'package:flutter_module/services/call_details.dart';
+
 import 'package:test/test.dart';
+import 'package:usync/services/audio_call/audio_call_events.dart';
+import 'package:usync/services/audio_call/call_details.dart';
 
 void main() {
   test('Create user Event', () async {

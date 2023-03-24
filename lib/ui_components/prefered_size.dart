@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-PreferredSizeWidget buildPreferredSizeWidget(Widget child, double preferredHeight) {
+PreferredSizeWidget buildPreferredSizeWidget({required Widget child, required double preferredHeight}) {
   return _PreferredSizeWidget(preferredHeight: preferredHeight, child: child);
 }
 

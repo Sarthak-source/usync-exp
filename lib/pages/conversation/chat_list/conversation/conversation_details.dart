@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:stacked/stacked.dart';
 import 'package:usync/data/models/hive_user/user.dart';
-import 'package:usync/data/view_models/search_viewmodel/search_view_model.dart';
+import 'package:usync/data/view_models/search_view_model/search_view_model.dart';
 import 'package:usync/ui_components/avatar.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_section.dart';
@@ -125,8 +124,8 @@ List<Widget> subpaneldetails(
                             (TextEditingValue textEditingValue) async {
                           // You can replace this with your own logic for retrieving suggestions
                           final suggestions = users
-                              .where((User option) => option.name!['first']
-                                  .toString()
+                              .where((User option) => option.name!['full']
+                                  .toString().toLowerCase()
                                   .contains(
                                       textEditingValue.text.toLowerCase()))
                               .toList();
@@ -159,7 +158,7 @@ List<Widget> subpaneldetails(
                                         size: 20,
                                       ),
                                       title: Text(
-                                        option.name['first'],
+                                        '${option.name['full']}',
                                       ),
                                       subtitle: const Text('User'),
                                     ),

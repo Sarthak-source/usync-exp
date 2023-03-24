@@ -1,11 +1,16 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_audio_manager_plus/flutter_audio_manager_plus.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:usync/components/calltimer.dart';
+import 'package:usync/services/audio_call/audio_call_fg_service.dart';
+import 'package:usync/services/audio_call/audio_call_state.dart';
 import 'package:usync/ui_components/avatar.dart';
+import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/ui_components/icon.dart';
 import 'package:usync/ui_components/typography/text.dart';
 import 'package:usync/utils/local_notifications.dart';
@@ -27,14 +32,14 @@ class AudioCallPageState extends State<AudioCallPage> {
         converter: (store) => store,
         builder: (context, Store<RAudioCallState> store) {
           return store.state.muted
-              ? QIcon(CupertinoIcons.mic_off, color: ThemeColors.primaryColor,
+              ? QIcon(CupertinoIcons.mic_off, color: DarkThemeColors.primaryColor,
                   onPressed: () {
                   store.dispatch(MicActions.unMute);
                   AudioCallFgService.instance.toggleRoomMic(true);
                 })
               : QIcon(
                   CupertinoIcons.mic,
-                  color: ThemeColors.textColor,
+                  color: DarkThemeColors.textColor,
                   onPressed: () {
                     store.dispatch(MicActions.mute);
                     AudioCallFgService.instance.toggleRoomMic(false);
@@ -50,7 +55,7 @@ class AudioCallPageState extends State<AudioCallPage> {
           return store.state.speaker
               ? QIcon(
                   CupertinoIcons.speaker_3,
-                  color: ThemeColors.primaryColor,
+                  color: DarkThemeColors.primaryColor,
                   onPressed: () async {
                     await Helper.setSpeakerphoneOn(false);
                     store.dispatch(SpeakerActions.off);
@@ -59,7 +64,7 @@ class AudioCallPageState extends State<AudioCallPage> {
                 )
               : QIcon(
                   CupertinoIcons.speaker_3,
-                  color: ThemeColors.textColor,
+                  color: DarkThemeColors.textColor,
                   onPressed: () async {
                     await Helper.setSpeakerphoneOn(true);
                     store.dispatch(SpeakerActions.on);
@@ -72,9 +77,9 @@ class AudioCallPageState extends State<AudioCallPage> {
   get _acceptCallIcon {
     return QIcon(
       CupertinoIcons.phone,
-      color: ThemeColors.textColor,
+      color: DarkThemeColors.textColor,
       filled: true,
-      filledColor: ThemeColors.primaryColor,
+      filledColor: DarkThemeColors.primaryColor,
       onPressed: () {
         AudioCallFgService.instance.pickupCall();
       },
@@ -119,11 +124,11 @@ class AudioCallPageState extends State<AudioCallPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Avatar(
-                  src: avatar,
+                  imageUrl: [avatar],
                   border: 3.0,
                   size: 70,
-                  borderColor: ThemeColors.primaryColor,
-                  padding: EdgeInsets.only(bottom: 20),
+                  borderColor: DarkThemeColors.primaryColor,
+                  padding: const EdgeInsets.only(bottom: 20),
                 ),
                 UsyncText(
                   userName,
@@ -133,7 +138,7 @@ class AudioCallPageState extends State<AudioCallPage> {
                 if (notPickedUpOrConnecting(audioCallState))
                   UsyncText(callingStatus,
                       type: UsyncTextType.subHeadlineBold,
-                      padding: EdgeInsets.only(bottom: 10)),
+                      padding: const EdgeInsets.only(bottom: 10)),
                 if (connectingOrReconnecting(audioCallState))
                   const UsyncText("Connecting...",
                       type: UsyncTextType.subHeadlineBold,
@@ -162,9 +167,9 @@ class AudioCallPageState extends State<AudioCallPage> {
   get _callDisconnect {
     return QIcon(
       CupertinoIcons.phone_down,
-      color: ThemeColors.textColor,
+      color: DarkThemeColors.textColor,
       filled: true,
-      filledColor: ThemeColors.negativeColor,
+      filledColor: DarkThemeColors.negativeColor,
       onPressed: () async {
         AudioCallFgService.instance.declineCall();
       },
@@ -175,10 +180,10 @@ class AudioCallPageState extends State<AudioCallPage> {
     return StoreConnector<RAudioCallState, Store<RAudioCallState>>(
         converter: (store) => store,
         builder: (BuildContext context, Store<RAudioCallState> store) {
-          print({
+          debugPrint({
             "incomingCallNotReceived(store.state)":
                 incomingCallNotReceived(store.state)
-          });
+          }.toString());
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -211,7 +216,7 @@ class AudioCallPageState extends State<AudioCallPage> {
 
   Future<void> init() async {
     FlutterAudioManagerPlus.setListener(() async {
-      print("-----changed-------");
+      debugPrint("-----changed-------");
       await _getInput();
       setState(() {});
     });
@@ -223,17 +228,17 @@ class AudioCallPageState extends State<AudioCallPage> {
 
   _getInput() async {
     _currentInput = await FlutterAudioManagerPlus.getCurrentOutput();
-    print("current:$_currentInput");
+    debugPrint("current:$_currentInput");
     _availableInputs = await FlutterAudioManagerPlus.getAvailableInputs();
-    print("available $_availableInputs");
+    debugPrint("available $_availableInputs");
   }
 
-  Future<void> _isAndroidPermissionGranted() async {
+  Future<void> isAndroidPermissionGranted() async {
     if (Platform.isAndroid) {
       final bool granted = await flutterLocalNotificationsPlugin
               .resolvePlatformSpecificImplementation<
                   AndroidFlutterLocalNotificationsPlugin>()
-              ?.areNotificationsEnabled() ??
+              !.areNotificationsEnabled() ??
           false;
 
       //   setState(() {
@@ -243,7 +248,7 @@ class AudioCallPageState extends State<AudioCallPage> {
     }
   }
 
-  Future<void> _requestPermissions() async {
+  Future<void> requestPermissions() async {
     if (Platform.isIOS) {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
@@ -265,7 +270,7 @@ class AudioCallPageState extends State<AudioCallPage> {
     }
   }
 
-  void _configureDidReceiveLocalNotificationSubject() {
+  void configureDidReceiveLocalNotificationSubject() {
     didReceiveLocalNotificationStream.stream
         .listen((ReceivedNotification receivedNotification) async {
       await showCupertinoModalPopup(
@@ -289,17 +294,17 @@ class AudioCallPageState extends State<AudioCallPage> {
     });
   }
 
-  void _configureSelectNotificationSubject() {
+  void configureSelectNotificationSubject() {
     selectNotificationStream.stream.listen((String? payload) async {});
   }
 
-  Future<void> _showNotification() async {
-    print("Showing notification");
-    const AndroidNotificationDetails androidNotificationDetails =
+  Future<void> showNotification() async {
+    debugPrint("Showing notification");
+     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       'audio_call',
       'Audio Call',
-      channelDescription: 'Audio call notifications channel',
+       'Audio call notifications channel',
       importance: Importance.max,
       priority: Priority.max,
       icon: 'avd_incoming_call',
@@ -309,13 +314,13 @@ class AudioCallPageState extends State<AudioCallPage> {
         AndroidNotificationAction(
           'id_2',
           'Answer Call',
-          titleColor: Color.fromARGB(255, 255, 0, 0),
-          icon: DrawableResourceAndroidBitmap('ldpi'),
+          titleColor: const Color.fromARGB(255, 255, 0, 0),
+          icon: const DrawableResourceAndroidBitmap('ldpi'),
         ),
         AndroidNotificationAction(
           navigationActionId,
           'Reject Call',
-          icon: DrawableResourceAndroidBitmap('ldpi'),
+          icon: const DrawableResourceAndroidBitmap('ldpi'),
           showsUserInterface: true,
           // By default, Android plugin will dismiss the notification when the
           // user tapped on a action (this mimics the behavior on iOS).
@@ -324,12 +329,12 @@ class AudioCallPageState extends State<AudioCallPage> {
       ],
     );
 
-    const DarwinNotificationDetails iosNotificationDetails =
+     DarwinNotificationDetails iosNotificationDetails =
         DarwinNotificationDetails(
       categoryIdentifier: darwinNotificationCategoryPlain,
     );
 
-    const NotificationDetails notificationDetails = NotificationDetails(
+     NotificationDetails notificationDetails = NotificationDetails(
         android: androidNotificationDetails, iOS: iosNotificationDetails);
 
     await flutterLocalNotificationsPlugin.show(
@@ -337,7 +342,7 @@ class AudioCallPageState extends State<AudioCallPage> {
         payload: 'item x');
   }
 
-  Future<void> _showFullScreenNotification(BuildContext context) async {
+  Future<void> showFullScreenNotification(BuildContext context) async {
     await showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(

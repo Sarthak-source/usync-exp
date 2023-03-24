@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 int id = 0;
@@ -60,8 +58,6 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 }
 
 Future<void> initLocalNotificationsPlugins() async {
-  final NotificationAppLaunchDetails? notificationAppLaunchDetails =
-      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('ldpi');

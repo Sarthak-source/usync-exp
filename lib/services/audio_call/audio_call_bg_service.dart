@@ -1,24 +1,17 @@
 import 'dart:async';
-import 'dart:ui';
-
-import 'package:chatsampleapp/services/audio_call_events.dart';
-import 'package:chatsampleapp/services/audio_call_session_events.dart';
-import 'package:chatsampleapp/services/audio_call_state.dart';
 import 'package:connectanum/authentication.dart';
 import 'package:connectanum/connectanum.dart';
 import 'package:connectanum/json.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_module/router.dart';
-import 'package:flutter_module/services/audio_call_events.dart';
-import 'package:flutter_module/services/call_details.dart';
-import 'package:livekit_client/livekit_client.dart';
-import 'package:flutter_module/usync_app.dart';
-import 'package:flutter_module/services/audio_call_state.dart';
-import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
-import 'package:flutter_module/services/audio_call_session_events.dart';
-import 'package:flutter_module/local_notifications.dart';
+import 'package:usync/services/audio_call/call_details.dart';
+import 'package:usync/utils/local_notifications.dart';
+import 'package:usync/utils/usync_app.dart';
+import 'audio_call_events.dart';
+import 'audio_call_session_events.dart';
+import 'audio_call_state.dart';
 
 final player = AudioPlayer();
 
@@ -133,7 +126,7 @@ class AudioCallBgService {
       final callDetails = CallDetails.mapFromJson(
           Map<String, dynamic>.from(event.arguments![0]));
 
-      print({"callerDetails": callDetails.callerData?.name});
+      debugPrint({"callerDetails": callDetails.callerData?.name}.toString());
 
       // Set Call details
       await updateCallDetails(callDetails)(UsyncApp.instance.store);
@@ -314,11 +307,11 @@ class AudioCallBgService {
   }
 
   Future<void> _showNotificationWithActions(callerName) async {
-    const AndroidNotificationDetails androidNotificationDetails =
+     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       'call_notification',
       'call_notification',
-      channelDescription: 'call_notification',
+      'call_notification',
       importance: Importance.max,
       priority: Priority.max,
       visibility: NotificationVisibility.public,
@@ -335,16 +328,16 @@ class AudioCallBgService {
         ),
         AndroidNotificationAction(urlLaunchActionId, 'Accept',
             showsUserInterface: true,
-            icon: DrawableResourceAndroidBitmap('ldpi')),
+            icon: const DrawableResourceAndroidBitmap('ldpi')),
       ],
     );
 
-    const DarwinNotificationDetails iosNotificationDetails =
+     DarwinNotificationDetails iosNotificationDetails =
         DarwinNotificationDetails(
       categoryIdentifier: darwinNotificationCategoryPlain,
     );
 
-    const NotificationDetails notificationDetails = NotificationDetails(
+     NotificationDetails notificationDetails = NotificationDetails(
       android: androidNotificationDetails,
       iOS: iosNotificationDetails,
     );
