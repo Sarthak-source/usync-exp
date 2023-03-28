@@ -22,6 +22,24 @@ class CoversationListViewModel extends BaseViewModel {
 
   final String conversationUrl = API.conversation;
 
+  Future<bool> postData(List<String> users, String message) async {
+    var result = await _apiService.postRequest(
+      conversationUrl,
+      {'users': users, 'message': message},
+      bearerToken: true,
+    );
+
+    if (result.statusCode == 200) {
+      final decoded = await _apiService.handleResponse(result);
+
+      debugPrint('NEW--CONVERSATION--$decoded');
+      return true;
+    } else {
+      // handle the error
+      return false;
+    }
+  }
+
   getData() async {
     bool checkConnectivity =
         await _connectivityService.checkInternetConnection();
@@ -53,14 +71,10 @@ class CoversationListViewModel extends BaseViewModel {
         List<dynamic> users = e['users'];
         List<User> userList = [];
         for (var userMap in users) {
-          if (userMap['avatar'] != null && userMap['avatar']['links'] != null) {
-            File avatar = mapJsonToFile(
-            userMap
-            );
+          File avatar = mapJsonToFile(userMap);
 
-            User user = mapJsonToUser(userMap, avatar, File());
-            userList.add(user);
-          }
+          User user = mapJsonToUser(userMap, avatar, File());
+          userList.add(user);
         }
 
         Message lastMessage =
@@ -80,19 +94,40 @@ class CoversationListViewModel extends BaseViewModel {
     var users = conversation.users;
     List<String> imageLinks = [];
 
-    for (var i = 0; i < users.length; i++) {
-      var userAvatar = users[i].avatar;
-      if (userAvatar != null) {
-        var userAvatarLinks = userAvatar.links;
-        if (userAvatarLinks != null) {
-          String userAvatarUrl = userAvatarLinks['xs']['url'];
-          debugPrint(userAvatarUrl);
-          imageLinks.add(userAvatarUrl);
+    try {
+      for (var i = 0; i < users.length; i++) {
+        var userAvatar = users[i].avatar;
+        if (userAvatar != null) {
+          var userAvatarLinks = userAvatar.links;
+          if (userAvatarLinks != null) {
+            String userAvatarUrl = userAvatarLinks['xs']['url'];
+            debugPrint(userAvatarUrl);
+            imageLinks.add(userAvatarUrl);
+          }
         }
       }
+    } catch (e) {
+      debugPrint('Error occurred while getting image: $e');
     }
 
     return imageLinks;
+  }
+
+  List<Conversation> getFilteredConversation(List<dynamic> conversation) {
+    List<Conversation> filteredConversationList = [];
+
+    for (var i = 0; i < conversation.length; i++) {
+      if (conversation[i].type != 'group') {
+        debugPrint(conversation[i].type);
+        filteredConversationList.add(conversation[i]);
+      }
+    }
+
+    return filteredConversationList;
+  }
+
+  static String stripHtmlIfNeeded(String text) {
+    return text.replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), '');
   }
 
   String getNames(Conversation conversation) {
@@ -101,16 +136,19 @@ class CoversationListViewModel extends BaseViewModel {
 
     for (var i = 0; i < users.length; i++) {
       var userNames = users[i].name;
+      //debugPrint('user name ${users[i].name}');
       if (userNames != null) {
-        debugPrint(userNames['full']);
+        //debugPrint(userNames.toString());
         nameList.add(userNames['full'] ?? '');
       }
     }
 
     final foldValue = nameList.join(", ");
 
-    return foldValue;
+    return stripHtmlIfNeeded(foldValue);
   }
+
+  
 
   String getDate(Conversation conversation) {
     DateTime lastSeen = DateTime.parse(conversation.updated_at ?? '');

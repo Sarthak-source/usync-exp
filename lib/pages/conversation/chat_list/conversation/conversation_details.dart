@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:usync/data/models/hive_user/user.dart';
 import 'package:usync/data/view_models/search_view_model/search_view_model.dart';
 import 'package:usync/ui_components/avatar.dart';
+import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_section.dart';
 import 'package:usync/ui_components/globalcomponents/photo_grid.dart';
@@ -249,7 +250,7 @@ List<Widget> subpaneldetails(
               Spacer(),
               Icon(
                 Icons.warning,
-                color: Colors.red,
+                color: DarkThemeColors.errror,
               ),
               SizedBox(
                 width: 20,
@@ -268,7 +269,7 @@ List<Widget> subpaneldetails(
                 ),
                 TextSpan(
                   text: ' settings.',
-                  style: TextStyle(color: Colors.green),
+                  style: TextStyle(color: DarkThemeColors.primary),
                 ),
               ],
             ),

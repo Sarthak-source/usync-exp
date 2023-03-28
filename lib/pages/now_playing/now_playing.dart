@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:miniplayer/miniplayer.dart';
-import 'package:usync/pages/conversation/chat_list/conversation/conversation_page.dart';
 import 'package:usync/ui_components/config/theme/styles/theme_colors.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel.dart';
 import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
@@ -22,20 +21,7 @@ class _NowPlayingState extends State<NowPlaying> {
 
     //int selectedIndex = 0;
 
-    final pages = [
-      const ConversationsPage(
-        title: 'Conversation',
-      ),
-      const ConversationsPage(
-        title: 'Conversation',
-      ),
-      const ConversationsPage(
-        title: 'Conversation',
-      ),
-      const ConversationsPage(
-        title: 'Conversation',
-      ),
-    ];
+    //final List<Widget> pages = [];
 
     return AppPanel(
       content: [

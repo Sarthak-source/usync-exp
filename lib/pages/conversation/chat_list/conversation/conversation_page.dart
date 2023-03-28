@@ -60,6 +60,9 @@ class _ConversationsPageState extends State<ConversationsPage> {
                 itemCount: conversation.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
+
+                  //debugPrint(conversation[index].users[0].name.toString());
+
                   return ConversationList(
                     name: model.getNames(conversation[index]),
                     messageText: conversation[index].lastMessage?.content ?? "",

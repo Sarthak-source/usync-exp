@@ -66,6 +66,8 @@ dependencies:
   test: ^1.22.0
   livekit_client: ^1.2.1
   stop_watch_timer: ^2.0.0
+ 
+  #flutter_local_notifications: ^8.2.0
   #flutter_local_notifications: ^8.2.0
   
   

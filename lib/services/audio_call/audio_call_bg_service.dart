@@ -4,7 +4,7 @@ import 'package:connectanum/connectanum.dart';
 import 'package:connectanum/json.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:usync/services/audio_call/call_details.dart';
 import 'package:usync/utils/local_notifications.dart';

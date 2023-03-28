@@ -37,7 +37,7 @@ class SendChatViewModel extends BaseViewModel {
     if (result.statusCode == 200) {
       final decoded = await _apiService.handleResponse(result);
 
-      debugPrint('SendChat--TOKEN--$decoded');
+      debugPrint('SendChat----$decoded');
       return true;
     } else {
       // handle the error

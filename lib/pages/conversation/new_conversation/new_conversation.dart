@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
-import 'package:usync/data/models/place_holder/conversation_models/chat_user.dart';
 import 'package:usync/data/view_models/chat_view/conversation_list_view_model.dart';
 import 'package:usync/data/view_models/contact_view_model/contact_view_model.dart';
 import 'package:usync/pages/conversation/chat_list/utility/messagebar.dart';
@@ -15,7 +14,6 @@ import 'package:usync/ui_components/globalcomponents/app_panel_header.dart';
 import 'package:usync/ui_components/prefered_size.dart';
 import 'package:usync/ui_components/usync_text_field.dart';
 import 'package:usync/utils/theme_color.dart';
-
 import 'new_group_conversation.dart';
 
 class NewConversationPage extends StatefulWidget {
@@ -134,8 +132,11 @@ class _NewConversationPageState extends State<NewConversationPage> {
                                 model.getAvatar(limitedConversation[index]),
                             size: 20,
                           ),
-                          title:
-                              Text(model.getNames(limitedConversation[index])),
+                          title: Text(
+                            model.getNames(limitedConversation[index]),
+                            style: const TextStyle(
+                                overflow: TextOverflow.ellipsis),
+                          ),
                           trailing: const Icon(CupertinoIcons.chevron_forward),
                         ),
                       ),

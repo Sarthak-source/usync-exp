@@ -111,9 +111,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int pageIndex = 0;
 
-  final pages = [
+  final List<Widget> pages = [
     const ConversationsPage(title: 'Conversation'),
-    const NowPlaying(),
+    const ConversationsPage(title: 'Conversation'),
     const ConversationsPage(title: 'Conversation'),
     const ConversationsPage(title: 'Conversation'),
   ];
@@ -153,14 +153,9 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             enableFeedback: false,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const NowPlaying();
-                  },
-                ),
-              );
+              setState(() {
+                pageIndex = 1;
+              });
             },
             icon: pageIndex == 1
                 ? const Icon(
@@ -173,7 +168,16 @@ class _HomePageState extends State<HomePage> {
                   ),
           ),
           RawMaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const NowPlaying();
+                  },
+                ),
+              );
+            },
             elevation: 2.0,
             fillColor: LightThemeColors.primary,
             padding: const EdgeInsets.all(10.0),

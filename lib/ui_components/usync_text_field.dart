@@ -18,22 +18,23 @@ class UsyncTextField extends StatefulWidget {
   final Function()? onEditingComplete;
   final Function()? onTap;
   final double height;
- 
+  final Function(String)? onSubmitted;
 
   const UsyncTextField(
       {super.key,
       required this.textController,
-       this.placeholderString='',
+      this.placeholderString = '',
       this.keyboardType = TextInputType.text,
       this.onChanged,
       this.prifix = const SizedBox.shrink(),
       this.suffix = const SizedBox.shrink(),
       this.obscureText = false,
       this.enableSuggestions = true,
-      this.autocorrect = true,     
+      this.autocorrect = true,
       this.border = true,
       this.height = 40,
-      this.onTap,    
+      this.onTap,
+      this.onSubmitted,
       this.onEditingComplete});
 
   @override
@@ -53,8 +54,9 @@ class _UsyncTextFieldState extends State<UsyncTextField> {
         suffix: Padding(
           padding: const EdgeInsets.only(right: 10),
           child: widget.suffix,
-        ),  
-        onTap: widget.onTap,     
+        ),
+        onSubmitted: widget.onSubmitted,
+        onTap: widget.onTap,
         controller: widget.textController,
         onEditingComplete: widget.onEditingComplete,
         placeholder: widget.placeholderString,

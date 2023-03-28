@@ -21,6 +21,20 @@ class SearchViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+ bool userExists(List<User> userList, User user) {
+  return userList.where((u) => u.id == user.id).isNotEmpty;
+}
+
+List<String> getUserIDList(List<User> user){
+  List<String> userIds = [];
+  for (int i = 0; i < user.length; i++) {
+    userIds.add(user[i].id ?? '');
+  }
+  return userIds;
+
+}
+
+
   getSearch(String search) async {
     debugPrint("Entered get Data()");
     _text = "Fetching data";
@@ -61,7 +75,7 @@ class SearchViewModel extends BaseViewModel {
       if (userAvatar != null) {
         var userAvatarLinks = userAvatar.links;
         if (userAvatarLinks != null) {
-          String userAvatarUrl = userAvatarLinks['xs']['url'];
+          String userAvatarUrl = userAvatarLinks['xs']['url']??'';
           imageLinks.add(userAvatarUrl);
         }
       }
