@@ -21,10 +21,10 @@ class NewGroupConversation extends StatefulWidget {
 
 class _NewGroupConversationState extends State<NewGroupConversation> {
   List<User> userList = [];
+  TextEditingController search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    TextEditingController search = TextEditingController();
 
     return ViewModelBuilder<SearchViewModel>.reactive(
       viewModelBuilder: () => SearchViewModel(),
@@ -107,6 +107,9 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
                           optionsViewBuilder: (BuildContext context,
                               AutocompleteOnSelected<User> onSelected,
                               Iterable<User> options) {
+                                // onSelected(User option){
+                                //   search.clear();
+                                // }
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 12),
@@ -124,12 +127,14 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
                                         options.elementAt(index);
                                     return GestureDetector(
                                       onTap: () {
+                                        
                                         onSelected(option);
                                         setState(
                                           () {
                                             if (searchModel.userExists(
                                                 userList, option)) {
                                             } else {
+                                              search.text=option.name!['full']??"";
                                               userList.add(option);
                                             }
                                           },
@@ -220,7 +225,7 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
                               color: LightThemeColors.primary,
                               onPressed: () async {
                                 conversationModel.postData(
-                                    searchModel.getUserIDList(userList), 'hi');
+                                    searchModel.getUserIDList(userList), "hi");
                               },
                               child: Text(
                                 "Start Conversation",

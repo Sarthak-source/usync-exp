@@ -22,23 +22,7 @@ class CoversationListViewModel extends BaseViewModel {
 
   final String conversationUrl = API.conversation;
 
-  Future<bool> postData(List<String> users, String message) async {
-    var result = await _apiService.postRequest(
-      conversationUrl,
-      {'users': users, 'message': message},
-      bearerToken: true,
-    );
-
-    if (result.statusCode == 200) {
-      final decoded = await _apiService.handleResponse(result);
-
-      debugPrint('NEW--CONVERSATION--$decoded');
-      return true;
-    } else {
-      // handle the error
-      return false;
-    }
-  }
+  
 
   getData() async {
     bool checkConnectivity =
@@ -87,6 +71,25 @@ class CoversationListViewModel extends BaseViewModel {
       _text = "Caching data";
       await _hiveService.addBoxes(_conversationList, "ConversationList");
       setBusy(false);
+    }
+  }
+
+
+  Future<bool> postData(List<String> users, String message) async {
+    var result = await _apiService.postRequest(
+      conversationUrl,
+      {"users": users, "message": message},
+      bearerToken: true,
+    );
+
+    if (result.statusCode == 200) {
+      final decoded = await _apiService.handleResponse(result);
+
+      debugPrint('NEW--CONVERSATION--$decoded');
+      return true;
+    } else {
+      // handle the error
+      return false;
     }
   }
 
