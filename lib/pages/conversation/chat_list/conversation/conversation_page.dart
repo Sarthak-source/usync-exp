@@ -31,6 +31,12 @@ class _ConversationsPageState extends State<ConversationsPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
+
+    
+
+
+
     return ValueListenableBuilder<bool>(
       valueListenable: isSearchNotifier,
       builder: (context, isSearch, _) {
@@ -43,6 +49,21 @@ class _ConversationsPageState extends State<ConversationsPage> {
             List<User> userList = model.getConversationUsers(conversation);
 
             List<dynamic> searchConversation = model.conversationSearchList;
+
+
+            TextEditingController search = TextEditingController();
+
+// Add a listener to the TextEditingController
+search.addListener(() {
+  // Get the current text in the search field
+  String searchText = search.text;
+  
+  // Call the method to update conversationSearchList in the ViewModel
+  model.getSearchData(searchText);
+  
+  // Call setState to rebuild the widget tree and show the updated search results
+  setState(() {});
+});
 
             return AppPanel(
               radius: AppPanelRadius.xs,
