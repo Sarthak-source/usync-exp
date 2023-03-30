@@ -38,6 +38,7 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
             SizedBox(
               height: 140,
               child: AppPanelHeader(
+              
                 search: false,
                 toolbarHeight: 60,
                 onBackClick: () {
@@ -162,6 +163,7 @@ class _NewGroupConversationState extends State<NewGroupConversation> {
                       ),
                     ),
                     preferredHeight: 50),
+           
                 child: const Text(
                   'New Group Conversation',
                 ),

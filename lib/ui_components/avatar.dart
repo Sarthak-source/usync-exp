@@ -37,7 +37,7 @@ class _AvatarState extends State<Avatar> {
     return Padding(
       padding: widget.padding ?? const EdgeInsets.all(0),
       child: Container(
-        width: widget.size! * 2,
+        width: widget.size! * 2.1,
         height: 5 + (widget.size! * 2),
         decoration: widget.border! > 0.0
             ? BoxDecoration(

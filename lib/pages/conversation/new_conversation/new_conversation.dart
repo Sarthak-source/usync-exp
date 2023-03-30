@@ -37,6 +37,7 @@ class _NewConversationPageState extends State<NewConversationPage> {
         SizedBox(
           height: 140,
           child: AppPanelHeader(
+        
             search: false,
             toolbarHeight: 60,
             onBackClick: () {
@@ -57,6 +58,7 @@ class _NewConversationPageState extends State<NewConversationPage> {
                   ),
                 ),
                 preferredHeight: 50),
+          
             child: const Text(
               'Conversation',
             ),
@@ -106,8 +108,9 @@ class _NewConversationPageState extends State<NewConversationPage> {
               onViewModelReady: (model) => model.getData(),
               builder: (context, model, child) {
                 List<dynamic> conversation = model.conversationList;
-                List<dynamic> limitedConversation =
-                    conversation.take(3).toList();
+                
+                   List<dynamic> userOnlyConversation= model.getFilteredConversation(conversation);
+                   List<dynamic> limitedConversation=userOnlyConversation.take(3).toList();
                 return ListView.builder(
                   padding: const EdgeInsets.all(2),
                   itemCount: limitedConversation.length,
@@ -143,7 +146,7 @@ class _NewConversationPageState extends State<NewConversationPage> {
                     );
                   },
                 );
-              }),
+              },),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 10),

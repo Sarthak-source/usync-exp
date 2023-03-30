@@ -103,6 +103,7 @@ class ChatDetailPageState extends State<ChatDetailPage> {
               radius: AppPanelRadius.xs,
               content: [
                 AppPanelHeader(
+             
                   toolbarHeight: 100,
                   actionButtons: [
                     IconButton(
@@ -129,6 +130,7 @@ class ChatDetailPageState extends State<ChatDetailPage> {
                     Navigator.pop(context);
                   },
                   alignment: true,
+                 
                   child: Column(
                     children: [
                       const SizedBox(

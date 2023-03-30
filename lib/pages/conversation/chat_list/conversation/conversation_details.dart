@@ -22,11 +22,13 @@ List<Widget> subpaneldetails(
 
   return [
     AppPanelHeader(
+     
       toolbarHeight: 70,
       actionButtons: const [],
       onBackClick: () {
         Navigator.pop(context);
       },
+      
       child: const Text('details'),
     ),
     const SizedBox(

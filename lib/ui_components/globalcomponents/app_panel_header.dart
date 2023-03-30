@@ -11,11 +11,16 @@ class AppPanelHeader extends StatefulWidget {
   final PreferredSizeWidget? bottomWidget;
   final List<Widget> actionButtons;
   final bool search;
+
+  final ValueNotifier<bool>? isSearchNotifier;
+
   final void Function(String)? onSearchInput;
   final void Function()? onSearchCancel;
+  final void Function()? onTap;
   const AppPanelHeader({
     super.key,
-    this.elevation=1,
+    this.isSearchNotifier,
+    this.elevation = 1,
     required this.toolbarHeight,
     this.back = true,
     this.onBackClick,
@@ -25,6 +30,7 @@ class AppPanelHeader extends StatefulWidget {
     this.search = false,
     this.onSearchInput,
     this.onSearchCancel,
+    this.onTap,
     required this.actionButtons,
   });
 
@@ -45,30 +51,31 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
       constraints: const BoxConstraints.expand(width: 80),
       icon: action,
       onPressed: () {
-        debugPrint('SEARCH');
         setState(
           () {
             if (appBarTitle == widget.child) {
-              action = const Text(
-                'cancel',
-              );
+              action = const Text('cancel');
+
               appBarTitle = UsyncTextField(
                 border: false,
                 placeholderString: "search",
                 onChanged: widget.onSearchInput,
+                onTap: widget.onTap,
                 textController: _searchController,
               );
               followedAction = [];
               backstate = false;
-
-              debugPrint(backstate.toString());
+              widget.isSearchNotifier?.value = true;
+              //debugPrint('isSearch----${isSearch.toString()}');
             } else {
+              widget.onSearchCancel;
               action = const Icon(Icons.search);
               appBarTitle = widget.child;
 
               followedAction = widget.actionButtons;
               backstate = widget.back;
-              debugPrint(backstate.toString());
+              widget.isSearchNotifier?.value = false;
+              //debugPrint('sSearch----${isSearch.toString()}');
             }
           },
         );
@@ -84,7 +91,6 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
 
     return AppBar(
       toolbarHeight: widget.toolbarHeight,
-      
       elevation: widget.elevation,
       leading: backstate == true
           ? IconButton(
@@ -103,9 +109,7 @@ class _AppPanelHeaderState extends State<AppPanelHeader> {
       title: appBarTitle,
       centerTitle: widget.alignment,
       bottom: widget.bottomWidget,
-      
       actions: actionItems,
     );
-    
   }
 }

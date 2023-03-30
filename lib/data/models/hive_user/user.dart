@@ -76,6 +76,20 @@ class User extends HiveObject {
     this.username,
     this.preferences = const {},
   });
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! User) {
+      return false;
+    }
+    return id == other.id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 

@@ -40,6 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
       radius: AppPanelRadius.xs,
       content: [
         AppPanelHeader(
+         
           elevation: 0,
           back: false,
           search: false,
@@ -55,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {},
             ),
           ],
+       
           child: Container(),
         ),
         Expanded(
@@ -214,19 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 TextButton(
                                   onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      var success = await loginmodel.login(
-                                        _usernameController.text,
-                                        _passwordController.text,
-                                      );
-                                      if (success) {
-                                        if (!mounted) return;
-                                        myAsyncMethod(context);
-                                      } else {
-                                        // Handle login failure
-                                        debugPrint('no login');
-                                      }
-                                    }
+                                   
                                   },
                                   child: const Text(
                                     "About",
@@ -238,19 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const Spacer(),
                                 TextButton(
                                   onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      var success = await loginmodel.login(
-                                        _usernameController.text,
-                                        _passwordController.text,
-                                      );
-                                      if (success) {
-                                        if (!mounted) return;
-                                        myAsyncMethod(context);
-                                      } else {
-                                        // Handle login failure
-                                        debugPrint('no login');
-                                      }
-                                    }
+                                   
                                   },
                                   child: const Text(
                                     "Legal",

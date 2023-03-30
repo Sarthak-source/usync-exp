@@ -17,12 +17,22 @@ class CoversationListViewModel extends BaseViewModel {
 
   List<dynamic> _conversationList = [];
   List<dynamic> get conversationList => _conversationList;
+  final List<dynamic> _conversationSearchList = [];
+  List<dynamic> get conversationSearchList => _conversationSearchList;
   String _text = "";
   String get text => _text;
 
-  final String conversationUrl = API.conversation;
+  String _search = '';
 
-  
+  String get search => _search;
+
+  void updateEmail(String value) {
+    _search = value;
+    notifyListeners();
+  }
+
+  final String conversationUrl = API.conversation;
+  final String conversationSearchUrl = API.conversationSearch;
 
   getData() async {
     bool checkConnectivity =
@@ -74,7 +84,6 @@ class CoversationListViewModel extends BaseViewModel {
     }
   }
 
-
   Future<bool> postData(List<String> users, String message) async {
     var result = await _apiService.postRequest(
       conversationUrl,
@@ -91,6 +100,59 @@ class CoversationListViewModel extends BaseViewModel {
       // handle the error
       return false;
     }
+  }
+
+  getSearchData(String search) async {
+    setBusy(true);
+    var result = await _apiService.getRequest(conversationSearchUrl,
+        queryParams: {"search": search}, bearerToken: true);
+
+    final decoded = await _apiService.handleResponse(result);
+
+    debugPrint('search--CONVERSATION--$decoded');
+    (decoded['data'] as List).map((e) {
+      debugPrint(
+        e.toString(),
+      );
+
+      List<dynamic> users = e['users'];
+      List<User> userList = [];
+      for (var userMap in users) {
+        File avatar = mapJsonToFile(userMap);
+
+        User user = mapJsonToUser(userMap, avatar, File());
+        userList.add(user);
+      }
+
+      Message lastMessage =
+          mapJsonToMessage(e['lastMessage'], User(), Conversation());
+
+      Conversation conversation =
+          mapJsonToConversation(e, userList, lastMessage, [Message()]);
+      _conversationSearchList.add(conversation);
+      notifyListeners();
+    }).toList();
+    _text = "Caching data";
+
+    setBusy(false);
+  }
+
+  List<User> userExists(List<User> userList) {
+    return userList.toSet().toList();
+  }
+
+  List<User> getConversationUsers(List<dynamic> conversation) {
+    List<User> users = [];
+
+    for (var i = 0; i < conversation.length; i++) {
+      List<User> userInConversation = conversation[i].users;
+
+      for (var j = 0; j < userInConversation.length; j++) {
+        users.addAll(userInConversation);
+      }
+    }
+
+    return userExists(users);
   }
 
   List<String> getAvatar(Conversation conversation) {
@@ -116,6 +178,24 @@ class CoversationListViewModel extends BaseViewModel {
     return imageLinks;
   }
 
+  List<String> getUserAvatar(User user) {
+    List<String> userAvatarUrl = [];
+
+    try {
+      var userAvatar = user.avatar;
+      if (userAvatar != null) {
+        var userAvatarLinks = userAvatar.links;
+        if (userAvatarLinks != null) {
+          userAvatarUrl.add(userAvatarLinks['xs']['url']);
+        }
+      }
+    } catch (e) {
+      debugPrint('Error occurred while getting image: $e');
+    }
+
+    return userAvatarUrl;
+  }
+
   List<Conversation> getFilteredConversation(List<dynamic> conversation) {
     List<Conversation> filteredConversationList = [];
 
@@ -129,7 +209,7 @@ class CoversationListViewModel extends BaseViewModel {
     return filteredConversationList;
   }
 
-  static String stripHtmlIfNeeded(String text) {
+  String stripHtmlIfNeeded(String text) {
     return text.replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), '');
   }
 
@@ -150,8 +230,6 @@ class CoversationListViewModel extends BaseViewModel {
 
     return stripHtmlIfNeeded(foldValue);
   }
-
-  
 
   String getDate(Conversation conversation) {
     DateTime lastSeen = DateTime.parse(conversation.updated_at ?? '');

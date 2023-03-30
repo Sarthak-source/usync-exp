@@ -26,6 +26,7 @@ class _NowPlayingState extends State<NowPlaying> {
     return AppPanel(
       content: [
         AppPanelHeader(
+          
           search: true,
           toolbarHeight: 65,
           onBackClick: () {
@@ -43,6 +44,7 @@ class _NowPlayingState extends State<NowPlaying> {
               },
             ),
           ],
+       
           child: const Text(
             'Now playing',
           ),
