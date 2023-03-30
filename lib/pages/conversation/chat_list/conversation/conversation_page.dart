@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
@@ -107,126 +106,127 @@ class _ConversationsPageState extends State<ConversationsPage> {
                         ),
                       )
                     : Expanded(
+                     
                         child: SingleChildScrollView(
                           child: Column(
-                            children: [
-                              Container(
-                                color: ThemeColor().bgThemecolor(context),
-                                height: 138,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 10),
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: userList.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        child: Column(
-                                          children: [
-                                            Avatar(
-                                              imageUrl: model.getUserAvatar(
-                                                  userList[index]),
-                                              size: 32,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                model.stripHtmlIfNeeded(
-                                                    userList[index]
-                                                            .name!['full']
-                                                            ?.replaceAll(
-                                                                ' ', '\n') ??
-                                                        ''),
-                                                textAlign: TextAlign.center,
-                                                overflow: TextOverflow.fade,
+                              children: [
+                                Container(
+                                  color: ThemeColor().bgThemecolor(context),
+                                  height: 138,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: userList.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          child: Column(
+                                            children: [
+                                              Avatar(
+                                                imageUrl: model
+                                                    .getUserAvatar(userList[index]),
+                                                size: 32,
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              showSearch == true
-                                  ? Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 28, vertical: 15),
-                                        child: Text(
-                                          'Conversations',
-                                          style: const TextTheme().body(
-                                            context,
-                                            FontWeight.bold,
-                                            FontStyle.normal,
+                                              Expanded(
+                                                child: Text(
+                                                  model.stripHtmlIfNeeded(
+                                                      userList[index]
+                                                              .name!['full']
+                                                              ?.replaceAll(
+                                                                  ' ', '\n') ??
+                                                          ''),
+                                                  textAlign: TextAlign.center,
+                                                  overflow: TextOverflow.fade,
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                        ),
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(),
-                              showSearch == true
-                                  ? Expanded(
-                                     
-                                      child: ListView.builder(
-                                        padding: const EdgeInsets.all(2),
-                                        itemCount: searchConversation.length,
-                                        shrinkWrap: true,
-                                        itemBuilder: (context, index) {
-                                          //debugPrint(conversation[index].users[0].name.toString());
-
-                                          return ConversationList(
-                                            name: model.getNames(
-                                                searchConversation[index]),
-                                            messageText:
-                                                searchConversation[index]
-                                                        .lastMessage
-                                                        ?.content ??
-                                                    "",
-                                            imageUrl: model.getAvatar(
-                                                searchConversation[index]),
-                                            time: model.getDate(
-                                                searchConversation[index]),
-                                            isMessageRead: !(searchConversation[
-                                                        index]
-                                                    .unseen_messages_count ==
-                                                0),
-                                            convesationId:
-                                                searchConversation[index]
-                                                    .lastMessage
-                                                    .conversation_id,
-                                          );
-                                        },
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(),
-                              AppPanelSection(
-                                title: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 28, top: 28),
-                                  child: Text(
-                                    'Photos',
-                                    style: const TextTheme().body(
-                                      context,
-                                      FontWeight.bold,
-                                      FontStyle.normal,
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
-                                height: ((imageList.length / 2) * 250) + 265,
-                                body: [
-                                  SizedBox(
-                                    width: width,
-                                    child: const PhotoGrid(),
+                                showSearch == true
+                                    ? Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 28, vertical: 15),
+                                          child: Text(
+                                            'Conversations',
+                                            style: const TextTheme().body(
+                                              context,
+                                              FontWeight.bold,
+                                              FontStyle.normal,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
+                                showSearch == true
+                                    ? SizedBox(
+                                          height: (searchConversation.length) * 85,
+                                          child: ListView.builder(
+                                            physics: const NeverScrollableScrollPhysics(),
+                                            padding: const EdgeInsets.all(2),
+                                            itemCount: searchConversation.length,
+                                            shrinkWrap: true,
+                                            itemBuilder: (context, index) {
+                                              //debugPrint(conversation[index].users[0].name.toString());
+                                              return ConversationList(
+                                                name: model.getNames(
+                                                    searchConversation[index]),
+                                                messageText: searchConversation[index]
+                                                        .lastMessage
+                                                        ?.content ??
+                                                    "",
+                                                imageUrl: model.getAvatar(
+                                                    searchConversation[index]),
+                                                time: model.getDate(
+                                                    searchConversation[index]),
+                                                isMessageRead:
+                                                    !(searchConversation[index]
+                                                            .unseen_messages_count ==
+                                                        0),
+                                                convesationId:
+                                                    searchConversation[index]
+                                                        .lastMessage
+                                                        .conversation_id,
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      
+                                    : const SizedBox.shrink(),
+                                AppPanelSection(
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(left: 28, top: 28),
+                                    child: Text(
+                                      'Photos',
+                                      style: const TextTheme().body(
+                                        context,
+                                        FontWeight.bold,
+                                        FontStyle.normal,
+                                      ),
+                                    ),
                                   ),
-                                ],
-                                direction: Axis.vertical,
-                                gutter: 0,
-                              ),
-                            ],
-                          ),
+                                  height: ((imageList.length / 2) * 250) + 270,
+                                  body: [
+                                    SizedBox(
+                                      width: width,
+                                      child: const PhotoGrid(),
+                                    ),
+                                  ],
+                                  direction: Axis.vertical,
+                                  gutter: 0,
+                                ),
+                              ],
+                            ),
                         ),
                       ),
+                    
               ],
             );
           },

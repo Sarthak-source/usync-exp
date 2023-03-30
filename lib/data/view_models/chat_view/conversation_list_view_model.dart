@@ -106,6 +106,7 @@ class CoversationListViewModel extends BaseViewModel {
     setBusy(true);
     var result = await _apiService.getRequest(conversationSearchUrl,
         queryParams: {"search": search}, bearerToken: true);
+        notifyListeners();
 
     final decoded = await _apiService.handleResponse(result);
 
